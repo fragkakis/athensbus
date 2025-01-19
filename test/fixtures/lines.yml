@@ -1,13 +1,5 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  code: MyString
-  line_id: MyString
-  description: MyString
-  description_en: MyString
-
-two:
-  code: MyString
-  line_id: MyString
-  description: MyString
-  description_en: MyString
+x97:
+  code: "1547"
+  line_id: "Χ97"
+  description: "ΑΕΡΟΛΙΜΕΝΑΣ ΑΘΗΝΩΝ - ΣΤ. ΕΛΛΗΝΙΚΟ (EXPRESS) (ΚΥΚΛΙΚΗ)"
+  description_en: "AEROL. ATHINON - ST. ELLINIKO (EXPRESS)"

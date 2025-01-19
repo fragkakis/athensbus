@@ -1,29 +1,16 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  code: MyString
-  stop_id: MyString
-  description: MyString
-  description_en: MyString
-  street: MyString
-  streen_en: MyString
-  heading: MyString
-  lat: MyString
-  lng: MyString
-  order: 1
-  type: 
+stop1:
+  code: "stop1_code"
+  stop_id: "stop1_stop_id"
+  description: "ΚΤΙΡΙΟ ΑΝΑΧΩΡΗΣΕΩΝ"
+  description_en: "AIR TERMINAL (ALL DEPARTURES)"
+  street: nil
+  street_en: nil
+  heading: "223"
+  lat: "37.9368263"
+  lng: "23.9465442"
+  stop_type: "0"
   amea: false
-
-two:
-  code: MyString
-  stop_id: MyString
-  description: MyString
-  description_en: MyString
-  street: MyString
-  streen_en: MyString
-  heading: MyString
-  lat: MyString
-  lng: MyString
-  order: 1
-  type: 
-  amea: false
+  previous_pending_arrivals: [
+    {"line_code": "x97", "route_code": "4099", "veh_code": "v1_code", "btime2": "12"},
+    {"line_code": "x97", "route_code": "4099", "veh_code": "v2_code", "btime2": "75"}
+  ]

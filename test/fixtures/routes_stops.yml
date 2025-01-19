@@ -1,0 +1,14 @@
+x97_route_stop1_start:
+  route: x97_route
+  stop: stop1
+  order: 1
+
+x97_route_stop2:
+  route: x97_route
+  stop: stop2
+  order: 2
+
+x97_route_stop1_terminal:
+  route: x97_route
+  stop: stop1
+  order: 3

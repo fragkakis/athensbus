@@ -1,0 +1,5 @@
+x97_route_stop1_v1_day1:
+  route: x97_route
+  stop: stop1
+  vehicle: v1
+  created_at: <%= 23.hours.ago %>

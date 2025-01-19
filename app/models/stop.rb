@@ -2,7 +2,7 @@ class Stop < ApplicationRecord
   has_many :routes_stops
   has_many :routes, through: :routes_stops
 
-  def arrivals
+  def pending_arrivals
     r = RestClient.get("http://telematics.oasa.gr/api/?act=getStopArrivals&p1=#{code}")
     arrivals = JSON.parse(r.body)
     return [] if arrivals.blank?

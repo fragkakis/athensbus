@@ -1,15 +1,7 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  code: MyString
-  route_id: MyString
-  description: MyString
-  active: false
-  description_en: MyString
-
-two:
-  code: MyString
-  route_id: MyString
-  description: MyString
-  active: false
-  description_en: MyString
+x97_route:
+  line: x97
+  code: "4099"
+  route_id: "01"
+  description: "ΑΕΡΟΛΙΜΕΝΑΣ ΑΘΗΝΩΝ - ΣΤ.ΕΛΛΗΝΙΚΟ [EXPRESS]"
+  active: true
+  description_en: "AER/NAS ATHINON - ST. ELLINIKO [EXPRESS]"
