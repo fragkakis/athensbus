@@ -20,6 +20,19 @@ end
 
 
 
+r = RestClient.get("http://telematics.oasa.gr/api/?act=webGetStops&p1=#{route["route_code"]}")
+stops = JSON.parse(r.body)
+
+r = RestClient.get("http://telematics.oasa.gr/api/?act=getBusLocation&p1=#{route["route_code"]}")
+bus_locations = JSON.parse(r.body)
+
+r = RestClient.get("http://telematics.oasa.gr/api/?act=getStopArrivals&p1=#{stop["StopCode"]}")
+stop_arrivals = JSON.parse(r.body)
+
+r = RestClient.get("http://telematics.oasa.gr/api/?act=getBusLocation&p1=#{route["route_code"]}")
+bus_locations = JSON.parse(r.body)
+
+
 
 
 
@@ -48,3 +61,12 @@ lines.each do |line|
     stop_codes.uniq!
   end
 end
+
+threads = []
+Stop.first(200).each do |stop|
+  threads << Thread.new do
+    stop.arrivals
+  end
+end
+threads.each(&:join)
+threads.map(&:value)
