@@ -165,7 +165,7 @@ GEM
     mime-types-data (3.2025.0107)
     mini_mime (1.1.5)
     minitest (5.25.4)
-    mocha (2.6.1)
+    mocha (2.7.1)
       ruby2_keywords (>= 0.0.5)
     msgpack (1.7.5)
     net-imap (0.5.5)
