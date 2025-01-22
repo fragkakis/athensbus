@@ -1,7 +1,7 @@
 r = RestClient.get("http://telematics.oasa.gr/api/?act=webGetLines")
 lines = JSON.parse(r.body)
 
-line = lines.select{|l| l["LineID"] == "Χ97"}.first
+line = lines.select { |l| l["LineID"] == "Χ97" }.first
 
 r = RestClient.get("http://telematics.oasa.gr/api/?act=getRoutesForLine&p1=#{line["LineCode"]}")
 route = JSON.parse(r.body).first
