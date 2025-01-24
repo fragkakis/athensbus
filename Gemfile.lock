@@ -168,6 +168,7 @@ GEM
     mocha (2.7.1)
       ruby2_keywords (>= 0.0.5)
     msgpack (1.7.5)
+    mutex_m (0.3.0)
     net-imap (0.5.5)
       date
       net-protocol
@@ -395,6 +396,7 @@ DEPENDENCIES
   jbuilder
   kamal
   mocha
+  mutex_m
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.1)

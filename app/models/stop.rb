@@ -1,6 +1,7 @@
 class Stop < ApplicationRecord
   has_many :routes_stops
   has_many :routes, through: :routes_stops
+  has_many :arrivals
 
   def pending_arrivals
     r = RestClient.get("http://telematics.oasa.gr/api/?act=getStopArrivals&p1=#{code}")
@@ -11,5 +12,8 @@ class Stop < ApplicationRecord
       { "line_code" => Route::ROUTE_CODE_TO_LINE_IDS[arrival["route_code"]] }.
         merge(arrival)
     end
+  rescue RestClient::ExceptionWithResponse => e
+    Rails.logger.error(">>>>> Error fetching pending arrivals for stop #{id}: #{e.http_body}")
+    raise e
   end
 end

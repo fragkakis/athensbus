@@ -47,13 +47,13 @@ Rails.application.configure do
   config.active_record.migration_error = :page_load
 
   # Highlight code that triggered database queries in logs.
-  config.active_record.verbose_query_logs = true
+  config.active_record.verbose_query_logs = false
 
   # Append comments with runtime information tags to SQL queries in logs.
-  config.active_record.query_log_tags_enabled = true
+  config.active_record.query_log_tags_enabled = false
 
   # Highlight code that enqueued background job in logs.
-  config.active_job.verbose_enqueue_logs = true
+  config.active_job.verbose_enqueue_logs = false
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
@@ -72,5 +72,16 @@ Rails.application.configure do
 
   # Use Solid Queue in Development.
   config.active_job.queue_adapter = :solid_queue
-  config.solid_queue.connects_to = { database: { writing: :queue } }
+  config.solid_queue.connects_to = { database: { writing: :development } }
+
+  class CustomLoggerFormatter < Logger::Formatter
+    def call(severity, time, progname, msg)
+      "#{time.to_s} #{severity} #{msg}\n"
+    end
+  end
+
+  Rails.logger = Logger.new(Rails.root.join("log/development.log"))
+  Rails.logger.formatter = CustomLoggerFormatter.new
+
+  config.log_level = :info
 end
