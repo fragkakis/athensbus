@@ -186,7 +186,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_19_170606) do
     t.string "lng"
     t.string "stop_type"
     t.boolean "amea"
-    t.json "previous_pending_arrivals", default: {}
+    t.json "last_sync_pending_arrivals", default: {}
+    t.datetime "last_synced_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_stops_on_code", unique: true

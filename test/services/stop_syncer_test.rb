@@ -13,7 +13,7 @@ class StopSyncerTest < ActiveSupport::TestCase
       StopSyncer.process(stop)
     end
 
-    assert_equal new_pending_arrivals, stop.reload.previous_pending_arrivals
+    assert_equal new_pending_arrivals, stop.reload.last_sync_pending_arrivals
   end
 
   test "process with one arrival" do
@@ -33,7 +33,7 @@ class StopSyncerTest < ActiveSupport::TestCase
     assert_equal "4099", arrival.route.code
     assert_equal "v1_code", arrival.vehicle.code
 
-    assert_equal new_pending_arrivals, stop.reload.previous_pending_arrivals
+    assert_equal new_pending_arrivals, stop.reload.last_sync_pending_arrivals
   end
 
   test "process with one arrival when syncing was too long ago" do
@@ -49,6 +49,6 @@ class StopSyncerTest < ActiveSupport::TestCase
       StopSyncer.process(stop)
     end
 
-    assert_equal new_pending_arrivals, stop.reload.previous_pending_arrivals
+    assert_equal new_pending_arrivals, stop.reload.last_sync_pending_arrivals
   end
 end
