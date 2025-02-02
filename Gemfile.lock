@@ -148,6 +148,7 @@ GEM
       thor (~> 1.3)
       zeitwerk (>= 2.6.18, < 3.0)
     language_server-protocol (3.17.0.3)
+    lefthook (1.10.10)
     logger (1.6.5)
     loofah (2.24.0)
       crass (~> 1.0.2)
@@ -405,6 +406,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kamal
+  lefthook
   mission_control-jobs
   mocha
   mutex_m

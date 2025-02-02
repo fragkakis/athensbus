@@ -1,0 +1,7 @@
+pre-commit:
+  commands:
+    rubocop:
+      tags: backend style
+      glob: "*.{rb,jbuilder,haml}"
+      run: bundle exec rubocop -a {staged_files} || true
+      stage_fixed: true
