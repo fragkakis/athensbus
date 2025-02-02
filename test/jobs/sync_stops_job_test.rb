@@ -1,9 +1,9 @@
 require "test_helper"
 
-class SyncStopsJobTest < ActiveSupport::TestCase
+class SyncStopsJobTest < ActiveJob::TestCase
   test "perform" do
-    SyncStopsBatchJob.expects(:perform_later).with(Stop.minimum(:id), Stop.maximum(:id))
-
-    SyncStopsJob.perform_now(100)
+    assert_enqueued_with(job: SyncStopsBatchJob, args: [Stop.minimum(:id), Stop.maximum(:id)]) do
+      SyncStopsJob.perform_now(100)
+    end
   end
 end
