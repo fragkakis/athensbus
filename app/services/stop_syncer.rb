@@ -25,7 +25,7 @@ class StopSyncer
         if route.nil?
           Rails.logger.error(">>>>> Route with code #{past_pending_arrival["route_code"]} not found")
         end
-        arrival_timestamp = [last_synced_at + past_pending_arrival["btime2"].to_i.minutes, Time.now].min
+        arrival_timestamp = [ last_synced_at + past_pending_arrival["btime2"].to_i.minutes, Time.now ].min
         Arrival.create!(stop: stop,
                         route: route,
                         vehicle: Vehicle.find_or_create_by!(code: past_pending_arrival["veh_code"],

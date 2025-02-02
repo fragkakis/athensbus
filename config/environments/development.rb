@@ -76,7 +76,7 @@ Rails.application.configure do
 
   class CustomLoggerFormatter < Logger::Formatter
     def call(severity, time, progname, msg)
-      "#{time.to_s} #{severity} #{msg}\n"
+      "#{time} #{severity} #{msg}\n"
     end
   end
 
