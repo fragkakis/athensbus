@@ -1,0 +1,4 @@
+// isoformat@0.2.1 downloaded from https://ga.jspm.io/npm:isoformat@0.2.1/src/index.js
+
+function format(t,e){t instanceof Date||(t=new Date(+t));if(isNaN(t))return"function"===typeof e?e(t):e;const n=t.getUTCHours();const a=t.getUTCMinutes();const d=t.getUTCSeconds();const o=t.getUTCMilliseconds();return`${formatYear(t.getUTCFullYear(),4)}-${pad(t.getUTCMonth()+1,2)}-${pad(t.getUTCDate(),2)}${n||a||d||o?`T${pad(n,2)}:${pad(a,2)}${d||o?`:${pad(d,2)}${o?`.${pad(o,3)}`:""}`:""}Z`:""}`}function formatYear(t){return t<0?`-${pad(-t,6)}`:t>9999?`+${pad(t,6)}`:pad(t,4)}function pad(t,e){return`${t}`.padStart(e,"0")}const t=/^(?:[-+]\d{2})?\d{4}(?:-\d{2}(?:-\d{2})?)?(?:T\d{2}:\d{2}(?::\d{2}(?:\.\d{3})?)?(?:Z|[-+]\d{2}:?\d{2})?)?$/;function parse(e,n){return t.test(e+="")?new Date(e):"function"===typeof n?n(e):n}export{format,parse};
+

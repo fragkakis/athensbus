@@ -40,3 +40,12 @@ pin "d3-zoom" # @3.0.0
 pin "delaunator" # @5.0.1
 pin "internmap" # @2.0.3
 pin "robust-predicates" # @3.0.2
+pin "plot" # @1.0.22
+pin "@plotex/chart-def", to: "@plotex--chart-def.js" # @1.0.21
+pin "@plotex/serialization", to: "@plotex--serialization.js" # @1.0.11
+pin "typy" # @3.0.1
+pin "util" # @2.1.0
+pin "@observablehq/plot", to: "@observablehq--plot.js" # @0.6.16
+pin "binary-search-bounds" # @2.0.5
+pin "interval-tree-1d" # @1.0.4
+pin "isoformat" # @0.2.1
