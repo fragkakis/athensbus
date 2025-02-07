@@ -1,17 +1,28 @@
 class RoutesController < ApplicationController
   def show
-    route = Route.find_by(code: params[:code])
-    arrivals = route.arrivals.where("created_at > ?", 1.day.ago)
-    arrivals_by_itinerary = arrivals.group_by(&:vehicle_id)
-    stop_positions = route.routes_stops.pluck(:stop_id, :order).to_h
+    @route = Route.find_by(code: params[:code])
+    arrivals = @route.arrivals.where("created_at between ? and ?", 3.days.ago, 2.day.ago)
+    trips = TripExtractor.process(@route, arrivals)
+    TripTimestampSanitizer.process(trips)
+    @data = transform_to_data(trips)
+  end
 
-    @data = arrivals_by_itinerary.map do |vehicle_id, arrivals|
-      {
-        name: vehicle_id,
-        data: arrivals
-               .sort_by { |a| stop_positions[a.stop_id] }
-               .map { |a| [ a.created_at.round(0), stop_positions[a.stop_id] ] }
-      }
+  def transform_to_data(trips)
+    data = []
+    trips.each_with_index do |trip, i|
+      trip.each.each do |trip_arrival|
+        data << {
+          train: "#{trip_arrival[:vehicle_code]} #{i}",
+          speed: "normal",
+          schedule: "weekday",
+          direction: "S",
+          station: trip_arrival[:stop_description],
+          distance: ::Geocoder::Calculations.distance_between([ @route.stops.first.lat, @route.stops.first.lng ], [ trip_arrival[:stop_lat], trip_arrival[:stop_lng] ], units: :km),
+          zone: 1,
+          time: trip_arrival[:created_at].strftime("%l:%M%P")
+        }
+      end
     end
+    data
   end
 end

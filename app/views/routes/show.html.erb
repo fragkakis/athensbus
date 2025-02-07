@@ -1,5 +1,5 @@
-<div data-controller="routes" data-action="connect">
-  Marey chart
-</div>
+<h1><%= @route.description %></h1>
 
-<div id="myplot"></div>
+<div data-controller="routes"
+  data-routes-data-value="<%= @data.to_json %>"
+  data-action="connect" id="myplot"></div>
