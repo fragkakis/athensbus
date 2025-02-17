@@ -18,7 +18,7 @@ class TripExtractorTest < ActiveSupport::TestCase
     expected = [
       [
         { veh_code: "1", stop_description: "Stop 1", stop_lat: nil, stop_lng: nil, created_at: arrivals[0].created_at },
-        { veh_code: "1", stop_description: "Stop 2", stop_lat: nil, stop_lng: nil, created_at: arrivals[1].created_at },
+        { veh_code: "1", stop_description: "Stop 2", stop_lat: nil, stop_lng: nil, created_at: arrivals[1].created_at }
       ]
     ]
     assert_equal expected, TripExtractor.process(route, arrivals)
@@ -39,8 +39,8 @@ class TripExtractorTest < ActiveSupport::TestCase
     ]
 
     expected = [
-      [{ veh_code: "1", stop_description: "Stop 1", stop_lat: nil, stop_lng: nil, created_at: arrivals[0].created_at }],
-      [{ veh_code: "1", stop_description: "Stop 2", stop_lat: nil, stop_lng: nil, created_at: arrivals[1].created_at }]
+      [ { veh_code: "1", stop_description: "Stop 1", stop_lat: nil, stop_lng: nil, created_at: arrivals[0].created_at } ],
+      [ { veh_code: "1", stop_description: "Stop 2", stop_lat: nil, stop_lng: nil, created_at: arrivals[1].created_at } ]
     ]
     assert_equal expected, TripExtractor.process(route, arrivals)
   end
@@ -65,11 +65,11 @@ class TripExtractorTest < ActiveSupport::TestCase
     expected = [
       [
         { veh_code: "1", stop_description: "Stop 1", stop_lat: nil, stop_lng: nil, created_at: arrivals[0].created_at },
-        { veh_code: "1", stop_description: "Stop 2", stop_lat: nil, stop_lng: nil, created_at: arrivals[1].created_at },
+        { veh_code: "1", stop_description: "Stop 2", stop_lat: nil, stop_lng: nil, created_at: arrivals[1].created_at }
       ],
       [
         { veh_code: "2", stop_description: "Stop 1", stop_lat: nil, stop_lng: nil, created_at: arrivals[2].created_at },
-        { veh_code: "2", stop_description: "Stop 2", stop_lat: nil, stop_lng: nil, created_at: arrivals[3].created_at },
+        { veh_code: "2", stop_description: "Stop 2", stop_lat: nil, stop_lng: nil, created_at: arrivals[3].created_at }
       ]
     ]
     assert_equal expected, TripExtractor.process(route, arrivals)

@@ -1,7 +1,8 @@
 class RoutesController < ApplicationController
   def show
     @route = Route.find_by(code: params[:code])
-    arrivals = @route.arrivals.where("created_at between ? and ?", 3.days.ago, 2.day.ago)
+    ts = 10.days.ago
+    arrivals = @route.arrivals.where("created_at between ? and ?", ts, ts + 1.day)
     trips = TripExtractor.process(@route, arrivals)
     TripTimestampSanitizer.process(trips)
     @data = transform_to_data(trips)

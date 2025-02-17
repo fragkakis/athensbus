@@ -2,7 +2,6 @@ require "test_helper"
 
 class TripTimestampSanitizerTest < ActiveSupport::TestCase
   test "process" do
-
     ts1 = 60.minutes.ago
     ts2 = 59.minutes.ago
     ts3 = 58.minutes.ago
@@ -10,7 +9,7 @@ class TripTimestampSanitizerTest < ActiveSupport::TestCase
       [
         { veh_code: "1", created_at: ts3 },
         { veh_code: "1", created_at: ts2 },
-        { veh_code: "1", created_at: ts1 },
+        { veh_code: "1", created_at: ts1 }
       ]
     ]
 
@@ -18,7 +17,7 @@ class TripTimestampSanitizerTest < ActiveSupport::TestCase
       [
         { veh_code: "1", created_at: ts1 },
         { veh_code: "1", created_at: ts2 },
-        { veh_code: "1", created_at: ts3 },
+        { veh_code: "1", created_at: ts3 }
       ]
     ]
 

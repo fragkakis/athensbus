@@ -11,11 +11,15 @@ class Stop < ApplicationRecord
     return [] if arrivals.blank?
 
     arrivals.map do |arrival|
-      { "line_code" => Route::ROUTE_CODE_TO_LINE_IDS[arrival["route_code"]] }.
-        merge(arrival)
+      { "line_code" => Route::ROUTE_CODE_TO_LINE_IDS[arrival["route_code"]] }.merge(arrival)
     end
   rescue RestClient::ExceptionWithResponse => e
     Rails.logger.error(">>>>> Error fetching pending arrivals for stop #{id}: #{e.http_body}")
     raise e
+  end
+
+  def get_routes
+    r = RestClient.get("http://telematics.oasa.gr/api/?act=webGetRoutes&p1=#{code}")
+    JSON.parse(r.body)
   end
 end
