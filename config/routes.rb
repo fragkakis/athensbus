@@ -11,12 +11,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  resources :routes, only: :show, param: :code
-  resources :routes, only: :index do
-    collection do
-      post :filter
-    end
-  end
+  resources :routes, only: :index
 
   mount MissionControl::Jobs::Engine, at: "/jobs"
 end
