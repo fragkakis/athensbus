@@ -7,7 +7,7 @@ class RoutesController < ApplicationController
                  where("arrivals.created_at between ? and ?", date.beginning_of_day, date.end_of_day).
                  pluck(Arel.sql("distinct routes.line_id"))
                Line.where(id: line_ids).order(:line_id)
-             else
+    else
                Line.all.order("line_id")
     end
 
