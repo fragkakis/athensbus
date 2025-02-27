@@ -1,11 +1,31 @@
 class RoutesController < ApplicationController
-  def show
-    @route = Route.find_by(code: params[:code])
-    ts = 10.days.ago
-    arrivals = @route.arrivals.where("created_at between ? and ?", ts, ts + 1.day)
-    trips = TripExtractor.process(@route, arrivals)
-    TripTimestampSanitizer.process(trips)
-    @data = transform_to_data(trips)
+  def index
+    # for the dropdown
+    @lines = if date.present?
+               line_ids = Arrival.
+                 joins(:route).
+                 where("arrivals.created_at between ? and ?", date.beginning_of_day, date.end_of_day).
+                 pluck(Arel.sql("distinct routes.line_id"))
+               Line.where(id: line_ids).order(:line_id)
+             else
+               Line.all.order("line_id")
+    end
+
+    if params[:line_code].present? && date.present?
+      @line = Line.find_by(code: params[:line_code])
+      @route = @line.routes.first
+      arrivals = @route.arrivals.where("created_at between ? and ?", date.beginning_of_day, date.end_of_day)
+      trips = TripExtractor.process(@route, arrivals)
+      TripTimestampSanitizer.process(trips)
+      @data = transform_to_data(trips)
+    end
+  end
+
+  private
+
+  def date
+    return unless params[:date].present?
+    @date ||= Date.parse(params[:date])
   end
 
   def transform_to_data(trips)
