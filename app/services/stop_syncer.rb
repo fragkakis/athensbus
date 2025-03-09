@@ -27,7 +27,7 @@ class StopSyncer
           Rails.logger.info(">>>> Will resync route with code: #{arrival["route_code"]} at stop with code: #{stop.code}")
           Rails.logger.error("Route with code #{past_pending_arrival["route_code"]} not found")
         else
-          arrival_timestamp = [ last_synced_at + past_pending_arrival["btime2"].to_i.minutes, Time.now ].min
+          arrival_timestamp = [ last_synced_at + past_pending_arrival["btime2"].to_i.minutes, Time.zone.now ].min
           Arrival.create!(stop: stop,
                           route: route,
                           vehicle: Vehicle.find_or_create_by!(code: past_pending_arrival["veh_code"],
@@ -37,7 +37,7 @@ class StopSyncer
       end
     end
 
-    stop.update!(last_sync_pending_arrivals: pending_arrivals, last_synced_at: Time.current)
+    stop.update!(last_sync_pending_arrivals: pending_arrivals, last_synced_at: Time.zone.now)
     Rails.logger.info("Synced stop with id: #{stop.id}")
   end
 end
