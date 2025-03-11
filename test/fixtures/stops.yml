@@ -15,3 +15,21 @@ stop1:
     {"line_code": "x97", "route_code": "4099", "veh_code": "v2_code", "btime2": "75"}
   ]
   last_synced_at: <%= 1.minute.ago %>
+
+stop2:
+  code: "stop2_code"
+  stop_id: "stop2_stop_id"
+  description: "ΔΕΥΤΕΡΗ ΣΤΑΣΗ"
+  description_en: "SECOND STOP"
+  street: nil
+  street_en: nil
+  heading: "223"
+  lat: "38.8368263"
+  lng: "21.3465442"
+  stop_type: "0"
+  amea: false
+  last_sync_pending_arrivals: [
+    {"line_code": "x97", "route_code": "4099", "veh_code": "v1_code", "btime2": "12"},
+    {"line_code": "x97", "route_code": "4099", "veh_code": "v2_code", "btime2": "75"}
+  ]
+  last_synced_at: <%= 1.minute.ago %>

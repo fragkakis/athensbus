@@ -3,3 +3,9 @@ x97_route_stop1_v1_day1:
   stop: stop1
   vehicle: v1
   created_at: <%= 23.hours.ago %>
+
+x97_route_stop2_v1_day1:
+  route: x97_route
+  stop: stop2
+  vehicle: v1
+  created_at: <%= 23.hours.ago %>
