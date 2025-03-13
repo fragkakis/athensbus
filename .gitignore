@@ -32,6 +32,8 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+# Ignore db key containing DB password
+/config/db.key
 
 .idea
 .DS_Store
