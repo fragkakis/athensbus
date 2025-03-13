@@ -24,6 +24,7 @@ proxy:
     - athensbus.info
     - www.athensbus.info
   app_port: 3000
+  forward_headers: true
 
 # Credentials for your image host.
 registry:
@@ -52,7 +53,11 @@ env:
 
     # Match this to any external database server to configure Active Record correctly
     # Use athensbusinfo-db for a db accessory server on same machine via local kamal docker network.
-    # DB_HOST: 192.168.0.2
+    DB_HOST: 167.235.226.89
+    DB_PORT: 5432
+    POSTGRES_DB: oasa_production
+    POSTGRES_USER: oasa
+
 
     # Log everything from Rails
     # RAILS_LOG_LEVEL: debug
@@ -97,22 +102,22 @@ builder:
 #   user: app
 
 # Use accessory services (secrets come from .kamal/secrets).
-# accessories:
-#   db:
-#     image: mysql:8.0
-#     host: 192.168.0.2
-#     # Change to 3306 to expose port to the world instead of just local network.
-#     port: "127.0.0.1:3306:3306"
-#     env:
-#       clear:
-#         MYSQL_ROOT_HOST: '%'
-#       secret:
-#         - MYSQL_ROOT_PASSWORD
-#     files:
-#       - config/mysql/production.cnf:/etc/mysql/my.cnf
-#       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
-#     directories:
-#       - data:/var/lib/mysql
+accessories:
+  db:
+   image: postgres:17
+   host: 167.235.226.89
+   # Change to 3306 to expose port to the world instead of just local network.
+   port: "127.0.0.1:5432:5432"
+   env:
+     clear:
+       POSTGRES_USER: "${POSTGRES_USER}"
+       POSTGRES_DB: "${POSTGRES_DB}"
+     secret:
+       - OASA_POSTGRES_PASSWORD
+   directories:
+     - data:/var/lib/postgresql/data
+   files:
+     - db/production_setup.sql:/docker-entrypoint-initdb.d/setup.sql
 #   redis:
 #     image: redis:7.0
 #     host: 192.168.0.2

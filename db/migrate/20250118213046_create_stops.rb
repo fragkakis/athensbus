@@ -12,7 +12,7 @@ class CreateStops < ActiveRecord::Migration[8.0]
       t.string :lng
       t.string :stop_type
       t.boolean :amea
-      t.json :last_sync_pending_arrivals, default: {}
+      t.jsonb :last_sync_pending_arrivals, default: {}
       t.timestamp :last_synced_at
 
       t.timestamps
