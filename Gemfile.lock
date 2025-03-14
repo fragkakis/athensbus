@@ -428,7 +428,7 @@ DEPENDENCIES
   mission_control-jobs
   mocha
   mutex_m
-  pg
+  pg (~> 1.5.6)
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.1)

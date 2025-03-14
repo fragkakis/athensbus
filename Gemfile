@@ -43,7 +43,7 @@ gem "mutex_m"
 gem "mission_control-jobs"
 gem "geocoder"
 gem "honeybadger"
-gem "pg"
+gem "pg", "~> 1.5.6"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
