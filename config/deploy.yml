@@ -113,7 +113,7 @@ accessories:
        POSTGRES_USER: "${POSTGRES_USER}"
        POSTGRES_DB: "${POSTGRES_DB}"
      secret:
-       - OASA_POSTGRES_PASSWORD
+       - POSTGRES_PASSWORD
    directories:
      - data:/var/lib/postgresql/data
    files:
