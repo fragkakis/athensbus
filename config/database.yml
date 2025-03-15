@@ -25,6 +25,6 @@ production:
   <<: *default
   username: oasa_production
   database: oasa_production
-  password: <%= ENV["OASA_POSTGRES_PASSWORD"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
   host: <%= ENV["DB_HOST"] %>
   port: <%= ENV["DB_PORT"] %>
