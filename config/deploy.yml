@@ -53,7 +53,7 @@ env:
 
     # Match this to any external database server to configure Active Record correctly
     # Use athensbusinfo-db for a db accessory server on same machine via local kamal docker network.
-    DB_HOST: 167.235.226.89
+    DB_HOST: 127.0.0.1
     DB_PORT: 5432
     POSTGRES_DB: oasa_production
     POSTGRES_USER: oasa
