@@ -5,8 +5,8 @@ class StopTest < ActiveSupport::TestCase
     stop = stops(:stop1)
 
     expected = [
-      { "line_code" => "x97", "route_code"=> "4099", "veh_code"=> "v1_code", "btime2"=> "12" },
-      { "line_code"=> "x97", "route_code"=> "4099", "veh_code"=> "v2_code", "btime2"=> "75" }
+      { "line_code" => "x97", "route_code"=> "5373", "veh_code"=> "v1_code", "btime2"=> "12" },
+      { "line_code"=> "x97", "route_code"=> "5373", "veh_code"=> "v2_code", "btime2"=> "75" }
     ]
 
     stub_request(:get, "http://telematics.oasa.gr/api/?act=getStopArrivals&p1=stop1_code").

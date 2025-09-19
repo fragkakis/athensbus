@@ -10,7 +10,7 @@ module Populators
 
       expected_routes_response = [
         {
-          "route_code": "4099",
+          "route_code": "5373",
           "route_id": "01",
           "route_descr": "\u0391\u0395\u03a1\u039f\u039b\u0399\u039c\u0395\u039d\u0391\u03a3 \u0391\u0398\u0397\u039d\u03a9\u039d - \u03a3\u03a4.\u0395\u039b\u039b\u0397\u039d\u0399\u039a\u039f [EXPRESS] ",
           "route_active": "1",
@@ -50,7 +50,7 @@ module Populators
           "StopAmea": "1"
         }
       ].to_json
-      stub_request(:get, "http://telematics.oasa.gr/api/?act=webGetStops&p1=4099").
+      stub_request(:get, "http://telematics.oasa.gr/api/?act=webGetStops&p1=5373").
         to_return(status: 200, body: expected_stops_response, headers: {})
 
       assert_difference("::Route.count") do
@@ -60,7 +60,7 @@ module Populators
       end
 
       route = ::Route.last
-      assert_equal "4099", route.code
+      assert_equal "5373", route.code
       assert_equal "01", route.route_id
       assert_equal "\u0391\u0395\u03a1\u039f\u039b\u0399\u039c\u0395\u039d\u0391\u03a3 \u0391\u0398\u0397\u039d\u03a9\u039d - \u03a3\u03a4.\u0395\u039b\u039b\u0397\u039d\u0399\u039a\u039f [EXPRESS] ", route.description
       assert_equal "AER/NAS ATHINON - ST. ELLINIKO [EXPRESS]", route.description_en
@@ -98,7 +98,7 @@ module Populators
 
       expected_routes_response = [
         {
-          "route_code": "4099",
+          "route_code": "5373",
           "route_id": "01",
           "route_descr": "\u0391\u0395\u03a1\u039f\u039b\u0399\u039c\u0395\u039d\u0391\u03a3 \u0391\u0398\u0397\u039d\u03a9\u039d - \u03a3\u03a4.\u0395\u039b\u039b\u0397\u039d\u0399\u039a\u039f [EXPRESS] ",
           "route_active": "1",
@@ -138,7 +138,7 @@ module Populators
           "StopAmea": "1"
         }
       ].to_json
-      stub_request(:get, "http://telematics.oasa.gr/api/?act=webGetStops&p1=4099").
+      stub_request(:get, "http://telematics.oasa.gr/api/?act=webGetStops&p1=5373").
         to_return(status: 200, body: expected_stops_response, headers: {})
 
       assert_no_difference("::Route.count") do

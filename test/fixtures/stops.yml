@@ -11,8 +11,8 @@ stop1:
   stop_type: "0"
   amea: false
   last_sync_pending_arrivals: [
-    {"line_code": "x97", "route_code": "4099", "veh_code": "v1_code", "btime2": "12"},
-    {"line_code": "x97", "route_code": "4099", "veh_code": "v2_code", "btime2": "75"}
+    {"line_code": "x97", "route_code": "5373", "veh_code": "v1_code", "btime2": "12"},
+    {"line_code": "x97", "route_code": "5373", "veh_code": "v2_code", "btime2": "75"}
   ]
   last_synced_at: <%= 1.minute.ago %>
 
@@ -29,7 +29,7 @@ stop2:
   stop_type: "0"
   amea: false
   last_sync_pending_arrivals: [
-    {"line_code": "x97", "route_code": "4099", "veh_code": "v1_code", "btime2": "12"},
-    {"line_code": "x97", "route_code": "4099", "veh_code": "v2_code", "btime2": "75"}
+    {"line_code": "x97", "route_code": "5373", "veh_code": "v1_code", "btime2": "12"},
+    {"line_code": "x97", "route_code": "5373", "veh_code": "v2_code", "btime2": "75"}
   ]
   last_synced_at: <%= 1.minute.ago %>

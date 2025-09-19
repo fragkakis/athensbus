@@ -3,3 +3,9 @@ x97:
   line_id: "Χ97"
   description: "ΑΕΡΟΛΙΜΕΝΑΣ ΑΘΗΝΩΝ - ΣΤ. ΕΛΛΗΝΙΚΟ (EXPRESS) (ΚΥΚΛΙΚΗ)"
   description_en: "AEROL. ATHINON - ST. ELLINIKO (EXPRESS)"
+
+x93:
+  code: "1521"
+  line_id: "Χ93"
+  description: "ΣΤ. ΥΠΕΡ. ΛΕΩΦ. ΚΗΦΙΣΟΥ - ΑΕΡΟΛΙΜΕΝΑΣ ΑΘΗΝΩΝ (EXPRESS)"
+  description_en: "ST. YPER. LEOF. KIFISOU - AEROLIMENAS ATHINON (EXPRESS)"

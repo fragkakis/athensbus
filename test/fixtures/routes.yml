@@ -1,7 +1,23 @@
 x97_route:
   line: x97
-  code: "4099"
+  code: "5373"
   route_id: "01"
   description: "ΑΕΡΟΛΙΜΕΝΑΣ ΑΘΗΝΩΝ - ΣΤ.ΕΛΛΗΝΙΚΟ [EXPRESS]"
   active: true
   description_en: "AER/NAS ATHINON - ST. ELLINIKO [EXPRESS]"
+
+x93_route_1:
+  line: x93
+  code: "3965"
+  route_id: "01"
+  description: "ΣΤ.ΥΠΕΡ.ΛΕΩΦ.ΚΗΦΙΣΟΥ - ΑΕΡΟΛΙΜΕΝΑΣ ΑΘΗΝΩΝ[EXPRESS]"
+  active: true
+  description_en: "ST.YPER.LEOF.KIFISOU - AEROLIMENAS ATHINON[EXPRESS]"
+
+x93_route_2:
+  line: x93
+  code: "3966"
+  route_id: "02"
+  description: "ΑΕΡΟΛΙΜΕΝΑΣ ΑΘΗΝΩΝ - ΣΤ.ΥΠΕΡ.ΛΕΩΦ.ΚΗΦΙΣΟΥ[EXPRESS]"
+  active: true
+  description_en: "AEROLIMENAS ATHINON - ST.YPER.LEOF.KIFISOU[EXPRESS]"
