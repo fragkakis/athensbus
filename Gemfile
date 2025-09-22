@@ -44,6 +44,7 @@ gem "mission_control-jobs"
 gem "geocoder"
 gem "honeybadger"
 gem "pg", "~> 1.5.6"
+gem "datadog", require: "datadog/auto_instrument"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

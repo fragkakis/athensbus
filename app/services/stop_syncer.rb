@@ -21,9 +21,10 @@ class StopSyncer
       new_arrivals_data = []
       last_sync_pending_arrivals.each do |past_pending_arrival|
         next if pending_arrivals.any? { |arrival| arrival["veh_code"] == past_pending_arrival["veh_code"] }
+
         route = Route.find_by(code: past_pending_arrival["route_code"])
         if route.nil?
-          Rails.logger.info(">>>> Will resync route with code: #{arrival["route_code"]} at stop with code: #{stop.code}")
+          Rails.logger.info(">>>> Will resync route with code: #{past_pending_arrival["route_code"]} at stop with code: #{stop.code}")
           Rails.logger.error("Route with code #{past_pending_arrival["route_code"]} not found")
           next
         end

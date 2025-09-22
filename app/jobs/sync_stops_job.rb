@@ -3,9 +3,10 @@ class SyncStopsJob < ApplicationJob
 
   def perform(batch_size)
     Rails.benchmark("Scheduling all batches of stops") do
-      Stop.ids.sort.each_slice(batch_size).with_index do |stops_batch, i|
-        SyncStopsBatchJob.set(priority: 1).perform_later(stops_batch.first, stops_batch.last)
+      jobs = Stop.ids.sort.each_slice(batch_size).map do |stops_batch|
+        SyncStopsBatchJob.new(stops_batch.first, stops_batch.last).set(priority: 1)
       end
+      ActiveJob.perform_all_later(jobs)
     end
   end
 end

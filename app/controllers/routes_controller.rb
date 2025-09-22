@@ -36,12 +36,12 @@ class RoutesController < ApplicationController
       trip.each.each do |trip_arrival|
         first_stop = @route.stops.first
         data << {
-          train: "#{trip_arrival[:vehicle_code]} #{i}",
+          vehicle: "#{trip_arrival[:veh_code]}-#{i}",
           speed: "normal",
           schedule: "weekday",
           direction: "S",
           station: trip_arrival[:stop_description],
-          distance: ::Geocoder::Calculations.distance_between([ first_stop.lat, first_stop.lng ], [ trip_arrival[:stop_lat], trip_arrival[:stop_lng] ], units: :km),
+          distance: trip_arrival[:stop_position],
           zone: 1,
           time: trip_arrival[:created_at].strftime("%l:%M%P")
         }

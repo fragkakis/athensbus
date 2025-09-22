@@ -84,4 +84,13 @@ Rails.application.configure do
   Rails.logger.formatter = CustomLoggerFormatter.new
 
   config.log_level = :info
+
+  Datadog.configure do |c|
+    c.service = "oasa"
+    c.env = Rails.env
+    c.tracing.enabled = true
+    c.tracing.instrument :rails
+    c.tracing.instrument :active_record
+    c.tracing.instrument :active_job
+  end
 end

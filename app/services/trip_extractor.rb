@@ -8,6 +8,7 @@ class TripExtractor
   def initialize(route, arrivals)
     @route = route
     @arrivals = arrivals
+    @stop_positions = @route.routes_stops.pluck(:stop_id, :order).to_h
   end
 
   def process
@@ -35,7 +36,8 @@ class TripExtractor
           stop_description: next_arrival.stop.description,
           stop_lat: next_arrival.stop.lat,
           stop_lng: next_arrival.stop.lng,
-          created_at: next_arrival.created_at
+          created_at: next_arrival.created_at,
+          stop_position: @stop_positions[next_arrival.stop_id]
         }
         if veh_arrivals_by_created_at.empty?
           trips << trip
@@ -66,7 +68,7 @@ class TripExtractor
       expected_next_arrival_stop_order = last_arrival_stop_order + 1
       next_arrival = remaining_arrivals_by_created_at.find do |arrival|
         stop_id_to_stop_order[arrival.stop_id] == expected_next_arrival_stop_order &&
-          (arrival.created_at - last_arrival.created_at) < 25.minutes
+          (arrival.created_at - last_arrival.created_at).abs < 25.minutes
       end
       if next_arrival.present?
         [ next_arrival, remaining_arrivals_by_created_at - [ next_arrival ] ]
