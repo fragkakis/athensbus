@@ -1,5 +1,3 @@
-<h1>Lines</h1>
-
 <%= form_with(url: routes_path, method: :get,
             data: { turbo_frame: "search_results", turbo_action: "advance" }) do |f| %>
     <select id="line_code" name="line_code" >
@@ -77,8 +75,8 @@
             },
             color: {
                 legend: true,
-                domain: ["normal", "limited", "bullet"],
-                range: ["rgb(34, 34, 34)", "rgb(183, 116, 9)", "rgb(192, 62, 29)"]
+                domain: ["normal", "limited", "bullet", "last"],
+                range: ["rgb(34, 34, 34)", "rgb(183, 116, 9)", "rgb(192, 62, 29)", "red"]
             },
             marks: [
                 Plot.ruleX(allStops, {x: "position", strokeOpacity: 0.1, strokeDasharray: 2}),

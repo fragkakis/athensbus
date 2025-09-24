@@ -34,11 +34,12 @@ class RoutesController < ApplicationController
   def transform_to_data(trips)
     data = []
     trips.each_with_index do |trip, i|
-      trip.each.each do |trip_arrival|
+      trip.each.each_with_index do |trip_arrival, j|
         first_stop = @route.stops.first
+        is_last_arrival = (j == trip.length - 1)
         data << {
           vehicle: "#{trip_arrival[:veh_code]}-#{i}",
-          speed: "normal",
+          speed: is_last_arrival ? "last" : "normal",
           schedule: "weekday",
           direction: "S",
           stop: trip_arrival[:stop_description],
