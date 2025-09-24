@@ -8,3 +8,8 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+.form-container {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}

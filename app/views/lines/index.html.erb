@@ -1,22 +1,29 @@
-<%= form_with(url: routes_path, method: :get,
-            data: { turbo_frame: "search_results", turbo_action: "advance" }) do |f| %>
-    <select id="line_code" name="line_code" >
+<%= form_with(url: lines_path, method: :get) do |f| %>
+  <div>
+    <div class="form-group mb-3">
+      <label for="line">Γραμμή</label>
+      <select id="line_id" name="line_id" class="form-select">
         <% @lines.each do |line| %>
-          <option value="<%= line.code %>"><%= "#{line.line_id}: #{line.description}" %></option>
+          <option value="<%= line.line_id %>"><%= "#{line.line_id}: #{line.description}" %></option>
         <% end %>
-    </select>
-  <p>
-    <input type="date" id="date" name="date" value="<%= params[:date] || Date.current.to_s %>"/>
-  </p>
-
-    <div>
-      <%= f.submit "Δες τα δρομολόγια" %>
+      </select>
+      <small class="form-text text-muted">Διάλεξε μια γραμμή λεωφορείου από τη λίστα</small>
     </div>
+
+    <div class="form-group mb-3">
+      <label for="date">Ημερομηνία</label>
+      <input type="date" id="date" name="date" class="form-control" style="width: 170px;" value="<%= params[:date] || Date.current.to_s %>"/>
+    </div>
+
+    <%= button_tag type: "submit", class: "btn btn-primary btn-lg" do %>
+      <i class="bi bi-bus-front-fill"></i> Δες τα δρομολόγια
+    <% end %>
+  </div>
+
 <% end %>
 
-
 <turbo-frame id="search_results">
-    <% if @data.present? %>
+  <% if @data.present? %>
     <h1><%= @route.description %></h1>
 
     <div data-routes-data-value="<%= @data.to_json %>" data-all-stops-value="<%= @all_stops.to_json %>" id="myplot" />
@@ -95,15 +102,23 @@
 
         div.append(plot);
     </script>
-    <% end %>
+  <% end %>
 </turbo-frame>
-
-
 
 <script type="module">
     $(document).ready(function() {
+        $('#line').select2({
+            theme: 'bootstrap-5',
+            containerCssClass: 'form-select-lg',
+            closeOnSelect: true,
+            dropdownAutoWidth: true
+        });
 
-        $('#line_code').select2();
+        // Ensure clicking outside closes the dropdown
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('.select2').length) {
+                $('#line').select2('close');
+            }
+        });
     });
 </script>
-
