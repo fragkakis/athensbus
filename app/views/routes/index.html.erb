@@ -35,6 +35,11 @@
             return formatTime(d3.utcMinute.offset(d3.utcDay(), minutes - minutesOffset));
         }
 
+        function asTimeForLabels(minutes) {
+            const formatTimeForLabels = d3.utcFormat("%I:%M%p");
+            return formatTimeForLabels(d3.utcMinute.offset(d3.utcDay(), minutes - minutesOffset)).toLowerCase();
+        }
+
         const minutesOffset = -60 * 2 // no trains run at 2 AM
         const parseTime = d3.utcParse("%I:%M%p")
         const formatTime = d3.utcFormat("%-I %p")
@@ -80,10 +85,13 @@
             },
             marks: [
                 Plot.ruleX(allStops, {x: "position", strokeOpacity: 0.1, strokeDasharray: 2}),
-                Plot.text(allStops, {x: "position", text: "name", y: () => asTime(earliestArrival), rotate: -90, frameAnchor: "left", dy: -12}),
+                Plot.text(allStops, {x: "position", text: "name", y: () => asTimeForLabels(earliestArrival), rotate: -90, frameAnchor: "left", dy: -12}),
                 Plot.line(arrivals, {filter: d => d.schedule === schedule, x: "distance", y: "time", z: "vehicle", stroke: "speed", marker: "circle", title: (d) => `${d.vehicle}${d.direction}\n${d.stop}\n${d.time}`, tip: true})
             ]
         });
+
+        console.log(earliestArrival)
+        console.log(asTime(earliestArrival))
 
         div.append(plot);
     </script>
