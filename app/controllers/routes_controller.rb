@@ -20,6 +20,7 @@ class RoutesController < ApplicationController
       trips = TripExtractor.process(@route, arrivals)
       TripTimestampSanitizer.process(trips)
       @data = transform_to_data(trips)
+      @all_stops = @route.stops.map.with_index(1) { |stop, index| { name: stop.description, position: index } }
     end
   end
 
@@ -40,7 +41,7 @@ class RoutesController < ApplicationController
           speed: "normal",
           schedule: "weekday",
           direction: "S",
-          station: trip_arrival[:stop_description],
+          stop: trip_arrival[:stop_description],
           distance: trip_arrival[:stop_position],
           zone: 1,
           time: trip_arrival[:created_at].strftime("%l:%M%P")

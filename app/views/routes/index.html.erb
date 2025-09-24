@@ -21,7 +21,7 @@
     <% if @data.present? %>
     <h1><%= @route.description %></h1>
 
-    <div data-routes-data-value="<%= @data.to_json %>" id="myplot" />
+    <div data-routes-data-value="<%= @data.to_json %>" data-all-stops-value="<%= @all_stops.to_json %>" id="myplot" />
 
     <script type="module">
 
@@ -30,6 +30,8 @@
 
         const div = document.querySelector("#myplot");
         const arrivals = JSON.parse(div.getAttribute('data-routes-data-value'))
+        const allStops = JSON.parse(div.getAttribute('data-all-stops-value'))
+        console.log(arrivals)
 
         function asTime(minutes) {
             return formatTime(d3.utcMinute.offset(d3.utcDay(), minutes - minutesOffset));
@@ -70,8 +72,8 @@
                 range: ["rgb(34, 34, 34)", "rgb(183, 116, 9)", "rgb(192, 62, 29)"]
             },
             marks: [
-                Plot.ruleX(arrivals, Plot.groupX({}, {x: "distance", strokeOpacity: 0.1, strokeDasharray: 2})),
-                Plot.text(arrivals, Plot.groupX({text: "first", y: () => "4:30am"}, {x: "distance", text: "stop", rotate: -90, frameAnchor: "left", dy: -12})),
+                Plot.ruleX(allStops, {x: "position", strokeOpacity: 0.1, strokeDasharray: 2}),
+                Plot.text(allStops, {x: "position", text: "name", y: () => "4:30am", rotate: -90, frameAnchor: "left", dy: -12}),
                 Plot.line(arrivals, {filter: d => d.schedule === schedule, x: "distance", y: "time", z: "vehicle", stroke: "speed", marker: "circle", title: (d) => `${d.vehicle}${d.direction}\n${d.stop}\n${d.time}`, tip: true})
             ]
         });
