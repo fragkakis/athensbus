@@ -42,6 +42,14 @@
         const formatTime = d3.utcFormat("%-I %p")
         const schedule = "weekday"
 
+        // Find earliest arrival time
+        const earliestArrival = arrivals.length > 0 ?
+            d3.min(arrivals, d => asMinutes(d.time)) :
+            3 * 60 // fallback to 3am if no arrivals
+
+        // Calculate midnight in the offset coordinate system
+        const midnightInOffset = asMinutes("12:00am")
+
         function asMinutes(time) {
             if (!(time = parseTime(time))) return;
             const minutes = time.getUTCHours() * 60 + time.getUTCMinutes();
@@ -61,7 +69,8 @@
             },
             y: {
                 label: null,
-                ticks: d3.range(3, 24).map(h => h * 60),
+                domain: [earliestArrival, midnightInOffset], // from earliest arrival to midnight
+                ticks: d3.range(Math.floor(earliestArrival / 60), 25).map(h => h * 60),
                 tickFormat: asTime,
                 transform: asMinutes,
                 reverse: true
@@ -73,7 +82,7 @@
             },
             marks: [
                 Plot.ruleX(allStops, {x: "position", strokeOpacity: 0.1, strokeDasharray: 2}),
-                Plot.text(allStops, {x: "position", text: "name", y: () => "4:30am", rotate: -90, frameAnchor: "left", dy: -12}),
+                Plot.text(allStops, {x: "position", text: "name", y: () => asTime(earliestArrival), rotate: -90, frameAnchor: "left", dy: -12}),
                 Plot.line(arrivals, {filter: d => d.schedule === schedule, x: "distance", y: "time", z: "vehicle", stroke: "speed", marker: "circle", title: (d) => `${d.vehicle}${d.direction}\n${d.stop}\n${d.time}`, tip: true})
             ]
         });
