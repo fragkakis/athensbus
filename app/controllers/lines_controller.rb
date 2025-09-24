@@ -51,11 +51,9 @@ class LinesController < ApplicationController
     data = []
     trips.each_with_index do |trip, i|
       trip.each.each_with_index do |trip_arrival, j|
-        first_stop = @route.stops.first
-        is_last_arrival = (j == trip.length - 1)
         data << {
           vehicle: "#{trip_arrival[:veh_code]}-#{i}",
-          speed: is_last_arrival ? "last" : "normal",
+          speed: "normal",
           schedule: "weekday",
           direction: "S",
           stop: trip_arrival[:stop_description],

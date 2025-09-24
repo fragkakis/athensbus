@@ -61,9 +61,9 @@
                 reverse: true
             },
             color: {
-                legend: true,
-                domain: ["normal", "limited", "bullet", "last"],
-                range: ["rgb(34, 34, 34)", "rgb(183, 116, 9)", "rgb(192, 62, 29)", "red"]
+                legend: false,
+                domain: ["normal"],
+                range: ["rgb(34, 34, 34)"]
             },
             marks: [
                 Plot.ruleX(allStops, {x: "position", strokeOpacity: 0.1, strokeDasharray: 2}),
