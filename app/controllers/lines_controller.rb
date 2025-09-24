@@ -3,8 +3,10 @@ class LinesController < ApplicationController
 
   def index
     if(params[:line_id])
-      @line = Line.find_by(line_id: params[:line_id])
-      @route = @line.routes.first
+      @line = Line.find_by!(line_id: params[:line_id])
+      @route = params[:route_id] ?
+                 @line.routes.find_by(route_id: params[:route_id]) || @line.routes.first:
+                 @line.routes.first
       arrivals = @route.arrivals.
         where("created_at between ? and ?", date.beginning_of_day, date.end_of_day).
         includes(:vehicle, :stop)
@@ -12,6 +14,16 @@ class LinesController < ApplicationController
       TripTimestampSanitizer.process(trips)
       @data = transform_to_data(trips)
       @all_stops = @route.stops.map.with_index(1) { |stop, index| { name: stop.description, position: index } }
+    end
+
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.replace("search_results", partial: "search_results"),
+          turbo_stream.replace("route_select", partial: "route_select")
+        ]
+      end
+      format.html
     end
   end
 

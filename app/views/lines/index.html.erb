@@ -1,109 +1,31 @@
-<%= form_with(url: lines_path, method: :get) do |f| %>
+<%= form_with(url: lines_path, method: :get, data: { turbo_frame: "search_results", turbo_action: "advance" }) do |f| %>
   <div>
     <div class="form-group mb-3">
       <label for="line">Γραμμή</label>
       <select id="line_id" name="line_id" class="form-select">
+        <option value="" selected="<%= @line.blank? %>" disabled="true"></option>
         <% @lines.each do |line| %>
-          <option value="<%= line.line_id %>"><%= "#{line.line_id}: #{line.description}" %></option>
+        <option value="<%= line.line_id %>"<%= line.line_id == params[:line_id] ? ' selected="true"' : '' %>>
+            <%= "#{line.line_id}: #{line.description}" %>
+        </option>
         <% end %>
       </select>
       <small class="form-text text-muted">Διάλεξε μια γραμμή λεωφορείου από τη λίστα</small>
     </div>
 
+    <%= render 'route_select' %>
+
     <div class="form-group mb-3">
       <label for="date">Ημερομηνία</label>
       <input type="date" id="date" name="date" class="form-control" style="width: 170px;" value="<%= params[:date] || Date.current.to_s %>"/>
+      <small class="form-text text-muted">Διάλεξε την ημερομηνία</small>
     </div>
 
-    <%= button_tag type: "submit", class: "btn btn-primary btn-lg" do %>
-      <i class="bi bi-bus-front-fill"></i> Δες τα δρομολόγια
-    <% end %>
   </div>
 
 <% end %>
 
-<turbo-frame id="search_results">
-  <% if @data.present? %>
-    <h1><%= @route.description %></h1>
-
-    <div data-routes-data-value="<%= @data.to_json %>" data-all-stops-value="<%= @all_stops.to_json %>" id="myplot" />
-
-    <script type="module">
-
-        import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6.17/+esm";
-        import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm"
-
-        const div = document.querySelector("#myplot");
-        const arrivals = JSON.parse(div.getAttribute('data-routes-data-value'))
-        const allStops = JSON.parse(div.getAttribute('data-all-stops-value'))
-        console.log(arrivals)
-
-        function asTime(minutes) {
-            return formatTime(d3.utcMinute.offset(d3.utcDay(), minutes - minutesOffset));
-        }
-
-        function asTimeForLabels(minutes) {
-            const formatTimeForLabels = d3.utcFormat("%I:%M%p");
-            return formatTimeForLabels(d3.utcMinute.offset(d3.utcDay(), minutes - minutesOffset)).toLowerCase();
-        }
-
-        const minutesOffset = -60 * 2 // no trains run at 2 AM
-        const parseTime = d3.utcParse("%I:%M%p")
-        const formatTime = d3.utcFormat("%-I %p")
-        const schedule = "weekday"
-
-        // Find earliest arrival time
-        const earliestArrival = arrivals.length > 0 ?
-            d3.min(arrivals, d => asMinutes(d.time)) :
-            3 * 60 // fallback to 3am if no arrivals
-
-        // Calculate midnight in the offset coordinate system
-        const midnightInOffset = asMinutes("12:00am")
-
-        function asMinutes(time) {
-            if (!(time = parseTime(time))) return;
-            const minutes = time.getUTCHours() * 60 + time.getUTCMinutes();
-            return (minutes + minutesOffset + 60 * 24) % (24 * 60);
-        }
-
-        const plot = Plot.plot({
-            inset: 10,
-            margin: 10,
-            marginLeft: 40,
-            marginTop: 100,
-            grid: true,
-            width: 1152,
-            height: 1800,
-            x: {
-                axis: null // hide arbitrary distance units
-            },
-            y: {
-                label: null,
-                domain: [earliestArrival, midnightInOffset], // from earliest arrival to midnight
-                ticks: d3.range(Math.floor(earliestArrival / 60), 25).map(h => h * 60),
-                tickFormat: asTime,
-                transform: asMinutes,
-                reverse: true
-            },
-            color: {
-                legend: true,
-                domain: ["normal", "limited", "bullet", "last"],
-                range: ["rgb(34, 34, 34)", "rgb(183, 116, 9)", "rgb(192, 62, 29)", "red"]
-            },
-            marks: [
-                Plot.ruleX(allStops, {x: "position", strokeOpacity: 0.1, strokeDasharray: 2}),
-                Plot.text(allStops, {x: "position", text: "name", y: () => asTimeForLabels(earliestArrival), rotate: -90, frameAnchor: "left", dy: -12}),
-                Plot.line(arrivals, {filter: d => d.schedule === schedule, x: "distance", y: "time", z: "vehicle", stroke: "speed", marker: "circle", title: (d) => `${d.vehicle}${d.direction}\n${d.stop}\n${d.time}`, tip: true})
-            ]
-        });
-
-        console.log(earliestArrival)
-        console.log(asTime(earliestArrival))
-
-        div.append(plot);
-    </script>
-  <% end %>
-</turbo-frame>
+<%= render 'search_results' %>
 
 <script type="module">
     $(document).ready(function() {
@@ -112,6 +34,21 @@
             containerCssClass: 'form-select-lg',
             closeOnSelect: true,
             dropdownAutoWidth: true
+        });
+
+        // Clear route selection when line changes
+        $('#line_id').on('change', function() {
+            $(this).closest('form').submit();
+        });
+
+        // Submit form when route changes
+        $('#route_id').on('change', function() {
+            $(this).closest('form').submit();
+        });
+
+        // Submit form when date changes
+        $('#date').on('change', function() {
+            $(this).closest('form').submit();
         });
 
         // Ensure clicking outside closes the dropdown
