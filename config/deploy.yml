@@ -58,6 +58,7 @@ env:
     DB_PORT: 5432
     POSTGRES_DB: oasa_production
     POSTGRES_USER: oasa
+    DD_APM_ENABLED: false
 
     # Log everything from Rails
     # RAILS_LOG_LEVEL: debug
