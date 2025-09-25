@@ -108,8 +108,8 @@ accessories:
    port: "127.0.0.1:5432:5432"
    env:
      clear:
-       POSTGRES_USER: "${POSTGRES_USER}"
-       POSTGRES_DB: "${POSTGRES_DB}"
+       POSTGRES_USER: oasa
+       POSTGRES_DB: oasa_production
      secret:
        - POSTGRES_PASSWORD
    directories:
