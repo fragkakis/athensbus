@@ -1,8 +1,8 @@
-#development:
-#  sync:
-#    class: SyncStopsJob
-#    args: [ 100 ]
-#    schedule: every 5 minutes
+development:
+  sync:
+    class: SyncStopsJob
+    args: [ 100 ]
+    schedule: every 5 minutes
 #production:
 #  sync:
 #    class: SyncStopsJob
