@@ -17,7 +17,12 @@
 
     <div class="form-group mb-3">
       <label for="date">Ημερομηνία</label>
-      <input type="date" id="date" name="date" class="form-control" style="width: 170px;" value="<%= params[:date] || Date.current.to_s %>"/>
+      <input type="date" id="date" name="date"
+             class="form-control" style="width: 170px;"
+             min="<%= @date_min %>"
+             max="<%= @date_max %>"
+             value="<%= params[:date] || Date.current.to_s %>"
+        />
       <small class="form-text text-muted">Διάλεξε την ημερομηνία</small>
     </div>
 

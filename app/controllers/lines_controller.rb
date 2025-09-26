@@ -7,6 +7,8 @@ class LinesController < ApplicationController
       @route = params[:route_id] ?
                  @line.routes.find_by(route_id: params[:route_id]) :
                  @line.routes.first
+      @date_min = Arrival.minimum(:created_at).to_date.to_s
+      @date_max = Arrival.maximum(:created_at).to_date.to_s
       arrivals = @route.arrivals.
         where("created_at between ? and ?", date.beginning_of_day, date.end_of_day).
         includes(:vehicle, :stop)
