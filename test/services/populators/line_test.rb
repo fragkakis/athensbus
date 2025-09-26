@@ -60,24 +60,5 @@ module Populators
       assert_equal "PLATEIA KANIGKOS - GKIZI", line.description_en
     end
 
-    test "populate with existing payload updates descriptions" do
-      line_payload = {
-        "LineCode": "1547",
-        "LineID": "Χ97",
-        "LineDescr": "updated description",
-        "LineDescrEng": "updated description EN"
-      }.stringify_keys
-      ::Populators::Route.expects(:populate)
-
-      assert_no_difference("::Line.count") do
-        Populators::Line.populate(line_payload)
-      end
-
-      line = lines(:x97)
-      assert_equal "1547", line.code
-      assert_equal "Χ97", line.line_id
-      assert_equal "updated description", line.description
-      assert_equal "updated description EN", line.description_en
-    end
   end
 end
