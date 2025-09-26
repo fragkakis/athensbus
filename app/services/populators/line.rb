@@ -11,7 +11,7 @@ module Populators
 
     def self.populate(line_payload)
       Rails.logger.info("Creating line #{line_payload["LineCode"]}")
-      l = ::Line.find_or_create_by!(code: line_payload["LineCode"], line_id: line_payload["LineID"])
+      l = ::Line.create!(code: line_payload["LineCode"], line_id: line_payload["LineID"])
       l.update!(description: line_payload["LineDescr"], description_en: line_payload["LineDescrEng"])
 
       ::Populators::Route.populate(l)

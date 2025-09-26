@@ -1,11 +1,11 @@
 <%= form_with(url: lines_path, method: :get, data: { turbo_frame: "search_results", turbo_action: "advance" }) do |f| %>
   <div>
     <div class="form-group mb-3">
-      <label for="line">Γραμμή</label>
-      <select id="line_id" name="line_id" class="form-select">
+      <label for="line_code">Γραμμή</label>
+      <select id="line_code" name="line_code" class="form-select">
         <option value="" selected="<%= @line.blank? %>" disabled="true"></option>
         <% @lines.each do |line| %>
-        <option value="<%= line.line_id %>"<%= line.line_id == params[:line_id] ? ' selected="true"' : '' %>>
+        <option value="<%= line.code %>"<%= line.code == params[:line_code] ? ' selected="true"'.html_safe : '' %>>
             <%= "#{line.line_id}: #{line.description}" %>
         </option>
         <% end %>
@@ -37,7 +37,8 @@
         });
 
         // Clear route selection when line changes
-        $('#line_id').on('change', function() {
+        $('#line_code').on('change', function() {
+            $('#route_id').val('');
             $(this).closest('form').submit();
         });
 

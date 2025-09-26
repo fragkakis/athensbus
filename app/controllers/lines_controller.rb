@@ -2,10 +2,10 @@ class LinesController < ApplicationController
   before_action :set_lines
 
   def index
-    if(params[:line_id])
-      @line = Line.find_by!(line_id: params[:line_id])
+    if(params[:line_code])
+      @line = Line.find_by!(code: params[:line_code])
       @route = params[:route_id] ?
-                 @line.routes.find_by(route_id: params[:route_id]) || @line.routes.first:
+                 @line.routes.find_by(route_id: params[:route_id]) :
                  @line.routes.first
       arrivals = @route.arrivals.
         where("created_at between ? and ?", date.beginning_of_day, date.end_of_day).
@@ -31,15 +31,7 @@ class LinesController < ApplicationController
 
   def set_lines
     # for the dropdown
-    @lines = if date.present?
-               line_ids = Arrival.
-                 joins(:route).
-                 where("arrivals.created_at between ? and ?", date.beginning_of_day, date.end_of_day).
-                 pluck(Arel.sql("distinct routes.line_id"))
-               Line.where(id: line_ids).order(:line_id)
-             else
-               Line.all.order("line_id")
-             end
+    @lines = Line.all.order("line_id")
   end
 
   def date

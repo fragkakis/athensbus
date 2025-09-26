@@ -1,11 +1,18 @@
 <turbo-frame id="search_results">
   <% if @data.present? %>
-    <h1><%= @route.description %></h1>
+    <h1>
+      <% if(@line.line_id == "140") %>
+        <%= link_to "140", "https://www.youtube.com/watch?v=s4UwlLzHn5A" %>: <%= @route.description %>
+      <% else %>
+        <%= "#{@line.line_id}: #{@route.description}" %>
+      <% end %>
+    </h1>
+
+
 
     <div id="myplot"></div>
 
     <script type="module">
-
         import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6.17/+esm";
         import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm"
 
@@ -60,15 +67,10 @@
                 transform: asMinutes,
                 reverse: true
             },
-            color: {
-                legend: false,
-                domain: ["normal"],
-                range: ["rgb(34, 34, 34)"]
-            },
             marks: [
                 Plot.ruleX(allStops, {x: "position", strokeOpacity: 0.1, strokeDasharray: 2}),
                 Plot.text(allStops, {x: "position", text: "name", y: () => asTimeForLabels(earliestArrival), rotate: -90, frameAnchor: "left", dy: -12}),
-                Plot.line(arrivals, {filter: d => d.schedule === schedule, x: "distance", y: "time", z: "vehicle", stroke: "speed", marker: "circle", title: (d) => `${d.vehicle}${d.direction}\n${d.stop}\n${d.time}`, tip: true})
+                Plot.line(arrivals, {filter: d => d.schedule === schedule, x: "distance", y: "time", z: "vehicle", stroke: (d) => (Number(d.vehicle) % 2 == 0 ? "red" : "green"), marker: "circle", title: (d) => `${d.vehicle}${d.direction}\n${d.stop}\n${d.time}`, tip: true})
             ]
         });
 
@@ -77,5 +79,8 @@
 
         div.append(plot);
     </script>
+  <% elsif @line.present? %>
+    <h1>Δεν βρέθηκαν δεδομένα για τη συγκεκριμένη ημερομηνία</h1>
+    <div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/3D246bphVUzapwlMtN" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/kvkofficieel-waiting-bus-stop-hannes-van-der-bruggen-3D246bphVUzapwlMtN">via GIPHY</a></p>
   <% end %>
 </turbo-frame>
