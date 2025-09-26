@@ -54,7 +54,6 @@ class LinesController < ApplicationController
         data << {
           vehicle: "#{trip_arrival[:veh_code]}-#{i}",
           speed: "normal",
-          schedule: "weekday",
           stop: trip_arrival[:stop_description],
           distance: trip_arrival[:stop_position],
           zone: 1,

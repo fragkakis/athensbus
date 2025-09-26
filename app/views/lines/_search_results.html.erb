@@ -73,7 +73,15 @@
             marks: [
                 Plot.ruleX(allStops, {x: "position", strokeOpacity: 0.1, strokeDasharray: 2}),
                 Plot.text(allStops, {x: "position", text: "name", y: () => asTimeForLabels(earliestArrival), rotate: -90, frameAnchor: "left", dy: -12}),
-                Plot.line(arrivals, {filter: d => d.schedule === schedule, x: "distance", y: "time", z: "vehicle", stroke: (d) => colors[distinctVehicles.indexOf(d.vehicle) % (colors.length - 1)], marker: "circle", title: (d) => `${d.vehicle}\n${d.stop}\n${d.time}`, tip: true})
+                Plot.line(arrivals, {
+                    x: "distance",
+                    y: "time",
+                    z: "vehicle",
+                    stroke: (d) => colors[distinctVehicles.indexOf(d.vehicle) % (colors.length - 1)],
+                    marker: "circle",
+                    title: (d) => `${d.stop}\n${d.time}\n${d.vehicle}`,
+                    tip: true
+                })
             ]
         });
 
