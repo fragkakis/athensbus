@@ -1,3 +1,7 @@
+<% if(@line.present?) %>
+  <% content_for :title, "Athens Bus: #{@line.description}" %>
+<% end %>
+
 <%= form_with(url: lines_path, method: :get, data: { turbo_frame: "search_results", turbo_action: "advance" }) do |f| %>
   <div>
     <div class="form-group mb-3">
