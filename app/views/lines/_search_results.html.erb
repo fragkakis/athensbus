@@ -36,7 +36,6 @@
         const distinctVehicles = [...new Set(arrivals.map(a => a.vehicle))].sort();
         const colors = ["red", "green", "blue", "orange", "brown", "black", "maroon", "purple", "olive", "teal", "indigo"]
 
-        console.log(distinctVehicles)
         // Find earliest arrival time
         const earliestArrival = arrivals.length > 0 ?
             d3.min(arrivals, d => asMinutes(d.time)) :
