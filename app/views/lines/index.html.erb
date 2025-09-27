@@ -1,5 +1,5 @@
 <% if(@line.present?) %>
-  <% content_for :title, "Athens Bus: #{@line.description}" %>
+  <% content_for :title, "Athens Bus - #{@line.line_id}" %>
 <% end %>
 
 <%= form_with(url: lines_path, method: :get, data: { turbo_frame: "search_results", turbo_action: "advance" }) do |f| %>
