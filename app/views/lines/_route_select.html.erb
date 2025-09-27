@@ -1,6 +1,6 @@
 <turbo-frame id="route_select">
   <div class="form-group mb-3">
-    <select id="route_id" name="route_id" class="form-select" <%= (@line.blank? || @line.routes.count < 2) ? 'disabled="true"' : '' %>>
+    <select id="route_id" name="route_id" class="form-select" <%= (@line.blank? || @line.routes.size < 2) ? 'disabled="true"' : '' %>>
       <% @line&.routes&.each do |route| %>
         <option value="<%= route.route_id %>" <%= route.id == @route&.id ? 'selected="true"'.html_safe : '' %>>
           <%= route.description %>
