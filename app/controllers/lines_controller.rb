@@ -10,7 +10,7 @@ class LinesController < ApplicationController
       @date_min = Arrival.minimum(:created_at).to_date.to_s
       @date_max = Arrival.maximum(:created_at).to_date.to_s
       arrivals = @route.arrivals.
-        where("created_at between ? and ?", date.beginning_of_day, date.end_of_day).
+        at_date(date).
         includes(:vehicle, :stop)
       trips = TripExtractor.process(@route, arrivals)
       TripTimestampSanitizer.process(trips)
