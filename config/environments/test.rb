@@ -57,5 +57,5 @@ Rails.application.configure do
     Bullet.raise = true # raise an error if n+1 query occurs
   end
 
-  ActiveRecord::Base.logger = Logger.new(STDOUT)
+  # ActiveRecord::Base.logger = Logger.new(STDOUT)
 end
