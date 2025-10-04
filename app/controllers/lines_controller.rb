@@ -17,8 +17,8 @@ class LinesController < ApplicationController
       @data = transform_to_data(@trips)
       @all_stops = @route.stops.map.with_index(1) { |stop, index| { name: stop.description, position: index } }
 
-      @daily_schedule = @route.schedules.daily.find_by(date: date)
-      @normal_schedule = @route.schedules.normal.find_by(date: date)
+      @daily_schedule = @route.schedules.daily.find_by(date: date)&.departure_times || []
+      @normal_schedule = @route.schedules.normal.find_by(date: date)&.departure_times || []
       @dropped_trips = @normal_schedule - @daily_schedule
     end
 
