@@ -1,0 +1,11 @@
+x97_route_normal:
+  route: x97_route
+  type: "normal"
+  departure_times: ["8:00", "9:00", "10:00"]
+  date: <%= Date.current %>
+
+x97_route_daily:
+  route: x97_route
+  type: "daily"
+  departure_times: ["8:00", "10:00"]
+  date: <%= Date.current %>

@@ -3,7 +3,6 @@ class Arrival < ApplicationRecord
   belongs_to :stop
   belongs_to :vehicle
 
-
   def self.at_date(date)
     where("created_at between ? and ?", date.beginning_of_day, date.end_of_day)
   end

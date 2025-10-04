@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_19_170606) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_03_104858) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,6 +20,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_19_170606) do
     t.bigint "route_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_arrivals_on_created_at"
     t.index ["route_id"], name: "index_arrivals_on_route_id"
     t.index ["stop_id"], name: "index_arrivals_on_stop_id"
     t.index ["vehicle_id"], name: "index_arrivals_on_vehicle_id"
@@ -44,7 +45,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_19_170606) do
     t.bigint "line_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["code"], name: "index_routes_on_code", unique: true
+    t.index ["code"], name: "index_routes_on_code"
     t.index ["line_id"], name: "index_routes_on_line_id"
   end
 
@@ -54,6 +55,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_19_170606) do
     t.integer "order"
     t.index ["route_id", "stop_id"], name: "index_routes_stops_on_route_id_and_stop_id"
     t.index ["stop_id", "route_id"], name: "index_routes_stops_on_stop_id_and_route_id"
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.bigint "route_id", null: false
+    t.string "type", null: false
+    t.date "date", default: -> { "CURRENT_DATE" }, null: false
+    t.jsonb "departure_times", default: [], null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["route_id", "type"], name: "index_schedules_on_route_id_and_type", unique: true
+    t.index ["route_id"], name: "index_schedules_on_route_id"
   end
 
   create_table "solid_queue_blocked_executions", force: :cascade do |t|
@@ -206,6 +218,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_19_170606) do
   add_foreign_key "arrivals", "stops"
   add_foreign_key "arrivals", "vehicles"
   add_foreign_key "routes", "lines"
+  add_foreign_key "schedules", "routes"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_failed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

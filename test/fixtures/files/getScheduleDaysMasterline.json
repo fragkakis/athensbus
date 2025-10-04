@@ -1,0 +1,20 @@
+[
+  {
+    "sdc_descr": "\u03a7\u0395\u0399\u039c\u0395\u03a1\u0399\u039d\u039f \u039a\u0391\u0398\u0397\u039c\u0395\u03a1\u0399\u039d\u0397",
+    "sdc_descr_eng": "WINTER DAILY",
+    "sdc_code": "54",
+    "": "0"
+  },
+  {
+    "sdc_descr": "\u03a7\u0395\u0399\u039c\u0395\u03a1\u0399\u039d\u039f \u03a3\u0391\u0392\u0392\u0391\u03a4\u039f",
+    "sdc_descr_eng": "WINTER SATURDAY",
+    "sdc_code": "59",
+    "": "1"
+  },
+  {
+    "sdc_descr": "\u03a7\u0395\u0399\u039c\u0395\u03a1\u0399\u039dO \u039a\u03a5\u03a1\u0399\u0391\u039a\u0397",
+    "sdc_descr_eng": "WINTER SUNDAY",
+    "sdc_code": "60",
+    "": "0"
+  }
+]

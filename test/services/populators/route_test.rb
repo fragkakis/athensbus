@@ -6,6 +6,7 @@ module Populators
       line = lines(:x97)
       Arrival.delete_all
       RoutesStop.delete_all
+      Schedule.delete_all
       ::Route.delete_all
 
       expected_routes_response = [

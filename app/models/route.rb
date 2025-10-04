@@ -3,19 +3,36 @@ class Route < ApplicationRecord
   has_many :routes_stops, -> { order(:order) }
   has_many :stops, through: :routes_stops
   has_many :arrivals, dependent: :delete_all
+  has_many :schedules, dependent: :delete_all
 
   ROUTE_CODE_TO_LINE_IDS = Route.all.includes(:line).map { |r| [ r.code, r.line.line_id ] }.to_h
+  COME = "come"
+  GO = "go"
 
   def bus_locations
     r = RestClient.get("http://telematics.oasa.gr/api/?act=getBusLocation&p1=#{code}")
     JSON.parse(r.body).presence || []
   end
 
-  def direction
+  def come?
+    auto_calculated_direction == COME
+  end
+
+  def go?
+    auto_calculated_direction == GO
+  end
+
+  private
+
+  def auto_calculated_direction
+    @auto_calculated_direction ||= calculate_auto_calculated_direction
+  end
+
+  def calculate_auto_calculated_direction
     sanitized_route_desc = description.first(10).gsub(/[^[:word:]]/, "")
     sanitized_line_desc = line.description.first(10).gsub(/[^[:word:]]/, "")
-    return "come" if sanitized_route_desc.include?(sanitized_line_desc) || sanitized_route_desc.include?(sanitized_line_desc)
-    return "come" unless line.routes.where.not(id: self.id).exists?
-    "go"
+    return COME if sanitized_route_desc.include?(sanitized_line_desc) || sanitized_route_desc.include?(sanitized_line_desc)
+    return COME unless line.routes.where.not(id: self.id).exists?
+    GO
   end
 end
