@@ -4,7 +4,11 @@
 #    args: [ 100 ]
 #    schedule: every 5 minutes
 production:
-  sync:
+  sync_stops:
     class: SyncStopsJob
     args: [ 100 ]
     schedule: every 5 minutes
+  sync_schedules:
+    class: SyncSchedulesJob
+    schedule: every 1 day
+
