@@ -12,10 +12,14 @@ class LinesController < ApplicationController
       arrivals = @route.arrivals.
         at_date(date).
         includes(:vehicle, :stop)
-      trips = TripExtractor.process(@route, arrivals)
-      TripTimestampSanitizer.process(trips)
-      @data = transform_to_data(trips)
+      @trips = TripExtractor.process(@route, arrivals)
+      TripTimestampSanitizer.process(@trips)
+      @data = transform_to_data(@trips)
       @all_stops = @route.stops.map.with_index(1) { |stop, index| { name: stop.description, position: index } }
+
+      @daily_schedule = @route.schedules.daily.find_by(date: date)
+      @normal_schedule = @route.schedules.normal.find_by(date: date)
+      @dropped_trips = @normal_schedule - @daily_schedule
     end
 
     respond_to do |format|
