@@ -22,6 +22,10 @@
         <div class="alert alert-danger" role="alert">
           Προγραμματίστηκαν <%= @daily_schedule.size %> δρομολόγια (-<%= @normal_schedule.size - @daily_schedule.size %>)
         </div>
+      <% else %>
+        <div class="alert alert-success" role="alert">
+          Προγραμματίστηκαν <%= @daily_schedule.size %> δρομολόγια
+        </div>
       <% end %>
       <% (@daily_schedule.group_by { |t| t.split(":").first }).each do |hour_group, hours| %>
         <h5 class="d-inline"><span class="badge rounded-pill text-bg-secondary"><%= hour_group %></span></h5>
