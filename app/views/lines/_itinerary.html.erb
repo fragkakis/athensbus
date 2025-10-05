@@ -17,7 +17,7 @@
     </div>
 
     <div class="p-3">
-      <h3>Προγραμματισμένα</h3>
+      <h3>Ημερήσιος προγραμματισμός</h3>
       <% if @normal_schedule.size > @daily_schedule.size %>
         <div class="alert alert-danger" role="alert">
           Προγραμματίστηκαν <%= @daily_schedule.size %> δρομολόγια (-<%= @normal_schedule.size - @daily_schedule.size %>)
@@ -39,9 +39,16 @@
     <div class="p-3">
       <% normal_trips = @trips.select{|trip| trip.size > 5} %>
       <h3>Εκτελεσμένα</h3>
-      <div class="alert alert-danger" role="alert">
-        Εκτελέστηκαν <%= normal_trips.size %> δρομολόγια (-<%= @normal_schedule.size - normal_trips.size %>)
-      </div>
+      <% if @normal_schedule.size > normal_trips.size %>
+        <div class="alert alert-danger" role="alert">
+          Εκτελέστηκαν <%= normal_trips.size %> δρομολόγια (<%= normal_trips.size - @normal_schedule.size %>)
+        </div>
+      <% else %>
+        <div class="alert alert-success" role="alert">
+          Εκτελέστηκαν <%= normal_trips.size %> δρομολόγια
+        </div>
+      <% end %>
+
     </div>
 
   </div>
