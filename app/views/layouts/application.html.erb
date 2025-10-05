@@ -35,6 +35,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
@@ -46,6 +47,15 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KS3RWF82"
                       height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+
+
+    <nav class="nav">
+      <a class="nav-link active" aria-current="page" href="<%= lines_url %>">Αρχική</a>
+      <a class="nav-link" href="<%= about_index_url %>">Σχετικά</a>
+    </nav>
+
+
+
     <%= yield %>
   </body>
 </html>

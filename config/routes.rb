@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   root to: "lines#index"
 
   resources :lines, only: [:index]
+  resources :about, only: [:index]
 
   mount MissionControl::Jobs::Engine, at: "/jobs"
 end
