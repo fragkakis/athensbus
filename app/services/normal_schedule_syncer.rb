@@ -20,7 +20,7 @@ class NormalScheduleSyncer < BaseScheduleSyncer
 
     sunday_code = types_of_schedule.find{|e| e["sdc_descr"].include?("ΚΥΡΙΑΚΗ")}.try("[]", "sdc_code")
     saturday_code = types_of_schedule.find{|e| e["sdc_descr"].include?("ΣΑΒΒΑΤΟ")}.try("[]", "sdc_code")
-    weekday_code = types_of_schedule.find{|e| e["sdc_descr"].include?("ΚΑΘΗΜΕΡΙΝΗ")}.try("[]", "sdc_code")
+    weekday_code = types_of_schedule.find{|e| e["sdc_descr"].include?("ΚΑΘΗΜΕΡΙΝΗ") || e["sdc_descr"].include?("ΟΛΕΣ")}.try("[]", "sdc_code")
 
     today_code = if Date.current.sunday?
                    sunday_code || weekday_code
