@@ -43,7 +43,7 @@
       <%= "#{@line.line_id}: #{@route.description}" %>
     <% end %>
   </h1>
-  <%= link_to "History", route_history_url(@route.route_id) %>
+  <%= link_to "Στατιστικά", route_stats_url(@route.route_id) %>
   <%= render 'itinerary' %>
   <%= render 'search_results' %>
 <% end %>

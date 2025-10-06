@@ -1,5 +1,5 @@
 class RoutesController < ApplicationController
-  def history
+  def stats
     @route = Route.find_by!(route_id: params[:route_id])
   end
 
