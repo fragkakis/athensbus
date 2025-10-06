@@ -23,7 +23,7 @@ class AboutController < ApplicationController
       },
       {
         question: "Με τι είναι φτιαγμένο το AthensBus.info;",
-        answer: "Το AthensBus.info είναι ένα <a href='https://rubyonrails.org/'>Rails</a> application. Η βάση που χρησιμοποιεί είναι η <a href='https://www.postgresql.org/'>PostgreSQL</a> 17. Είναι deployed σε ένα server της Hetzner με το <a href='https://kamal-deploy.org/'>Kamal</a>."
+        answer: "Το AthensBus.info είναι ένα <a href='https://rubyonrails.org/'>Rails</a> application. Η βάση που χρησιμοποιεί είναι η <a href='https://www.postgresql.org/'>PostgreSQL</a> 17. Είναι deployed σε ένα server της <a href='https://www.hetzner.com/'>Hetzner</a> με το <a href='https://kamal-deploy.org/'>Kamal</a>."
       },
       {
         question: "Ποιός έφτιαξε το AthensBus.info;",
