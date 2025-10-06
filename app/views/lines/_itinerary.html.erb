@@ -4,7 +4,10 @@
   <div class="wrapper">
 
     <div class="p-3">
-      <h4>Προβλεπόμενα</h4>
+      <h4>
+        Προβλεπόμενα
+        <i class="bi bi-question-circle-fill text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="🎯 Το κανονικό πρόγραμμα για τα δρομολόγια. Αν δεν υπάρχει καμμία έλλειψη σε οχήματα και προσωπικό, αυτά τα δρομολόγια θα πρέπει να γίνουν." style="cursor: pointer; font-size: 0.8em;"></i>
+      </h4>
       <div class="alert alert-secondary" role="alert">
         Προβλέπονται <%= @normal_schedule.size %> δρομολόγια
       </div>
@@ -18,7 +21,10 @@
     </div>
 
     <div class="p-3">
-      <h4>Ημερήσιος προγραμματισμός</h4>
+      <h4>
+        Ημερήσιος προγραμματισμός
+        <i class="bi bi-question-circle-fill text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="🔧 Το αναθεωρημένο πρόγραμμα που καταρτίζεται τις προηγούμενες μέρες, λαμβάνοντας υπόψιν τις ελλείψεις σε οχήματα και προσωπικό. Τυπικά έχει λιγότερα δρομολόγια από τα προβλεπόμενα." style="cursor: pointer; font-size: 0.8em;"></i>
+      </h4>
       <% if @normal_schedule.size > @daily_schedule.size %>
         <div class="alert alert-danger" role="alert">
           Προγραμματίστηκαν <%= @daily_schedule.size %> δρομολόγια (-<%= @normal_schedule.size - @daily_schedule.size %>)
@@ -39,10 +45,13 @@
 
     <div class="p-3">
       <% executed_trips = @trips.select{|trip| trip.size > 4} %>
-      <h4>Εκτελεσμένα</h4>
+      <h4>
+        Εκτελεσμένα
+        <i class="bi bi-question-circle-fill text-secondary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="💥 Τα πραγματικά δρομολόγια που έγιναν, σύμφωνα με την τηλεματική. Τυπικά είναι ακόμη λιγότερα και από τα δρομολόγια του ημερήσιου προγραμματισμού, λόγω εκτάκτων ελλείψεων σε οχήματα και προσωπικό.<br><br>⚠️ Ο αριθμός είναι κατά προσέγγιση." style="cursor: pointer; font-size: 0.8em;"></i>
+      </h4>
       <% if @date.today? %>
         <div class="alert alert-light" role="alert">
-          <span>Εκτελούνται δρομολόγια<%= executed_trips.size %> από <%= @normal_schedule.size %>)</span>
+          <span>Εκτελούνται δρομολόγια (<%= executed_trips.size %> από <%= @normal_schedule.size %>)</span>
           <div class="spinner-border spinner-border-sm" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>

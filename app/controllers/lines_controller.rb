@@ -37,14 +37,15 @@ class LinesController < ApplicationController
 
   def set_lines
     # for the dropdown
-    @lines = if date.present?
-               Line.joins(routes: :arrivals).
-                 where("arrivals.created_at between ? and ?", date.beginning_of_day, date.end_of_day).
-                 distinct.
-                 order(:line_id)
-             else
+    @lines =
+      # if date.present?
+      #          Line.joins(routes: :arrivals).
+      #            where("arrivals.created_at between ? and ?", date.beginning_of_day, date.end_of_day).
+      #            distinct.
+      #            order(:line_id)
+      #        else
                Line.all.order("line_id")
-             end
+             # end
   end
 
   def date
