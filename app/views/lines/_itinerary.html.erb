@@ -2,8 +2,9 @@
 
   <h2>Δρομολόγια</h2>
   <div class="wrapper">
+
     <div class="p-3">
-      <h3>Προβλεπόμενα</h3>
+      <h4>Προβλεπόμενα</h4>
       <div class="alert alert-secondary" role="alert">
         Προβλέπονται <%= @normal_schedule.size %> δρομολόγια
       </div>
@@ -17,7 +18,7 @@
     </div>
 
     <div class="p-3">
-      <h3>Ημερήσιος προγραμματισμός</h3>
+      <h4>Ημερήσιος προγραμματισμός</h4>
       <% if @normal_schedule.size > @daily_schedule.size %>
         <div class="alert alert-danger" role="alert">
           Προγραμματίστηκαν <%= @daily_schedule.size %> δρομολόγια (-<%= @normal_schedule.size - @daily_schedule.size %>)
@@ -38,17 +39,26 @@
 
     <div class="p-3">
       <% normal_trips = @trips.select{|trip| trip.size > 5} %>
-      <h3>Εκτελεσμένα</h3>
+      <h4>Εκτελεσμένα</h4>
       <% if @normal_schedule.size > normal_trips.size %>
         <div class="alert alert-danger" role="alert">
-          Εκτελέστηκαν <%= normal_trips.size %> δρομολόγια (<%= normal_trips.size - @normal_schedule.size %>)
+          <span>Εκτελέστηκαν <%= normal_trips.size %> δρομολόγια (<%= normal_trips.size - @normal_schedule.size %>)</span>
+          <% if @date.today? %>
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          <% end %>
         </div>
       <% else %>
         <div class="alert alert-success" role="alert">
-          Εκτελέστηκαν <%= normal_trips.size %> δρομολόγια
+          <span>Εκτελέστηκαν <%= normal_trips.size %> δρομολόγια</span>
+          <% if @date.today? %>
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          <% end %>
         </div>
       <% end %>
-
     </div>
 
   </div>
