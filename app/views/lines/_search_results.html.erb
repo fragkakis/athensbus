@@ -1,15 +1,5 @@
 <turbo-frame id="search_results">
   <% if @data.present? %>
-    <h1>
-      <% if(@line.line_id == "140") %>
-        <%= link_to "140", "https://www.youtube.com/watch?v=s4UwlLzHn5A" %>: <%= @route.description %>
-      <% else %>
-        <%= "#{@line.line_id}: #{@route.description}" %>
-      <% end %>
-    </h1>
-
-
-
     <div id="myplot"></div>
 
     <script type="module">

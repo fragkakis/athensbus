@@ -34,8 +34,19 @@
 
 <% end %>
 
-<%= render 'search_results' %>
-<%= render 'itinerary' %>
+
+<% if(@line.present?) %>
+  <h1>
+    <% if(@line.line_id == "140") %>
+      <%= link_to "140", "https://www.youtube.com/watch?v=s4UwlLzHn5A" %>: <%= @route.description %>
+    <% else %>
+      <%= "#{@line.line_id}: #{@route.description}" %>
+    <% end %>
+  </h1>
+
+  <%= render 'itinerary' %>
+  <%= render 'search_results' %>
+<% end %>
 
 <script type="module">
     $(document).ready(function() {
