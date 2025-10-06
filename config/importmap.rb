@@ -49,3 +49,6 @@ pin "@observablehq/plot", to: "@observablehq--plot.js" # @0.6.16
 pin "binary-search-bounds" # @2.0.5
 pin "interval-tree-1d" # @1.0.4
 pin "isoformat" # @0.2.1
+
+pin "chartkick", to: "chartkick.js"
+pin "Chart.bundle", to: "Chart.bundle.js"

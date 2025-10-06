@@ -85,12 +85,12 @@ Rails.application.configure do
 
   config.log_level = :info
 
-  Datadog.configure do |c|
-    c.service = "oasa"
-    c.env = Rails.env
-    c.tracing.enabled = true
-    c.tracing.instrument :rails
-    c.tracing.instrument :active_record
-    c.tracing.instrument :active_job
-  end
+  # Datadog.configure do |c|
+  #   c.service = "oasa"
+  #   c.env = Rails.env
+  #   c.tracing.enabled = true
+  #   c.tracing.instrument :rails
+  #   c.tracing.instrument :active_record
+  #   c.tracing.instrument :active_job
+  # end
 end

@@ -44,6 +44,7 @@ gem "mission_control-jobs"
 gem "geocoder"
 gem "honeybadger"
 gem "pg", "~> 1.5.6"
+gem "chartkick"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -65,7 +66,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
   gem "lefthook"
-  gem "datadog", require: "datadog/auto_instrument"
+  # gem "datadog", require: "datadog/auto_instrument"
 end
 
 group :test do
