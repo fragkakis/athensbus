@@ -42,14 +42,15 @@
       <h4>Εκτελεσμένα</h4>
       <% if @date.today? %>
         <div class="alert alert-light" role="alert">
-          <span>Εκτελούνται δρομολόγια (<%= normal_trips.size %> από <%= @normal_schedule.size %>)</span>
+          <span>Εκτελούνται δρομολόγια<%= normal_trips.size %> από <%= @normal_schedule.size %>)</span>
           <div class="spinner-border spinner-border-sm" role="status">
             <span class="visually-hidden">Loading...</span>
           </div>
         </div>
       <% elsif @normal_schedule.size > normal_trips.size %>
         <div class="alert alert-danger" role="alert">
-          Εκτελέστηκαν <%= normal_trips.size %> δρομολόγια (<%= normal_trips.size - @normal_schedule.size %>)
+          Εκτελέστηκαν <%= normal_trips.size %> δρομολόγια
+          <span class="badge text-bg-danger"><%= normal_trips.size - @normal_schedule.size %></span>
         </div>
       <% else %>
         <div class="alert alert-success" role="alert">
