@@ -54,7 +54,7 @@
 
 <script type="module">
     $(document).ready(function() {
-        $('#line').select2({
+        $('#line_code').select2({
             theme: 'bootstrap-5',
             containerCssClass: 'form-select-lg',
             closeOnSelect: true,
@@ -80,7 +80,7 @@
         // Ensure clicking outside closes the dropdown
         $(document).on('click', function(e) {
             if (!$(e.target).closest('.select2').length) {
-                $('#line').select2('close');
+                $('#line_code').select2('close');
             }
         });
     });
