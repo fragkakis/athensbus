@@ -2,9 +2,13 @@
 
   <h2>Δρομολόγια</h2>
 
-  <%= link_to route_stats_url(@route.route_id) do %>
-    <i class="bi bi-graph-up"></i> Στατιστικά
-  <% end %>
+  <div class="p-3">
+    <h4>
+      <%= link_to route_stats_url(@route.route_id) do %>
+        📊 Στατιστικά
+      <% end %>
+    </h4>
+  </div>
 
   <div class="wrapper">
 
