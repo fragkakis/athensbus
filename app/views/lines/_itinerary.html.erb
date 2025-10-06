@@ -1,6 +1,11 @@
 <% if(@line.present?) %>
 
   <h2>Δρομολόγια</h2>
+
+  <%= link_to route_stats_url(@route.route_id) do %>
+    <i class="bi bi-graph-up"></i> Στατιστικά
+  <% end %>
+
   <div class="wrapper">
 
     <div class="p-3">
