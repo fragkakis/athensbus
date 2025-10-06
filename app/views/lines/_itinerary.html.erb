@@ -36,7 +36,7 @@
       </div>
 
       <% if @normal_schedule.size > @daily_schedule.size %>
-        <div>
+        <div class="mb-3">
           Προγραμματίστηκαν <span class="badge text-bg-danger"><%= @normal_schedule.size - @daily_schedule.size %></span> λιγότερα δρομολόγια από τα προβλεπόμενα
         </div>
       <% end %>
@@ -74,7 +74,7 @@
       <% end %>
 
       <% if executed_trips.size < @normal_schedule.size %>
-        <div>
+        <div class="mb-3">
           Έγιναν <span class="badge text-bg-danger"><%= @normal_schedule.size - executed_trips.size %></span> λιγότερα δρομολόγια από τα προβλεπόμενα
         </div>
       <% end %>
