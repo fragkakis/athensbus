@@ -48,13 +48,14 @@
                       height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-
-    <nav class="nav">
-      <a class="nav-link active" aria-current="page" href="<%= lines_url %>">Αρχική</a>
-      <a class="nav-link" href="<%= about_index_url %>">Σχετικά</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="<%= lines_url %>"><%= image_tag 'icon.png', alt: 'Αρχική', style: 'height: 24px;' %></a></li>
+          <li class="nav-item"><a class="nav-link" href="<%= about_index_url %>">Σχετικά</a></li>
+        </ul>
+      </div>
     </nav>
-
-
 
     <%= yield %>
   </body>

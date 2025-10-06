@@ -29,9 +29,9 @@ class Route < ApplicationRecord
   end
 
   def calculate_auto_calculated_direction
+    return GO unless line.routes.where.not(id: self.id).exists?
     sanitized_route_desc = description.first(10).gsub(/[^[:word:]]/, "")
     sanitized_line_desc = line.description.first(10).gsub(/[^[:word:]]/, "")
-    return GO unless line.routes.where.not(id: self.id).exists?
     return COME if sanitized_route_desc.include?(sanitized_line_desc) || sanitized_route_desc.include?(sanitized_line_desc)
     GO
   end
