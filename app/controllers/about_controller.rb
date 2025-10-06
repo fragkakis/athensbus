@@ -18,6 +18,14 @@ class AboutController < ApplicationController
         answer: "Το AthensBus.info βασίζεται στα δημόσια δεδομένα της τηλεματικής του ΟΑΣΑ, και τις υποδομές που τη λειτουργούν, οι οποίες κατά καιρούς αποτυγχάνουν, προκαλώντας κενά στα δεδομένα. Επίσης, ο υπολογισμός των πραγματοποιηθέντων δρομολογίων είναι κατά προσέγγιση. Συνεπώς, το περιεχόμενο του AthensBus.info δίνεται χωρίς εγγυήσεις αξιοπιστίας."
       },
       {
+        question: "Πόσο παλιά δεδομένα κρατάει το AthensBus.info;",
+        answer: "Για λόγους πόρων (πχ χώρος στο δίσκο, ταχύτητα), το AthensBus.info κρατάει δεδομένα μέχρι 30 μέρες στο παρελθόν. Αυτή σημαίνει ότι δε μπορείτε να βρείτε τα δρομολόγια για μια γραμμή λεωφορείου σε μια ημερομηνία 2 μήνες πριν. Το χρονικό όριο ενδέχεται να αλλάξει, αλλά σε κάθε περίπτωση θα υπάρχει κάποιο όριο."
+      },
+      {
+        question: "Με τι είναι φτιαγμένο το AthensBus.info;",
+        answer: "Το AthensBus.info είναι ένα <a href='https://rubyonrails.org/'>Rails</a> application. Η βάση που χρησιμοποιεί είναι η <a href='https://www.postgresql.org/'>PostgreSQL</a> 17. Είναι deployed σε ένα server της Hetzner με το <a href='https://kamal-deploy.org/'>Kamal</a>."
+      },
+      {
         question: "Ποιός έφτιαξε το AthensBus.info;",
         answer: "Γειά και χαρά, με λένε <a href='https://www.linkedin.com/in/fragkakis/'>Μάρκο Φραγκάκη</a>."
       },
