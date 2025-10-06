@@ -36,7 +36,9 @@
       </div>
 
       <% if @normal_schedule.size > @daily_schedule.size %>
-        Προγραμματίστηκαν <span class="badge text-bg-danger"><%= @normal_schedule.size - @daily_schedule.size %></span> λιγότερα δρομολόγια από τα προβλεπόμενα
+        <div>
+          Προγραμματίστηκαν <span class="badge text-bg-danger"><%= @normal_schedule.size - @daily_schedule.size %></span> λιγότερα δρομολόγια από τα προβλεπόμενα
+        </div>
       <% end %>
 
       <% (@daily_schedule.group_by { |t| t.split(":").first }).each do |hour_group, hours| %>
@@ -72,7 +74,9 @@
       <% end %>
 
       <% if executed_trips.size < @normal_schedule.size %>
-        Έγιναν <span class="badge text-bg-danger"><%= @normal_schedule.size - executed_trips.size %></span> λιγότερα δρομολόγια από τα προβλεπόμενα
+        <div>
+          Έγιναν <span class="badge text-bg-danger"><%= @normal_schedule.size - executed_trips.size %></span> λιγότερα δρομολόγια από τα προβλεπόμενα
+        </div>
       <% end %>
 
 
