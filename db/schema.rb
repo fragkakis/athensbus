@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_03_104858) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_06_055204) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -64,7 +64,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_03_104858) do
     t.jsonb "departure_times", default: [], null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["route_id", "type"], name: "index_schedules_on_route_id_and_type", unique: true
+    t.index ["route_id", "type", "date"], name: "index_schedules_on_route_id_and_type_and_date", unique: true
     t.index ["route_id"], name: "index_schedules_on_route_id"
   end
 
