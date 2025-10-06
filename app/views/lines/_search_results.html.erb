@@ -1,83 +1,85 @@
-<turbo-frame id="search_results">
-  <% if @data.present? %>
-    <div id="myplot"></div>
+<div>
+  <turbo-frame id="search_results">
+    <% if @data.present? %>
+      <div id="myplot"></div>
 
-    <script type="module">
-        import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6.17/+esm";
-        import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm"
+      <script type="module">
+          import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6.17/+esm";
+          import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm"
 
-        const div = document.querySelector("#myplot");
-        const arrivals = <%= raw @data.to_json %>
-        const allStops = <%= raw @all_stops.to_json %>
+          const div = document.querySelector("#myplot");
+          const arrivals = <%= raw @data.to_json %>
+          const allStops = <%= raw @all_stops.to_json %>
 
-        function asTime(minutes) {
-            return formatTime(d3.utcMinute.offset(d3.utcDay(), minutes - minutesOffset));
-        }
+          function asTime(minutes) {
+              return formatTime(d3.utcMinute.offset(d3.utcDay(), minutes - minutesOffset));
+          }
 
-        function asTimeForLabels(minutes) {
-            const formatTimeForLabels = d3.utcFormat("%I:%M%p");
-            return formatTimeForLabels(d3.utcMinute.offset(d3.utcDay(), minutes - minutesOffset)).toLowerCase();
-        }
+          function asTimeForLabels(minutes) {
+              const formatTimeForLabels = d3.utcFormat("%I:%M%p");
+              return formatTimeForLabels(d3.utcMinute.offset(d3.utcDay(), minutes - minutesOffset)).toLowerCase();
+          }
 
-        const minutesOffset = -60 * 2 // no trains run at 2 AM
-        const parseTime = d3.utcParse("%I:%M%p")
-        const formatTime = d3.utcFormat("%-I %p")
-        const schedule = "weekday"
-        const distinctVehicles = [...new Set(arrivals.map(a => a.vehicle))].sort();
-        const colors = ["red", "green", "blue", "orange", "brown", "black", "maroon", "purple", "olive", "teal", "indigo"]
+          const minutesOffset = -60 * 2 // no trains run at 2 AM
+          const parseTime = d3.utcParse("%I:%M%p")
+          const formatTime = d3.utcFormat("%-I %p")
+          const schedule = "weekday"
+          const distinctVehicles = [...new Set(arrivals.map(a => a.vehicle))].sort();
+          const colors = ["red", "green", "blue", "orange", "brown", "black", "maroon", "purple", "olive", "teal", "indigo"]
 
-        // Find earliest arrival time
-        const earliestArrival = arrivals.length > 0 ?
-            d3.min(arrivals, d => asMinutes(d.time)) :
-            3 * 60 // fallback to 3am if no arrivals
+          // Find earliest arrival time
+          const earliestArrival = arrivals.length > 0 ?
+              d3.min(arrivals, d => asMinutes(d.time)) :
+              3 * 60 // fallback to 3am if no arrivals
 
-        // Calculate midnight in the offset coordinate system
-        const midnightInOffset = asMinutes("12:00am")
+          // Calculate midnight in the offset coordinate system
+          const midnightInOffset = asMinutes("12:00am")
 
-        function asMinutes(time) {
-            if (!(time = parseTime(time))) return;
-            const minutes = time.getUTCHours() * 60 + time.getUTCMinutes();
-            return (minutes + minutesOffset + 60 * 24) % (24 * 60);
-        }
+          function asMinutes(time) {
+              if (!(time = parseTime(time))) return;
+              const minutes = time.getUTCHours() * 60 + time.getUTCMinutes();
+              return (minutes + minutesOffset + 60 * 24) % (24 * 60);
+          }
 
-        const plot = Plot.plot({
-            inset: 10,
-            margin: 10,
-            marginLeft: 40,
-            marginTop: 100,
-            grid: true,
-            width: 1152,
-            height: 1800,
-            x: {
-                axis: null // hide arbitrary distance units
-            },
-            y: {
-                label: null,
-                domain: [earliestArrival, midnightInOffset], // from earliest arrival to midnight
-                ticks: d3.range(Math.floor(earliestArrival / 60), 25).map(h => h * 60),
-                tickFormat: asTime,
-                transform: asMinutes,
-                reverse: true
-            },
-            marks: [
-                Plot.ruleX(allStops, {x: "position", strokeOpacity: 0.1, strokeDasharray: 2}),
-                Plot.text(allStops, {x: "position", text: "name", y: () => asTimeForLabels(earliestArrival), rotate: -90, frameAnchor: "left", dy: -12}),
-                Plot.line(arrivals, {
-                    x: "distance",
-                    y: "time",
-                    z: "vehicle",
-                    stroke: (d) => colors[distinctVehicles.indexOf(d.vehicle) % (colors.length - 1)],
-                    marker: "circle",
-                    title: (d) => `${d.time}\n${d.stop}\n${d.vehicle}`,
-                    tip: true
-                })
-            ]
-        });
+          const plot = Plot.plot({
+              inset: 10,
+              margin: 10,
+              marginLeft: 40,
+              marginTop: 100,
+              grid: true,
+              width: 1152,
+              height: 1800,
+              x: {
+                  axis: null // hide arbitrary distance units
+              },
+              y: {
+                  label: null,
+                  domain: [earliestArrival, midnightInOffset], // from earliest arrival to midnight
+                  ticks: d3.range(Math.floor(earliestArrival / 60), 25).map(h => h * 60),
+                  tickFormat: asTime,
+                  transform: asMinutes,
+                  reverse: true
+              },
+              marks: [
+                  Plot.ruleX(allStops, {x: "position", strokeOpacity: 0.1, strokeDasharray: 2}),
+                  Plot.text(allStops, {x: "position", text: "name", y: () => asTimeForLabels(earliestArrival), rotate: -90, frameAnchor: "left", dy: -12}),
+                  Plot.line(arrivals, {
+                      x: "distance",
+                      y: "time",
+                      z: "vehicle",
+                      stroke: (d) => colors[distinctVehicles.indexOf(d.vehicle) % (colors.length - 1)],
+                      marker: "circle",
+                      title: (d) => `${d.time}\n${d.stop}\n${d.vehicle}`,
+                      tip: true
+                  })
+              ]
+          });
 
-        div.append(plot);
-    </script>
-  <% elsif @line.present? %>
-    <h1>Δεν βρέθηκαν δεδομένα για τη συγκεκριμένη ημερομηνία</h1>
-    <div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/3D246bphVUzapwlMtN" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/kvkofficieel-waiting-bus-stop-hannes-van-der-bruggen-3D246bphVUzapwlMtN">via GIPHY</a></p>
-  <% end %>
-</turbo-frame>
+          div.append(plot);
+      </script>
+    <% elsif @line.present? %>
+      <h1>Δεν βρέθηκαν δεδομένα για τη συγκεκριμένη ημερομηνία</h1>
+      <div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/3D246bphVUzapwlMtN" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/kvkofficieel-waiting-bus-stop-hannes-van-der-bruggen-3D246bphVUzapwlMtN">via GIPHY</a></p>
+    <% end %>
+  </turbo-frame>
+</div>
