@@ -40,23 +40,20 @@
     <div class="p-3">
       <% normal_trips = @trips.select{|trip| trip.size > 5} %>
       <h4>Εκτελεσμένα</h4>
-      <% if @normal_schedule.size > normal_trips.size %>
+      <% if @date.today? %>
+        <div class="alert alert-light" role="alert">
+          <span>Εκτελούνται δρομολόγια (<%= normal_trips.size %> από <%= @normal_schedule.size %> μέχρι στιγμής)</span>
+          <div class="spinner-border spinner-border-sm" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      <% elsif @normal_schedule.size > normal_trips.size %>
         <div class="alert alert-danger" role="alert">
-          <span>Εκτελέστηκαν <%= normal_trips.size %> δρομολόγια (<%= normal_trips.size - @normal_schedule.size %>)</span>
-          <% if @date.today? %>
-            <div class="spinner-border" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div>
-          <% end %>
+          Εκτελέστηκαν <%= normal_trips.size %> δρομολόγια (<%= normal_trips.size - @normal_schedule.size %>)
         </div>
       <% else %>
         <div class="alert alert-success" role="alert">
-          <span>Εκτελέστηκαν <%= normal_trips.size %> δρομολόγια</span>
-          <% if @date.today? %>
-            <div class="spinner-border" role="status">
-              <span class="visually-hidden">Loading...</span>
-            </div>
-          <% end %>
+          Εκτελέστηκαν <%= normal_trips.size %> δρομολόγια
         </div>
       <% end %>
     </div>
