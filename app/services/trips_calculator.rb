@@ -12,11 +12,18 @@ class TripsCalculator
   def process
     stop_count = route.stops.size
     ignored_stop_number = (stop_count * 0.3).ceil
-    puts "ignoring #{ignored_stop_number}"
     # "trim" the outermost stops, which tend to be the more problematic
     considered_stops = route.stops[(ignored_stop_number)..(stop_count - 1 - ignored_stop_number)]
     considered_stop_ids = considered_stops.map(&:id)
     considered_arrivals = arrivals.select{ |a| considered_stop_ids.include?(a.stop_id) }
-    considered_arrivals.size / considered_stops.size
+
+    grouped_considered_arrivals = considered_arrivals.group_by{|a| a.created_at.to_date.to_s}
+    results = {}
+
+
+    grouped_considered_arrivals.each do |date_str, considered_date_arrivals|
+      results[date_str] = considered_date_arrivals.size / considered_stops.size
+    end
+    results
   end
 end

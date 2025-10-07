@@ -2,5 +2,6 @@
 
 <%= line_chart [
   {name: "Προβλεπόμενα", data: @route.schedules.normal.where.not(date: Date.current).order(:date).map{|s| [s.date, s.departure_times.size]}},
-  {name: "Ημερήσιος προγραμματισμός", data: @route.schedules.daily.where.not(date: Date.current).order(:date).map{|s| [s.date, s.departure_times.size]}}
+  {name: "Ημερήσιος προγραμματισμός", data: @route.schedules.daily.where.not(date: Date.current).order(:date).map{|s| [s.date, s.departure_times.size]}},
+  {name: "Πραγματοποιημένα", data: @trip_count_by_date}
  ] %>

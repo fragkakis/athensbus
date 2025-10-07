@@ -20,7 +20,7 @@ class LinesController < ApplicationController
       @daily_schedule = @route.schedules.daily.find_by(date: date)&.departure_times || []
       @normal_schedule = @route.schedules.normal.find_by(date: date)&.departure_times || []
       @dropped_trips = @normal_schedule - @daily_schedule
-      @executed_trips_count = TripsCalculator.process(@route, arrivals)
+      @executed_trips_count = TripsCalculator.process(@route, arrivals).values.first
     end
 
     respond_to do |format|
