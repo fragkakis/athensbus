@@ -20,6 +20,7 @@ class LinesController < ApplicationController
       @daily_schedule = @route.schedules.daily.find_by(date: date)&.departure_times || []
       @normal_schedule = @route.schedules.normal.find_by(date: date)&.departure_times || []
       @dropped_trips = @normal_schedule - @daily_schedule
+      @executed_trips_count = TripsCalculator.process(@route, arrivals)
     end
 
     respond_to do |format|
@@ -37,15 +38,14 @@ class LinesController < ApplicationController
 
   def set_lines
     # for the dropdown
-    @lines =
-      # if date.present?
-      #          Line.joins(routes: :arrivals).
-      #            where("arrivals.created_at between ? and ?", date.beginning_of_day, date.end_of_day).
-      #            distinct.
-      #            order(:line_id)
-      #        else
+    @lines = if date.present?
+               Line.joins(routes: :arrivals).
+                 where("arrivals.created_at between ? and ?", date.beginning_of_day, date.end_of_day).
+                 distinct.
+                 order(:line_id)
+             else
                Line.all.order("line_id")
-             # end
+             end
   end
 
   def date
