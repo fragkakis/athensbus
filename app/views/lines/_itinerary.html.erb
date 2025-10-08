@@ -39,7 +39,7 @@
 
           <div class="schedule-times">
             <% (@normal_schedule.group_by { |t| t.split(":").first }).each do |hour_group, hours| %>
-              <div class="mb-3">
+              <div class="mb-2">
                 <h6 class="d-inline me-2">
                   <span class="badge rounded-pill bg-secondary px-3 py-2" style="font-size: 0.9rem;"><%= hour_group %></span>
                 </h6>
@@ -84,7 +84,7 @@
 
           <div class="schedule-times">
             <% (@daily_schedule.group_by { |t| t.split(":").first }).each do |hour_group, hours| %>
-              <div class="mb-3">
+              <div class="mb-2">
                 <h6 class="d-inline me-2">
                   <span class="badge rounded-pill bg-secondary px-3 py-2" style="font-size: 0.9rem;"><%= hour_group %></span>
                 </h6>
