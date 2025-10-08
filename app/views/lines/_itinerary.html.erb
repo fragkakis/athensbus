@@ -19,7 +19,7 @@
 
     <!-- Planned Schedule -->
     <div class="col-12 col-lg-4">
-      <div class="card h-100 border-0 shadow-sm" style="border-radius: 12px; border-left: 4px solid #6c757d !important;">
+      <div class="card h-100 border-0 shadow-sm" style="border-radius: 12px; border-left: 4px solid #198754 !important;">
         <div class="card-body p-4">
           <h5 class="card-title fw-bold mb-3 d-flex align-items-center">
             <i class="bi bi-calendar-check me-2 text-secondary"></i>
@@ -55,7 +55,7 @@
 
     <!-- Daily Schedule -->
     <div class="col-12 col-lg-4">
-      <div class="card h-100 border-0 shadow-sm" style="border-radius: 12px; border-left: 4px solid <%= @normal_schedule.size > @daily_schedule.size ? '#dc3545' : '#198754' %> !important;">
+      <div class="card h-100 border-0 shadow-sm" style="border-radius: 12px; border-left: 4px solid #fd7e14 !important;">
         <div class="card-body p-4">
           <h5 class="card-title fw-bold mb-3 d-flex align-items-center">
             <i class="bi bi-calendar-week me-2 <%= @normal_schedule.size > @daily_schedule.size ? 'text-danger' : 'text-success' %>"></i>
@@ -100,7 +100,7 @@
 
     <!-- Executed Schedule -->
     <div class="col-12 col-lg-4">
-      <div class="card h-100 border-0 shadow-sm" style="border-radius: 12px; border-left: 4px solid <%= @date.today? ? '#0dcaf0' : (@normal_schedule.size > @executed_trips_count ? '#dc3545' : '#198754') %> !important;">
+      <div class="card h-100 border-0 shadow-sm" style="border-radius: 12px; border-left: 4px solid #dc3545 !important;">
         <div class="card-body p-4">
           <h5 class="card-title fw-bold mb-3 d-flex align-items-center">
             <i class="bi bi-check2-all me-2 <%= @date.today? ? 'text-info' : (@normal_schedule.size > @executed_trips_count ? 'text-danger' : 'text-success') %>"></i>
