@@ -1,21 +1,58 @@
-<h1>Σχετικά</h1>
+<div class="py-4">
 
-<div class="accordion" id="accordionExample">
+  <!-- Header -->
+  <div class="card border-0 shadow-sm mb-4" style="border-radius: 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <div class="card-body p-4 text-white">
+      <h1 class="mb-0 fw-bold">
+        <i class="bi bi-info-circle me-2"></i>Σχετικά
+      </h1>
+    </div>
+  </div>
 
-  <% @faqs.each_with_index do |faq, i| %>
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= i %>" aria-expanded="false" aria-controls="collapse<%= i %>">
-          <%= faq[:question] %>
-        </button>
-      </h2>
-      <div id="collapse<%= i %>" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          <%= raw faq[:answer] %>
-        </div>
+  <!-- FAQ Section -->
+  <div class="card border-0 shadow-sm" style="border-radius: 12px;">
+    <div class="card-body p-4">
+      <h3 class="card-title mb-4 fw-bold text-secondary">
+        <i class="bi bi-question-circle me-2"></i>Συχνές Ερωτήσεις
+      </h3>
+
+      <div class="accordion accordion-flush" id="accordionExample">
+        <% @faqs.each_with_index do |faq, i| %>
+          <div class="accordion-item border-0 mb-2" style="border-radius: 8px; overflow: hidden; border: 1px solid #e9ecef !important;">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= i %>" aria-expanded="false" aria-controls="collapse<%= i %>" style="background-color: #f8f9fa;">
+                <i class="bi bi-chevron-right me-2 accordion-icon"></i>
+                <%= faq[:question] %>
+              </button>
+            </h2>
+            <div id="collapse<%= i %>" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+              <div class="accordion-body bg-white p-4">
+                <%= raw faq[:answer] %>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
-  <% end %>
+  </div>
 
 </div>
+
+<style>
+  .accordion-button:not(.collapsed) .accordion-icon {
+    transform: rotate(90deg);
+    transition: transform 0.2s ease-in-out;
+  }
+  .accordion-icon {
+    transition: transform 0.2s ease-in-out;
+  }
+  .accordion-button:not(.collapsed) {
+    background-color: #e7f1ff !important;
+    color: #0d6efd;
+  }
+  .accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(0,0,0,.125);
+  }
+</style>
 
