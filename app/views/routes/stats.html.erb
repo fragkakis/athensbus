@@ -1,4 +1,11 @@
-<h1><%= @route.description %></h1>
+<h2>
+  <%= image_tag 'icon.png', alt: 'Bus', style: 'height: 1.5em; vertical-align: middle;' %>
+  <% if(@route.line.line_id == "140") %>
+    <%= link_to "140", "https://www.youtube.com/watch?v=s4UwlLzHn5A" %>: <%= @route.description %>
+  <% else %>
+    <%= "#{@route.line.line_id}: #{@route.description}" %>
+  <% end %>
+</h2>
 
 <%= line_chart [
   {name: "Προβλεπόμενα", data: @route.schedules.normal.where.not(date: Date.current).order(:date).map{|s| [s.date, s.departure_times.size]}},
