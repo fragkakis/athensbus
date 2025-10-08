@@ -1,14 +1,40 @@
-<h2>
-  <%= image_tag 'icon.png', alt: 'Bus', style: 'height: 1.5em; vertical-align: middle;' %>
-  <% if(@route.line.line_id == "140") %>
-    <%= link_to "140", "https://www.youtube.com/watch?v=s4UwlLzHn5A" %>: <%= @route.description %>
-  <% else %>
-    <%= "#{@route.line.line_id}: #{@route.description}" %>
-  <% end %>
-</h2>
+<div class="py-4">
 
-<%= line_chart [
-  {name: "Προβλεπόμενα", data: @route.schedules.normal.where.not(date: Date.current).order(:date).map{|s| [s.date, s.departure_times.size]}},
-  {name: "Ημερήσιος προγραμματισμός", data: @route.schedules.daily.where.not(date: Date.current).order(:date).map{|s| [s.date, s.departure_times.size]}},
-  {name: "Πραγματοποιημένα", data: @trip_count_by_date}
- ] %>
+  <!-- Line Header -->
+  <div class="card border-0 shadow-sm mb-4" style="border-radius: 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <div class="card-body p-4 text-white">
+      <h2 class="mb-0 fw-bold">
+        <%= image_tag 'icon.png', alt: 'Bus', style: 'height: 1.8em; vertical-align: middle; filter: brightness(0) invert(1);' %>
+        <% if(@route.line.line_id == "140") %>
+          <%= link_to "140", "https://www.youtube.com/watch?v=s4UwlLzHn5A", class: "text-white text-decoration-none" %>: <%= @route.description %>
+        <% else %>
+          <%= "#{@route.line.line_id}: #{@route.description}" %>
+        <% end %>
+      </h2>
+    </div>
+  </div>
+
+  <!-- Statistics Chart -->
+  <div class="card border-0 shadow-sm" style="border-radius: 12px;">
+    <div class="card-body p-4">
+      <h3 class="card-title mb-4 fw-bold text-secondary">
+        <i class="bi bi-bar-chart-line me-2"></i>Ιστορικό Δρομολογίων
+      </h3>
+
+      <div class="chart-container">
+        <%= line_chart [
+          {name: "Προβλεπόμενα", data: @route.schedules.normal.where.not(date: Date.current).order(:date).map{|s| [s.date, s.departure_times.size]}},
+          {name: "Ημερήσιος προγραμματισμός", data: @route.schedules.daily.where.not(date: Date.current).order(:date).map{|s| [s.date, s.departure_times.size]}},
+          {name: "Πραγματοποιημένα", data: @trip_count_by_date}
+        ],
+        colors: ["#6c757d", "#ffc107", "#dc3545"],
+        library: {
+          backgroundColor: '#ffffff',
+          borderRadius: 8
+        }
+        %>
+      </div>
+    </div>
+  </div>
+
+</div>

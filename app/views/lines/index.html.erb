@@ -2,55 +2,80 @@
   <% content_for :title, "Athens Bus - #{@line.line_id}" %>
 <% end %>
 
-<div class="card mb-4 shadow-sm">
-  <div class="card-body">
-    <%= form_with(url: lines_path, method: :get, data: { turbo_frame: "search_results", turbo_action: "advance" }) do |f| %>
-      <div>
-        <div class="form-group mb-3">
-          <label for="line_code">Γραμμή</label>
-          <select id="line_code" name="line_code" class="form-select">
-            <option value="" selected="<%= @line.blank? %>" disabled="true"></option>
-            <% @lines.each do |line| %>
-            <option value="<%= line.code %>"<%= line.code == params[:line_code] ? ' selected="true"'.html_safe : '' %>>
-                <%= "#{line.line_id}: #{line.description}" %>
-            </option>
-            <% end %>
-          </select>
-          <small class="form-text text-muted">Διάλεξε μια γραμμή λεωφορείου από τη λίστα</small>
+<div class="py-4">
+
+      <!-- Search Card -->
+      <div class="card border-0 shadow-sm mb-4" style="border-radius: 12px;">
+        <div class="card-body p-4">
+          <h5 class="card-title mb-4 text-primary fw-bold">
+            <i class="bi bi-search me-2"></i>Αναζήτηση Δρομολογίου
+          </h5>
+
+          <%= form_with(url: lines_path, method: :get, data: { turbo_frame: "search_results", turbo_action: "advance" }) do |f| %>
+            <div class="row g-3">
+
+              <div class="col-12">
+                <label for="line_code" class="form-label fw-semibold">
+                  <i class="bi bi-bus-front me-1"></i>Γραμμή
+                </label>
+                <select id="line_code" name="line_code" class="form-select form-select-lg">
+                  <option value="" selected="<%= @line.blank? %>" disabled="true">Επιλέξτε γραμμή...</option>
+                  <% @lines.each do |line| %>
+                  <option value="<%= line.code %>"<%= line.code == params[:line_code] ? ' selected="true"'.html_safe : '' %>>
+                      <%= "#{line.line_id}: #{line.description}" %>
+                  </option>
+                  <% end %>
+                </select>
+                <div class="form-text">
+                  <i class="bi bi-info-circle me-1"></i>Διάλεξε μια γραμμή λεωφορείου από τη λίστα
+                </div>
+              </div>
+
+              <div class="col-12">
+                <%= render 'route_select' %>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label for="date" class="form-label fw-semibold">
+                  <i class="bi bi-calendar-event me-1"></i>Ημερομηνία
+                </label>
+                <input type="date" id="date" name="date"
+                       class="form-control form-control-lg"
+                       min="<%= @date_min %>"
+                       max="<%= @date_max %>"
+                       value="<%= params[:date] || Date.current.to_s %>"
+                  />
+                <div class="form-text">
+                  <i class="bi bi-info-circle me-1"></i>Διάλεξε την ημερομηνία
+                </div>
+              </div>
+
+            </div>
+          <% end %>
         </div>
-
-        <%= render 'route_select' %>
-
-        <div class="form-group mb-3">
-          <label for="date">Ημερομηνία</label>
-          <input type="date" id="date" name="date"
-                 class="form-control" style="width: 170px;"
-                 min="<%= @date_min %>"
-                 max="<%= @date_max %>"
-                 value="<%= params[:date] || Date.current.to_s %>"
-            />
-          <small class="form-text text-muted">Διάλεξε την ημερομηνία</small>
-        </div>
-
       </div>
-
-    <% end %>
-  </div>
-</div>
 
 
 <% if(@line.present?) %>
-  <h2>
-    <%= image_tag 'icon.png', alt: 'Bus', style: 'height: 1.5em; vertical-align: middle;' %>
-    <% if(@line.line_id == "140") %>
-      <%= link_to "140", "https://www.youtube.com/watch?v=s4UwlLzHn5A" %>: <%= @route.description %>
-    <% else %>
-      <%= "#{@line.line_id}: #{@route.description}" %>
-    <% end %>
-  </h2>
-  <%= render 'itinerary' %>
-  <%= render 'search_results' %>
+      <!-- Line Header -->
+      <div class="card border-0 shadow-sm mb-4" style="border-radius: 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="card-body p-4 text-white">
+          <h2 class="mb-0 fw-bold">
+            <%= image_tag 'icon.png', alt: 'Bus', style: 'height: 1.8em; vertical-align: middle; filter: brightness(0) invert(1);' %>
+            <% if(@line.line_id == "140") %>
+              <%= link_to "140", "https://www.youtube.com/watch?v=s4UwlLzHn5A", class: "text-white text-decoration-none" %>: <%= @route.description %>
+            <% else %>
+              <%= "#{@line.line_id}: #{@route.description}" %>
+            <% end %>
+          </h2>
+        </div>
+      </div>
+
+      <%= render 'itinerary' %>
+      <%= render 'search_results' %>
 <% end %>
+
+</div>
 
 <script type="module">
     $(document).ready(function() {

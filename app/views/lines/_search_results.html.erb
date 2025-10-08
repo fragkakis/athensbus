@@ -2,9 +2,13 @@
   <turbo-frame id="search_results">
     <% if @data.present? %>
 
-      <h2>Τηλεματική</h2>
+      <div class="card border-0 shadow-sm mt-4" style="border-radius: 12px;">
+        <div class="card-body p-4">
+          <h3 class="card-title mb-4 fw-bold text-secondary">
+            <i class="bi bi-graph-up me-2"></i>Τηλεματική
+          </h3>
 
-      <div id="myplot"></div>
+          <div id="myplot" class="overflow-auto"></div>
 
       <script type="module">
           import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6.17/+esm";
@@ -80,9 +84,21 @@
 
           div.append(plot);
       </script>
+
+        </div>
+      </div>
+
     <% elsif @line.present? %>
-      <h1>Δεν βρέθηκαν δεδομένα για τη συγκεκριμένη ημερομηνία</h1>
-      <div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/3D246bphVUzapwlMtN" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/kvkofficieel-waiting-bus-stop-hannes-van-der-bruggen-3D246bphVUzapwlMtN">via GIPHY</a></p>
+      <div class="card border-0 shadow-sm mt-4" style="border-radius: 12px;">
+        <div class="card-body p-5 text-center">
+          <div class="mb-4">
+            <i class="bi bi-exclamation-circle text-warning" style="font-size: 4rem;"></i>
+          </div>
+          <h3 class="fw-bold mb-3">Δεν βρέθηκαν δεδομένα</h3>
+          <p class="text-muted mb-4">Δεν υπάρχουν διαθέσιμα δεδομένα τηλεματικής για την επιλεγμένη ημερομηνία</p>
+          
+        </div>
+      </div>
     <% end %>
   </turbo-frame>
 </div>
