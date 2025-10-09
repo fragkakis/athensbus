@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   root to: "lines#index"
 
   resources :lines, only: [:index]
-  get "/routes/:route_id/stats", to: "routes#stats", as: "route_stats"
+  get "/routes/:code/stats", to: "routes#stats", as: "route_stats"
   resources :about, only: [:index]
 
   mount MissionControl::Jobs::Engine, at: "/jobs"

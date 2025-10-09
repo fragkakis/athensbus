@@ -3,7 +3,7 @@ require "test_helper"
 class RoutesControllerTest < ActionDispatch::IntegrationTest
   test "index" do
     route = routes(:x97_route)
-    get route_stats_url(route.route_id)
+    get route_stats_url(route.code)
 
     assert_response :ok
   end
