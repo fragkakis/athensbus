@@ -11,7 +11,7 @@
             <i class="bi bi-search me-2"></i>Αναζήτηση Δρομολογίου
           </h5>
 
-          <%= form_with(url: lines_path, method: :get, data: { turbo_frame: "search_results", turbo_action: "advance" }) do |f| %>
+          <%= form_with(url: lines_path, method: :get) do |f| %>
             <div class="row g-3">
 
               <div class="col-12">

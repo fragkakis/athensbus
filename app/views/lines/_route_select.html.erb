@@ -1,17 +1,15 @@
-<turbo-frame id="route_select">
-  <div>
-    <label for="route_id" class="form-label fw-semibold">
-      <i class="bi bi-signpost-split me-1"></i>Διαδρομή
-    </label>
-    <select id="route_id" name="route_id" class="form-select form-select-lg" <%= (@line.blank? || @line.routes.size < 2) ? 'disabled="true"' : '' %>>
-      <% @line&.routes&.each do |route| %>
-        <option value="<%= route.route_id %>" <%= route.id == @route&.id ? 'selected="true"'.html_safe : '' %>>
-          <%= route.description %>
-        </option>
-      <% end %>
-    </select>
-    <div class="form-text">
-      <i class="bi bi-info-circle me-1"></i>Διάλεξε μια διαδρομή από τη λίστα
-    </div>
+<div>
+  <label for="route_id" class="form-label fw-semibold">
+    <i class="bi bi-signpost-split me-1"></i>Διαδρομή
+  </label>
+  <select id="route_id" name="route_id" class="form-select form-select-lg" <%= (@line.blank? || @line.routes.size < 2) ? 'disabled="true"' : '' %>>
+    <% @line&.routes&.each do |route| %>
+      <option value="<%= route.route_id %>" <%= route.id == @route&.id ? 'selected="true"'.html_safe : '' %>>
+        <%= route.description %>
+      </option>
+    <% end %>
+  </select>
+  <div class="form-text">
+    <i class="bi bi-info-circle me-1"></i>Διάλεξε μια διαδρομή από τη λίστα
   </div>
-</turbo-frame>
+</div>
