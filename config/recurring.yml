@@ -4,19 +4,17 @@
 #    args: [ 100 ]
 #    schedule: every 5 minutes
 production:
-  sync_stops_midnight:
+  sync_stops:
     class: SyncStopsJob
     args: [ 100 ]
     schedule: every 5 minutes
+  sync_stops_midnight:
+    class: SyncSchedulesJob
+    schedule: '0 0 * * *' # every day at 00:00
   sync_stops_morning:
     class: SyncStopsJob
-    args: [ 100 ]
     schedule: '0 8 * * *' # every day at 08:00
   sync_stops_evening:
-    class: SyncStopsJob
-    args: [ 100 ]
-    schedule: '0 23 * * *' # every day at 23:00
-  sync_schedules:
     class: SyncSchedulesJob
-    schedule: '0 3 * * *' # every day at 03:00
+    schedule: '0 23 * * *' # every day at 23:00
 
