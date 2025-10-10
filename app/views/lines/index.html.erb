@@ -4,6 +4,25 @@
 
 <div class="py-4">
 
+      <!-- Welcome Banner -->
+      <div id="welcome-banner" class="alert alert-info alert-dismissible fade show mb-4" role="alert" style="border-radius: 12px; border-left: 4px solid #0dcaf0;">
+        <div class="d-flex align-items-start">
+          <div class="me-3" style="font-size: 2rem;">
+            <i class="bi bi-bus-front"></i>
+          </div>
+          <div class="flex-grow-1">
+            <h5 class="alert-heading mb-2">
+              <i class="bi bi-info-circle me-2"></i>Καλώς ήρθες στο AthensBus.info!
+            </h5>
+            <p class="mb-0">
+              Αυτή η ιστοσελίδα σου επιτρέπει να δεις αν η γραμμή λεωφορείου που χρησιμοποιείς πραγματοποιεί σωστά τα δρομολόγια της.
+              Διάλεξε μια γραμμή, μια κατεύθυνση και μια ημερομηνία για να συγκρίνεις τα προγραμματισμένα δρομολόγια με τα δρομολόγια που πραγματικά έγιναν.
+            </p>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      </div>
+
       <!-- Search Card -->
       <div class="card border-0 shadow-sm mb-4" style="border-radius: 12px;">
         <div class="card-body p-4">
@@ -89,6 +108,16 @@
 
 <script type="module">
     $(document).ready(function() {
+        // Handle welcome banner dismissal with localStorage
+        const welcomeBanner = $('#welcome-banner');
+        if (localStorage.getItem('welcomeBannerDismissed') === 'true') {
+            welcomeBanner.hide();
+        }
+
+        welcomeBanner.on('closed.bs.alert', function () {
+            localStorage.setItem('welcomeBannerDismissed', 'true');
+        });
+
         // Initialize Select2 on line select
         $('#line_code').select2({
             theme: 'bootstrap-5',
