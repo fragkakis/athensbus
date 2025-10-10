@@ -5,7 +5,7 @@
 <div class="py-4">
 
       <!-- Welcome Banner -->
-      <div id="welcome-banner" class="alert alert-info alert-dismissible fade show mb-4" role="alert" style="border-radius: 12px; border-left: 4px solid #0dcaf0;">
+      <div id="welcome-banner" class="alert alert-info alert-dismissible fade show mb-4" role="alert" style="border-radius: 12px; border-left: 4px solid #0dcaf0; display: none;">
         <div class="d-flex align-items-start">
           <div class="me-3" style="font-size: 2rem;">
             <i class="bi bi-bus-front"></i>
@@ -110,8 +110,8 @@
     $(document).ready(function() {
         // Handle welcome banner dismissal with localStorage
         const welcomeBanner = $('#welcome-banner');
-        if (localStorage.getItem('welcomeBannerDismissed') === 'true') {
-            welcomeBanner.hide();
+        if (localStorage.getItem('welcomeBannerDismissed') !== 'true') {
+            welcomeBanner.show();
         }
 
         welcomeBanner.on('closed.bs.alert', function () {
