@@ -63,7 +63,10 @@
           <h2 class="mb-0 fw-bold fs-4 fs-md-3">
             <%= image_tag 'icon.png', alt: 'Bus', style: 'height: 1.6em; vertical-align: middle; filter: brightness(0) invert(1);' %>
             <% if(@line.line_id == "140") %>
-              <%= link_to "140", "https://www.youtube.com/watch?v=s4UwlLzHn5A", class: "text-white text-decoration-none" %>: <%= @route.description %>
+              <%= link_to "https://www.youtube.com/watch?v=s4UwlLzHn5A", class: "text-white text-decoration-none", title: "Κάνε κλικ για μία έκπληξη", style: "position: relative;" do %>
+                <span style="text-decoration: underline; text-decoration-style: dotted;">140</span>
+                <span style="font-size: 0.9em; margin-left: 6px; animation: pulse 2s infinite;">🥚</span>
+              <% end %>: <%= @route.description %>
             <% else %>
               <%= "#{@line.line_id}: #{@route.description}" %>
             <% end %>
@@ -76,6 +79,13 @@
 <% end %>
 
 </div>
+
+<style>
+    @keyframes pulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.6; transform: scale(1.1); }
+    }
+</style>
 
 <script type="module">
     $(document).ready(function() {
