@@ -38,14 +38,14 @@ class LinesController < ApplicationController
 
   def set_lines
     # for the dropdown
-    @lines = if date.present?
+    @lines = if Rails.env.development? || date.blank?
+               Line.all.order("line_id")
+             else
                line_ids = Arrival.
                  joins(:route).
                  where("arrivals.created_at between ? and ?", date.beginning_of_day, date.end_of_day).
                  pluck(Arel.sql("distinct routes.line_id"))
                Line.where(id: line_ids).order(:line_id)
-             else
-               Line.all.order("line_id")
              end
   end
 

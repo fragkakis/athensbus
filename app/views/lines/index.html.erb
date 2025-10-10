@@ -89,6 +89,14 @@
 
 <script type="module">
     $(document).ready(function() {
+        // Initialize Select2 on line select
+        $('#line_code').select2({
+            theme: 'bootstrap-5',
+            containerCssClass: 'form-select-lg',
+            closeOnSelect: true,
+            dropdownAutoWidth: true
+        });
+
         // Clear route selection when line changes
         $('#line_code').on('change', function() {
             $('#route_id').val('');
