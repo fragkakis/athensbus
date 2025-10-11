@@ -5,7 +5,7 @@ module RouteDailyReports
     test "process" do
       route = routes(:x93_route_1)
 
-      TripsCalculator.expects(:process).returns(mock("mock_trips", size: 10))
+      TripsCalculator.expects(:process).returns({Date.current.to_s => 10})
 
       assert_changes("RouteDailyReport.count") do
         Creator.process(route, Date.current)
@@ -21,13 +21,14 @@ module RouteDailyReports
       route = routes(:x93_route_1)
       route_daily_report = route.route_daily_reports.create!(date: Date.current, executed_trips: 10)
 
+      TripsCalculator.expects(:process).returns({Date.current.to_s => 8})
+
       assert_no_changes("RouteDailyReport.count") do
         Creator.process(route, Date.current)
       end
 
       route_daily_report.reload
-      assert_equal 0, route_daily_report.executed_trips
-
+      assert_equal 8, route_daily_report.executed_trips
     end
   end
 end

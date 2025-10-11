@@ -17,9 +17,9 @@ module RouteDailyReports
       executed_trips = TripsCalculator.process(route, arrivals)
       route_daily_report = route.route_daily_reports.find_by(date: date)
       if route_daily_report
-        route_daily_report.update_columns(executed_trips: executed_trips.size)
+        route_daily_report.update_columns(executed_trips: executed_trips.values.first)
       else
-        route.route_daily_reports.create!(date: date, executed_trips: executed_trips.size)
+        route.route_daily_reports.create!(date: date, executed_trips: executed_trips.values.first)
       end
     end
   end
