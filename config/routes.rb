@@ -19,7 +19,6 @@ Rails.application.routes.draw do
       get :coverage
     end
   end
-  get "/routes/:route_id/stats", to: "routes#stats", as: "route_stats"
   resources :about, only: [:index]
 
   mount MissionControl::Jobs::Engine, at: "/jobs"
