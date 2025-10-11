@@ -33,12 +33,13 @@
               <td><%= result["daily_schedule_count"] %></td>
               <td><%= result["executed_trips"] %></td>
               <td>
-                <% if result["normal_schedule_count"].present? %>
+                <% if result["normal_schedule_count"].to_i > 0 && result["executed_trips"].present? %>
                   <% coverage = (result["executed_trips"].to_f / result["normal_schedule_count"].to_f * 100).round %>
                   <% badge_class = coverage >= 90 ? 'bg-success' : (coverage >= 80 ? 'bg-warning' : 'bg-danger') %>
                   <span class="badge <%= badge_class %>"><%= coverage %>%</span>
+                <% else %>
+                  <span class="badge bg-secondary">N/A</span>
                 <% end %>
-
               </td>
             </tr>
           <% end %>
