@@ -18,15 +18,25 @@
           <tr>
             <th>Γραμμή</th>
             <th>Κατεύθυνση</th>
+            <th>Προβλεπόμενα δρομολόγια</th>
+            <th>Ημερήσιος προγραμματισμός</th>
+            <th>Εκτελεσμένα δρομολόγια</th>
             <th>Κάλυψη</th>
           </tr>
         </thead>
         <tbody>
-          <% @routes.each do |route| %>
+          <% @results.each do |result| %>
             <tr>
-              <td><%= route.line.line_id %> - <%= route.line.description %></td>
-              <td><%= route.description %></td>
-              <td><span class="badge bg-success">95.8%</span></td>
+              <td><%= result["line_id"] %> - <%= result["line_description"] %></td>
+              <td><%= result["route_description"] %></td>
+              <td><%= result["normal_schedule_count"] %></td>
+              <td><%= result["daily_schedule_count"] %></td>
+              <td><%= result["executed_trips"] %></td>
+              <td>
+                <% coverage = (result["executed_trips"].to_f / result["normal_schedule_count"].to_f * 100).round %>
+                <% badge_class = coverage >= 90 ? 'bg-success' : (coverage >= 80 ? 'bg-warning' : 'bg-danger') %>
+                <span class="badge <%= badge_class %>"><%= coverage %>%</span>
+              </td>
             </tr>
           <% end %>
         </tbody>
