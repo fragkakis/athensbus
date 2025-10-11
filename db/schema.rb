@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_06_055204) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_10_172757) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -34,6 +34,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_06_055204) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_lines_on_code", unique: true
+  end
+
+  create_table "route_daily_reports", force: :cascade do |t|
+    t.bigint "route_id", null: false
+    t.date "date", null: false
+    t.integer "executed_trips"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["route_id", "date"], name: "index_route_daily_reports_on_route_id_and_date", unique: true
+    t.index ["route_id"], name: "index_route_daily_reports_on_route_id"
   end
 
   create_table "routes", force: :cascade do |t|
@@ -217,6 +227,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_06_055204) do
   add_foreign_key "arrivals", "routes"
   add_foreign_key "arrivals", "stops"
   add_foreign_key "arrivals", "vehicles"
+  add_foreign_key "route_daily_reports", "routes"
   add_foreign_key "routes", "lines"
   add_foreign_key "schedules", "routes"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

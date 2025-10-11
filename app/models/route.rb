@@ -4,6 +4,7 @@ class Route < ApplicationRecord
   has_many :stops, through: :routes_stops
   has_many :arrivals, dependent: :delete_all
   has_many :schedules, dependent: :delete_all
+  has_many :route_daily_reports, dependent: :delete_all
 
   ROUTE_CODE_TO_LINE_IDS = Route.all.includes(:line).map { |r| [ r.code, r.line.line_id ] }.to_h
   COME = "come"
