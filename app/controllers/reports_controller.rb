@@ -7,20 +7,46 @@ class ReportsController < ApplicationController
   def coverage
     date = params[:date] || Date.current
 
+    # Whitelist sortable columns to prevent SQL injection
+    sort_column = params[:sort].presence_in(%w[line_id normal_schedule_count daily_schedule_count executed_trips coverage]) || 'coverage'
+    sort_direction = params[:direction].presence_in(%w[asc desc]) || 'desc'
+
+    # Map sort column to actual SQL column/expression
+    sort_sql = case sort_column
+    when 'line_id'
+      'l.line_id'
+    when 'normal_schedule_count'
+      'jsonb_array_length(ns.departure_times)'
+    when 'daily_schedule_count'
+      'jsonb_array_length(ds.departure_times)'
+    when 'executed_trips'
+      'rdr.executed_trips'
+    when 'coverage'
+      'coverage'
+    end
+
     sql = <<~SQL
       select l.line_id as line_id,
             l.description as line_description,
             r.description as route_description,
             jsonb_array_length(ds.departure_times) as daily_schedule_count,
             jsonb_array_length(ns.departure_times) as normal_schedule_count,
-            rdr.executed_trips as executed_trips
+            rdr.executed_trips as executed_trips,
+            CASE
+              WHEN jsonb_array_length(ns.departure_times) > 0 THEN
+                (rdr.executed_trips::float / jsonb_array_length(ns.departure_times)::float * 100)
+              ELSE NULL
+            END as coverage
       from routes r
       inner join lines l on l.id = r.line_id
       left outer join schedules ds on ds.route_id = r.id AND ds.type = 'daily' and ds.date = $1
       left outer join schedules ns on ns.route_id = r.id AND ns.type = 'normal' and ns.date = $1
       left outer join route_daily_reports rdr on rdr.route_id = r.id and rdr.date = $1
+      order by #{sort_sql} #{sort_direction} nulls last
     SQL
 
     @results = ActiveRecord::Base.connection.raw_connection.exec_params(sql, [date])
+    @sort_column = sort_column
+    @sort_direction = sort_direction
   end
 end
