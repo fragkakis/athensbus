@@ -17,7 +17,7 @@
         <thead class="table-dark">
           <tr>
             <th>
-              <%= link_to reports_coverage_path(sort: 'line_id', direction: @sort_column == 'line_id' && @sort_direction == 'asc' ? 'desc' : 'asc', date: params[:date]), class: 'text-white text-decoration-none' do %>
+              <%= link_to coverage_reports_path(sort: 'line_id', direction: @sort_column == 'line_id' && @sort_direction == 'asc' ? 'desc' : 'asc', date: params[:date]), class: 'text-white text-decoration-none' do %>
                 Γραμμή
                 <% if @sort_column == 'line_id' %>
                   <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
@@ -26,7 +26,7 @@
             </th>
             <th>Κατεύθυνση</th>
             <th>
-              <%= link_to reports_coverage_path(sort: 'normal_schedule_count', direction: @sort_column == 'normal_schedule_count' && @sort_direction == 'asc' ? 'desc' : 'asc', date: params[:date]), class: 'text-white text-decoration-none' do %>
+              <%= link_to coverage_reports_path(sort: 'normal_schedule_count', direction: @sort_column == 'normal_schedule_count' && @sort_direction == 'asc' ? 'desc' : 'asc', date: params[:date]), class: 'text-white text-decoration-none' do %>
                 Προβλεπόμενα δρομολόγια
                 <% if @sort_column == 'normal_schedule_count' %>
                   <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
@@ -34,7 +34,7 @@
               <% end %>
             </th>
             <th>
-              <%= link_to reports_coverage_path(sort: 'daily_schedule_count', direction: @sort_column == 'daily_schedule_count' && @sort_direction == 'asc' ? 'desc' : 'asc', date: params[:date]), class: 'text-white text-decoration-none' do %>
+              <%= link_to coverage_reports_path(sort: 'daily_schedule_count', direction: @sort_column == 'daily_schedule_count' && @sort_direction == 'asc' ? 'desc' : 'asc', date: params[:date]), class: 'text-white text-decoration-none' do %>
                 Ημερήσιος προγραμματισμός
                 <% if @sort_column == 'daily_schedule_count' %>
                   <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
@@ -42,7 +42,7 @@
               <% end %>
             </th>
             <th>
-              <%= link_to reports_coverage_path(sort: 'executed_trips', direction: @sort_column == 'executed_trips' && @sort_direction == 'asc' ? 'desc' : 'asc', date: params[:date]), class: 'text-white text-decoration-none' do %>
+              <%= link_to coverage_reports_path(sort: 'executed_trips', direction: @sort_column == 'executed_trips' && @sort_direction == 'asc' ? 'desc' : 'asc', date: params[:date]), class: 'text-white text-decoration-none' do %>
                 Εκτελεσμένα δρομολόγια
                 <% if @sort_column == 'executed_trips' %>
                   <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
@@ -50,7 +50,7 @@
               <% end %>
             </th>
             <th>
-              <%= link_to reports_coverage_path(sort: 'coverage', direction: @sort_column == 'coverage' && @sort_direction == 'asc' ? 'desc' : 'asc', date: params[:date]), class: 'text-white text-decoration-none' do %>
+              <%= link_to coverage_reports_path(sort: 'coverage', direction: @sort_column == 'coverage' && @sort_direction == 'asc' ? 'desc' : 'asc', date: params[:date]), class: 'text-white text-decoration-none' do %>
                 Κάλυψη
                 <% if @sort_column == 'coverage' %>
                   <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
