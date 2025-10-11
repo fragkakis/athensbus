@@ -7,6 +7,10 @@ class ReportsController < ApplicationController
   def coverage
     date = params[:date] || Date.current
 
+    # Set date range for datepicker
+    @date_min = Arrival.minimum(:created_at).to_date.to_s
+    @date_max = Arrival.maximum(:created_at).to_date.to_s
+
     # Whitelist sortable columns to prevent SQL injection
     sort_column = params[:sort].presence_in(%w[line_id normal_schedule_count daily_schedule_count executed_trips coverage]) || 'coverage'
     sort_direction = params[:direction].presence_in(%w[asc desc]) || 'desc'
@@ -26,8 +30,10 @@ class ReportsController < ApplicationController
     end
 
     sql = <<~SQL
-      select l.line_id as line_id,
+      select l.code as line_code,
+            l.line_id as line_id,
             l.description as line_description,
+            r.route_id as route_id,
             r.description as route_description,
             jsonb_array_length(ds.departure_times) as daily_schedule_count,
             jsonb_array_length(ns.departure_times) as normal_schedule_count,

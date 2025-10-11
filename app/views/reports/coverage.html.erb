@@ -11,6 +11,31 @@
     </p>
   </div>
 
+  <!-- Date Picker Card -->
+  <div class="card border-0 shadow-sm mb-4" style="border-radius: 12px;">
+    <div class="card-body p-4">
+      <%= form_with(url: coverage_reports_path, method: :get) do |f| %>
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <label for="date" class="form-label fw-semibold">
+              <i class="bi bi-calendar-event me-1"></i>Ημερομηνία
+            </label>
+            <input type="date" id="date" name="date"
+                   class="form-control form-control-lg"
+                   min="<%= @date_min %>"
+                   max="<%= @date_max %>"
+                   value="<%= params[:date] || Date.current.to_s %>" />
+            <div class="form-text">
+              <i class="bi bi-info-circle me-1"></i>Διάλεξε την ημερομηνία
+            </div>
+          </div>
+        </div>
+        <input type="hidden" name="sort" value="<%= @sort_column %>" />
+        <input type="hidden" name="direction" value="<%= @sort_direction %>" />
+      <% end %>
+    </div>
+  </div>
+
   <div class="card shadow-sm">
     <div class="card-body">
       <table class="table table-striped table-hover">
@@ -62,8 +87,16 @@
         <tbody>
           <% @results.each do |result| %>
             <tr>
-              <td><%= result["line_id"] %> - <%= result["line_description"] %></td>
-              <td><%= result["route_description"] %></td>
+              <td>
+                <%= link_to lines_path(line_code: result["line_code"], route_id: result["route_id"], date: params[:date]), class: 'text-decoration-none' do %>
+                  <%= result["line_id"] %> - <%= result["line_description"] %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to lines_path(line_code: result["line_code"], route_id: result["route_id"], date: params[:date]), class: 'text-decoration-none' do %>
+                  <%= result["route_description"] %>
+                <% end %>
+              </td>
               <td><%= result["normal_schedule_count"] %></td>
               <td><%= result["daily_schedule_count"] %></td>
               <td><%= result["executed_trips"] %></td>
@@ -83,3 +116,12 @@
     </div>
   </div>
 </div>
+
+<script type="module">
+  $(document).ready(function() {
+    // Submit form when date changes
+    $('#date').on('change', function() {
+      $(this).closest('form').submit();
+    });
+  });
+</script>
