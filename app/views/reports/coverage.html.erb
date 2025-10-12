@@ -24,7 +24,7 @@
                    class="form-control form-control-lg"
                    min="<%= @date_min %>"
                    max="<%= @date_max %>"
-                   value="<%= params[:date] || Date.current.to_s %>" />
+                   value="<%= params[:date] || @date_max %>" />
             <div class="form-text">
               <i class="bi bi-info-circle me-1"></i>Διάλεξε την ημερομηνία
             </div>
