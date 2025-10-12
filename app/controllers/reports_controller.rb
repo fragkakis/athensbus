@@ -9,7 +9,7 @@ class ReportsController < ApplicationController
 
     # Set date range for datepicker
     @date_min = Arrival.minimum(:created_at).to_date.to_s
-    @date_max = Arrival.maximum(:created_at).to_date.to_s
+    @date_max = [Date.yesterday, Arrival.maximum(:created_at)].min.to_date.to_s
 
     # Whitelist sortable columns to prevent SQL injection
     sort_column = params[:sort].presence_in(%w[line_id normal_schedule_count daily_schedule_count executed_trips coverage]) || 'coverage'

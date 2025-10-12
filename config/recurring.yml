@@ -8,6 +8,9 @@ production:
     class: SyncStopsJob
     args: [ 100 ]
     schedule: every 5 minutes
+  generate_daily_reports:
+    class: RouteDailyReports::GenerateReportsJob
+    schedule: '0 0 * * *' # every day at 00:00
   sync_schedules_midnight:
     class: SyncSchedulesJob
     schedule: '0 0 * * *' # every day at 00:00
