@@ -5,7 +5,7 @@ class ReportsController < ApplicationController
   end
 
   def coverage
-    date = params[:date] || Date.current
+    date = params[:date] || Date.yesterday
 
     # Set date range for datepicker
     @date_min = Arrival.minimum(:created_at).to_date.to_s
