@@ -68,7 +68,7 @@
             </th>
             <th>
               <%= link_to coverage_reports_path(sort: 'executed_trips', direction: @sort_column == 'executed_trips' && @sort_direction == 'asc' ? 'desc' : 'asc', date: params[:date]), class: 'text-white text-decoration-none' do %>
-                Εκτελεσμένα δρομολόγια
+                Εκτιμώμενα εκτελεσμένα δρομολόγια
                 <% if @sort_column == 'executed_trips' %>
                   <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
                 <% end %>

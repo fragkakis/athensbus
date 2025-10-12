@@ -104,8 +104,8 @@
         <div class="card-body p-4">
           <h5 class="card-title fw-bold mb-3 d-flex align-items-center">
             <i class="bi bi-check2-all me-2 <%= @date.today? ? 'text-info' : (@normal_schedule.size > @executed_trips_count ? 'text-danger' : 'text-success') %>"></i>
-            Εκτελεσμένα
-            <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Τα πραγματικά δρομολόγια που έγιναν, σύμφωνα με την τηλεματική. Τυπικά είναι ακόμη λιγότερα και από τα δρομολόγια του ημερήσιου προγραμματισμού, λόγω εκτάκτων ελλείψεων σε οχήματα και προσωπικό.<br><br>⚠️ Ο αριθμός είναι κατά προσέγγιση." class="ms-2" style="cursor: pointer;">
+            Εκτιμώμενα εκτελεσμένα
+            <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Τα εκτιμώμενα εκτελεσμένα δρομολόγια που έγιναν, σύμφωνα με την τηλεματική. Τυπικά είναι ακόμη λιγότερα και από τα δρομολόγια του ημερήσιου προγραμματισμού, λόγω εκτάκτων ελλείψεων σε οχήματα και προσωπικό.<br><br>⚠️ Ο αριθμός είναι κατά προσέγγιση." class="ms-2" style="cursor: pointer;">
               <i class="bi bi-info-circle-fill text-muted" style="font-size: 0.9rem;"></i>
             </span>
           </h5>

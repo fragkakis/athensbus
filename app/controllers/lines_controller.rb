@@ -5,7 +5,7 @@ class LinesController < ApplicationController
     if(params[:line_code])
       @line = Line.find_by!(code: params[:line_code])
       @route = params[:route_id] ?
-                 @line.routes.find_by(route_id: params[:route_id]) :
+                 @line.routes.find_by!(route_id: params[:route_id]) :
                  @line.routes.first
       @date_min = Arrival.minimum(:created_at).to_date.to_s
       @date_max = Arrival.maximum(:created_at).to_date.to_s
