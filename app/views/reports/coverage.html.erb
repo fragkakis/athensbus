@@ -88,9 +88,7 @@
           <% @results.each do |result| %>
             <tr>
               <td>
-                <%= link_to lines_path(line_code: result["line_code"], route_id: result["route_id"], date: params[:date]), class: 'text-decoration-none' do %>
-                  <%= result["line_id"] %> - <%= result["line_description"] %>
-                <% end %>
+                <%= result["line_id"] %> - <%= result["line_description"] %>
               </td>
               <td>
                 <%= link_to lines_path(line_code: result["line_code"], route_id: result["route_id"], date: params[:date]), class: 'text-decoration-none' do %>
