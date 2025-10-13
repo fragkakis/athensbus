@@ -15,4 +15,16 @@ class Schedule < ApplicationRecord
     where(type: NORMAL)
   end
 
+  def self.at_date(date)
+    where(date: date)
+  end
+
+  def self.today
+    at_date(Date.current)
+  end
+
+  def self.yesterday
+    at_date(Date.yesterday)
+  end
+
 end
