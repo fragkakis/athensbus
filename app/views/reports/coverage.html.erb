@@ -91,66 +91,78 @@
       <table class="table table-striped table-hover">
         <thead class="table-dark">
           <tr>
-            <th>
-              <%= link_to coverage_reports_path(sort: 'line_id', direction: @sort_column == 'line_id' && @sort_direction == 'asc' ? 'desc' : 'asc', date: params[:date]), class: 'text-white text-decoration-none' do %>
-                Γραμμή
-                <% if @sort_column == 'line_id' %>
-                  <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
+            <th class="align-middle">
+              <div class="d-inline-flex align-items-center">
+                <%= link_to coverage_reports_path(sort: 'line_id', direction: @sort_column == 'line_id' && @sort_direction == 'asc' ? 'desc' : 'asc', date: params[:date]), class: 'text-white text-decoration-none' do %>
+                  Γραμμή
+                  <% if @sort_column == 'line_id' %>
+                    <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
+                  <% end %>
                 <% end %>
-              <% end %>
-              <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Ο αριθμός και η περιγραφή της γραμμής" class="ms-1" style="cursor: pointer;">
-                <i class="bi bi-question-circle-fill text-white-50" style="font-size: 0.9rem;"></i>
-              </span>
+                <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Ο αριθμός και η περιγραφή της γραμμής" class="ms-1" style="cursor: pointer;">
+                  <i class="bi bi-question-circle-fill text-white-50" style="font-size: 0.9rem;"></i>
+                </span>
+              </div>
             </th>
-            <th>
-              Κατεύθυνση
-              <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Η κατεύθυνση της διαδρομής (πατήστε για λεπτομέρειες)" class="ms-1" style="cursor: pointer;">
-                <i class="bi bi-question-circle-fill text-white-50" style="font-size: 0.9rem;"></i>
-              </span>
+            <th class="align-middle">
+              <div class="d-inline-flex align-items-center">
+                Κατεύθυνση
+                <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Η κατεύθυνση της διαδρομής (πατήστε για λεπτομέρειες)" class="ms-1" style="cursor: pointer;">
+                  <i class="bi bi-question-circle-fill text-white-50" style="font-size: 0.9rem;"></i>
+                </span>
+              </div>
             </th>
-            <th>
-              <%= link_to coverage_reports_path(sort: 'normal_schedule_count', direction: @sort_column == 'normal_schedule_count' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
-                Προβλεπόμενα δρομολόγια
-                <% if @sort_column == 'normal_schedule_count' %>
-                  <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
+            <th class="align-middle">
+              <div class="d-inline-flex align-items-center">
+                <%= link_to coverage_reports_path(sort: 'normal_schedule_count', direction: @sort_column == 'normal_schedule_count' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
+                  Προβλεπόμενα δρομολόγια
+                  <% if @sort_column == 'normal_schedule_count' %>
+                    <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
+                  <% end %>
                 <% end %>
-              <% end %>
-              <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Το κανονικό πρόγραμμα για τα δρομολόγια. Αν δεν υπάρχει καμμία έλλειψη σε οχήματα και προσωπικό, αυτά τα δρομολόγια θα πρέπει να γίνουν." class="ms-1" style="cursor: pointer;">
-                <i class="bi bi-question-circle-fill text-white-50" style="font-size: 0.9rem;"></i>
-              </span>
+                <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Το κανονικό πρόγραμμα για τα δρομολόγια. Αν δεν υπάρχει καμμία έλλειψη σε οχήματα και προσωπικό, αυτά τα δρομολόγια θα πρέπει να γίνουν." class="ms-1" style="cursor: pointer;">
+                  <i class="bi bi-question-circle-fill text-white-50" style="font-size: 0.9rem;"></i>
+                </span>
+              </div>
             </th>
-            <th>
-              <%= link_to coverage_reports_path(sort: 'daily_schedule_count', direction: @sort_column == 'daily_schedule_count' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
-                Ημερήσιος προγραμματισμός
-                <% if @sort_column == 'daily_schedule_count' %>
-                  <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
+            <th class="align-middle">
+              <div class="d-inline-flex align-items-center">
+                <%= link_to coverage_reports_path(sort: 'daily_schedule_count', direction: @sort_column == 'daily_schedule_count' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
+                  Ημερήσιος προγραμματισμός
+                  <% if @sort_column == 'daily_schedule_count' %>
+                    <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
+                  <% end %>
                 <% end %>
-              <% end %>
-              <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Το αναθεωρημένο πρόγραμμα που καταρτίζεται τις προηγούμενες μέρες, λαμβάνοντας υπόψιν τις ελλείψεις σε οχήματα και προσωπικό. Τυπικά έχει λιγότερα δρομολόγια από τα προβλεπόμενα." class="ms-1" style="cursor: pointer;">
-                <i class="bi bi-question-circle-fill text-white-50" style="font-size: 0.9rem;"></i>
-              </span>
+                <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Το αναθεωρημένο πρόγραμμα που καταρτίζεται τις προηγούμενες μέρες, λαμβάνοντας υπόψιν τις ελλείψεις σε οχήματα και προσωπικό. Τυπικά έχει λιγότερα δρομολόγια από τα προβλεπόμενα." class="ms-1" style="cursor: pointer;">
+                  <i class="bi bi-question-circle-fill text-white-50" style="font-size: 0.9rem;"></i>
+                </span>
+              </div>
             </th>
-            <th>
-              <%= link_to coverage_reports_path(sort: 'executed_trips', direction: @sort_column == 'executed_trips' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
-                Εκτιμώμενα εκτελεσμένα δρομολόγια
-                <% if @sort_column == 'executed_trips' %>
-                  <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
+            <th class="align-middle">
+              <div class="d-inline-flex align-items-center">
+                <%= link_to coverage_reports_path(sort: 'executed_trips', direction: @sort_column == 'executed_trips' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
+                  Εκτιμώμενα εκτελεσμένα δρομολόγια
+                  <% if @sort_column == 'executed_trips' %>
+                    <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
+                  <% end %>
                 <% end %>
-              <% end %>
-              <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Τα εκτιμώμενα εκτελεσμένα δρομολόγια που έγιναν, σύμφωνα με την τηλεματική. Τυπικά είναι ακόμη λιγότερα και από τα δρομολόγια του ημερήσιου προγραμματισμού, λόγω εκτάκτων ελλείψεων σε οχήματα και προσωπικό.<br><br>⚠️ Ο αριθμός είναι κατά προσέγγιση, διάβασε στα Σχετικά." class="ms-1" style="cursor: pointer;">
-                <i class="bi bi-question-circle-fill text-white-50" style="font-size: 0.9rem;"></i>
-              </span>
+                <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Τα εκτιμώμενα εκτελεσμένα δρομολόγια που έγιναν, σύμφωνα με την τηλεματική. Τυπικά είναι ακόμη λιγότερα και από τα δρομολόγια του ημερήσιου προγραμματισμού, λόγω εκτάκτων ελλείψεων σε οχήματα και προσωπικό.<br><br>⚠️ Ο αριθμός είναι κατά προσέγγιση, διάβασε στα Σχετικά." class="ms-1" style="cursor: pointer;">
+                  <i class="bi bi-question-circle-fill text-white-50" style="font-size: 0.9rem;"></i>
+                </span>
+              </div>
             </th>
-            <th>
-              <%= link_to coverage_reports_path(sort: 'coverage', direction: @sort_column == 'coverage' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
-                Κάλυψη
-                <% if @sort_column == 'coverage' %>
-                  <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
+            <th class="align-middle">
+              <div class="d-inline-flex align-items-center">
+                <%= link_to coverage_reports_path(sort: 'coverage', direction: @sort_column == 'coverage' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
+                  Κάλυψη
+                  <% if @sort_column == 'coverage' %>
+                    <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
+                  <% end %>
                 <% end %>
-              <% end %>
-              <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Το ποσοστό εκτέλεσης των δρομολογίων<br><br>🟢 Πράσινο: ≥90%<br>🟡 Κίτρινο: 80-89%<br>🔴 Κόκκινο: &lt;80%" class="ms-1" style="cursor: pointer;">
-                <i class="bi bi-question-circle-fill text-white-50" style="font-size: 0.9rem;"></i>
-              </span>
+                <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Το ποσοστό εκτέλεσης των δρομολογίων<br><br>🟢 Πράσινο: ≥90%<br>🟡 Κίτρινο: 80-89%<br>🔴 Κόκκινο: &lt;80%" class="ms-1" style="cursor: pointer;">
+                  <i class="bi bi-question-circle-fill text-white-50" style="font-size: 0.9rem;"></i>
+                </span>
+              </div>
             </th>
           </tr>
         </thead>
