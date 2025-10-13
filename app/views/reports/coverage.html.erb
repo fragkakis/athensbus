@@ -159,7 +159,7 @@
                     <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
                   <% end %>
                 <% end %>
-                <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Το ποσοστό εκτέλεσης των δρομολογίων<br><br>🟢 Πράσινο: ≥90%<br>🟡 Κίτρινο: 80-89%<br>🔴 Κόκκινο: &lt;80%" class="ms-1" style="cursor: pointer;">
+                <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Το ποσοστό εκτέλεσης των δρομολογίων<br><br>🟠 Πορτοκαλί: &gt;100% (ύποπτο)<br>🟢 Πράσινο: 90-100%<br>🟡 Κίτρινο: 80-89%<br>🔴 Κόκκινο: &lt;80%" class="ms-1" style="cursor: pointer;">
                   <i class="bi bi-question-circle-fill text-white-50" style="font-size: 0.9rem;"></i>
                 </span>
               </div>
@@ -183,7 +183,7 @@
               <td>
                 <% if result["coverage"].present? %>
                   <% coverage = result["coverage"].to_f.round %>
-                  <% badge_class = coverage >= 90 ? 'bg-success' : (coverage >= 80 ? 'bg-warning' : 'bg-danger') %>
+                  <% badge_class = coverage > 100 ? 'bg-warning text-dark' : (coverage >= 90 ? 'bg-success' : (coverage >= 80 ? 'bg-warning' : 'bg-danger')) %>
                   <span class="badge <%= badge_class %>"><%= coverage %>%</span>
                 <% else %>
                   <span class="badge bg-secondary">N/A</span>
