@@ -45,9 +45,9 @@ class ReportsController < ApplicationController
             END as coverage
       from routes r
       inner join lines l on l.id = r.line_id
-      left outer join schedules ds on ds.route_id = r.id AND ds.type = 'daily' and ds.date = $1
-      left outer join schedules ns on ns.route_id = r.id AND ns.type = 'normal' and ns.date = $1
-      left outer join route_daily_reports rdr on rdr.route_id = r.id and rdr.date = $1
+      inner join schedules ds on ds.route_id = r.id AND ds.type = 'daily' and ds.date = $1
+      inner join schedules ns on ns.route_id = r.id AND ns.type = 'normal' and ns.date = $1
+      inner join route_daily_reports rdr on rdr.route_id = r.id and rdr.date = $1
       order by #{sort_sql} #{sort_direction} nulls last
     SQL
 

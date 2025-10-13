@@ -2,14 +2,79 @@
 
 <div class="container mt-4">
   <h1 class="mb-4">
-    <i class="bi bi-map"></i> Κάλυψη διαδρομών
+    <i class="bi bi-map"></i> Εκτιμώμενη κάλυψη διαδρομών
   </h1>
 
-  <div class="alert alert-info" role="alert">
-    <p class="mb-0">
-      Κάλυψη ονομάζουμε το ποσοστό πραγματοποίησης δρομολογίων σε σχέση με τα προγραμματισμένα δρομολόγια. Στον παρακάτω πίνακα φαίνονται οι διαδρομές με σειρά φθίνουσας κάλυψης.
-    </p>
+  <!-- Collapsible Info Section -->
+  <div class="card border-0 shadow-sm mb-4" style="border-radius: 12px;">
+    <div class="card-body p-0">
+      <div class="accordion accordion-flush" id="infoAccordion">
+        <div class="accordion-item border-0" style="border-radius: 8px; overflow: hidden; border: 1px solid #e9ecef !important;">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInfo" aria-expanded="false" aria-controls="collapseInfo" style="background-color: #f8f9fa;">
+              <i class="bi bi-chevron-right me-2 accordion-icon"></i>
+              Τι φαίνεται σε αυτή τη σελίδα;
+            </button>
+          </h2>
+          <div id="collapseInfo" class="accordion-collapse collapse" data-bs-parent="#infoAccordion">
+            <div class="accordion-body bg-white p-4">
+              <p class="mb-0">
+                Κάλυψη ονομάζουμε το ποσοστό πραγματοποίησης δρομολογίων σε σχέση με τα προγραμματισμένα δρομολόγια. Στον παρακάτω πίνακα φαίνονται οι διαδρομές με σειρά φθίνουσας κάλυψης.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item border-0 mt-2" style="border-radius: 8px; overflow: hidden; border: 1px solid #e9ecef !important;">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLorem1" aria-expanded="false" aria-controls="collapseLorem1" style="background-color: #f8f9fa;">
+              <i class="bi bi-chevron-right me-2 accordion-icon"></i>
+              Γιατί βλέπω γραμμές με κάλυψη μεγαλύτερη του 100%;
+            </button>
+          </h2>
+          <div id="collapseLorem1" class="accordion-collapse collapse" data-bs-parent="#infoAccordion">
+            <div class="accordion-body bg-white p-4">
+              <p class="mb-0">
+                Κάποια δρομολόγια έχουν παραλλαγές, για παράδειγμα μέρες λαϊκής. Το πρόγραμμα για αυτά τα δρομολόγια έχει λίγα δρομολόγια, και συγκεκριμένες μέρες. Κάποιες φορές η τηλεματική λέει πως το δρομολόγιο που εκτελείται είναι κάποιο εναλλακτικό δρομολόγιο, ενώ είναι το κανονικό (πιθανολογώ να είναι κάποια επιλογή στο όχημα). Ως συνέπεια, η γραμμή εμφανίζεται να έχει υπερκαλύψει τα προγραμματισμένα δρομολόγια.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item border-0 mt-2" style="border-radius: 8px; overflow: hidden; border: 1px solid #e9ecef !important;">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLorem2" aria-expanded="false" aria-controls="collapseLorem2" style="background-color: #f8f9fa;">
+              <i class="bi bi-chevron-right me-2 accordion-icon"></i>
+              Δεύτερο παράδειγμα
+            </button>
+          </h2>
+          <div id="collapseLorem2" class="accordion-collapse collapse" data-bs-parent="#infoAccordion">
+            <div class="accordion-body bg-white p-4">
+              <p class="mb-0">
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <style>
+    .accordion-button:not(.collapsed) .accordion-icon {
+      transform: rotate(90deg);
+      transition: transform 0.2s ease-in-out;
+    }
+    .accordion-icon {
+      transition: transform 0.2s ease-in-out;
+    }
+    .accordion-button:not(.collapsed) {
+      background-color: #e7f1ff !important;
+      color: #0d6efd;
+    }
+    .accordion-button:focus {
+      box-shadow: none;
+      border-color: rgba(0,0,0,.125);
+    }
+  </style>
 
   <!-- Date Picker Card -->
   <div class="card border-0 shadow-sm mb-4" style="border-radius: 12px;">
@@ -48,8 +113,16 @@
                   <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
                 <% end %>
               <% end %>
+              <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Ο αριθμός και η περιγραφή της γραμμής" class="ms-1" style="cursor: pointer;">
+                <i class="bi bi-question-circle-fill text-muted" style="font-size: 0.9rem;"></i>
+              </span>
             </th>
-            <th>Κατεύθυνση</th>
+            <th>
+              Κατεύθυνση
+              <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Η κατεύθυνση της διαδρομής (πατήστε για λεπτομέρειες)" class="ms-1" style="cursor: pointer;">
+                <i class="bi bi-question-circle-fill text-muted" style="font-size: 0.9rem;"></i>
+              </span>
+            </th>
             <th>
               <%= link_to coverage_reports_path(sort: 'normal_schedule_count', direction: @sort_column == 'normal_schedule_count' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
                 Προβλεπόμενα δρομολόγια
@@ -57,6 +130,9 @@
                   <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
                 <% end %>
               <% end %>
+              <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Το κανονικό πρόγραμμα για τα δρομολόγια. Αν δεν υπάρχει καμμία έλλειψη σε οχήματα και προσωπικό, αυτά τα δρομολόγια θα πρέπει να γίνουν." class="ms-1" style="cursor: pointer;">
+                <i class="bi bi-question-circle-fill text-muted" style="font-size: 0.9rem;"></i>
+              </span>
             </th>
             <th>
               <%= link_to coverage_reports_path(sort: 'daily_schedule_count', direction: @sort_column == 'daily_schedule_count' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
@@ -65,6 +141,9 @@
                   <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
                 <% end %>
               <% end %>
+              <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Το αναθεωρημένο πρόγραμμα που καταρτίζεται τις προηγούμενες μέρες, λαμβάνοντας υπόψιν τις ελλείψεις σε οχήματα και προσωπικό. Τυπικά έχει λιγότερα δρομολόγια από τα προβλεπόμενα." class="ms-1" style="cursor: pointer;">
+                <i class="bi bi-question-circle-fill text-muted" style="font-size: 0.9rem;"></i>
+              </span>
             </th>
             <th>
               <%= link_to coverage_reports_path(sort: 'executed_trips', direction: @sort_column == 'executed_trips' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
@@ -73,6 +152,9 @@
                   <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
                 <% end %>
               <% end %>
+              <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Τα εκτιμώμενα εκτελεσμένα δρομολόγια που έγιναν, σύμφωνα με την τηλεματική. Τυπικά είναι ακόμη λιγότερα και από τα δρομολόγια του ημερήσιου προγραμματισμού, λόγω εκτάκτων ελλείψεων σε οχήματα και προσωπικό.<br><br>⚠️ Ο αριθμός είναι κατά προσέγγιση, διάβασε στα Σχετικά." class="ms-1" style="cursor: pointer;">
+                <i class="bi bi-question-circle-fill text-muted" style="font-size: 0.9rem;"></i>
+              </span>
             </th>
             <th>
               <%= link_to coverage_reports_path(sort: 'coverage', direction: @sort_column == 'coverage' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
@@ -81,6 +163,9 @@
                   <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
                 <% end %>
               <% end %>
+              <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Το ποσοστό εκτέλεσης των δρομολογίων<br><br>🟢 Πράσινο: ≥90%<br>🟡 Κίτρινο: 80-89%<br>🔴 Κόκκινο: &lt;80%" class="ms-1" style="cursor: pointer;">
+                <i class="bi bi-question-circle-fill text-muted" style="font-size: 0.9rem;"></i>
+              </span>
             </th>
           </tr>
         </thead>
