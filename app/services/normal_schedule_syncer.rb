@@ -21,8 +21,12 @@ class NormalScheduleSyncer < BaseScheduleSyncer
     sunday_code = types_of_schedule.find{|e| e["sdc_descr"].include?("ΚΥΡΙΑΚΗ")}.try("[]", "sdc_code")
     saturday_code = types_of_schedule.find{|e| e["sdc_descr"].include?("ΣΑΒΒΑΤΟ")}.try("[]", "sdc_code")
     friday_code = types_of_schedule.find{|e| e["sdc_descr"].include?("ΠΑΡΑΣΚΕΥΗ")}.try("[]", "sdc_code")
-
-    weekday_code = get_weekday_code(types_of_schedule)
+    weekday_code = types_of_schedule.find do |e|
+      e["sdc_descr"].include?("ΚΑΘΗΜΕΡΙΝΗ") ||
+        e["sdc_descr"].include?("ΚΑΘΗΜΕΡΙΝH") || # contains an H in english, not a duplicate of the above
+        e["sdc_descr"].include?("ΟΛΕΣ") ||
+        e["sdc_descr"].include?("ΔΕΥΤΕΡΑ -")
+    end.try("[]", "sdc_code")
 
     today_code = if Date.current.sunday?
                    sunday_code || weekday_code
@@ -49,25 +53,6 @@ class NormalScheduleSyncer < BaseScheduleSyncer
     go_departure_times = extract_departure_times(normal_schedule["go"])
     go_routes.each do |route|
       upsert_schedule(route, Schedule::NORMAL, go_departure_times)
-    end
-  end
-
-  WEEKDAY_TERMS_WITH_PRIORITY = [
-    "ΔΕΥΤΕΡΑ -",
-    "ΚΑΘΗΜΕΡΙΝΗ",
-    "ΚΑΘΗΜΕΡΙΝH",  # contains an H in english, not a duplicate of the above
-    "ΟΛΕΣ"
-  ]
-
-  def get_weekday_code(types_of_schedule)
-    WEEKDAY_TERMS_WITH_PRIORITY.each do |weekday_term|
-      weekday_schedule = types_of_schedule.find do |e|
-        e["sdc_descr"].include?(weekday_term)
-      end
-      if weekday_schedule.present?
-        return weekday_schedule["sdc_code"]
-      end
-      nil
     end
   end
 end
