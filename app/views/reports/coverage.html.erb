@@ -154,12 +154,12 @@
             <th class="align-middle">
               <div class="d-inline-flex align-items-center">
                 <%= link_to coverage_reports_path(sort: 'coverage', direction: @sort_column == 'coverage' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
-                  Κάλυψη
+                  Εκτιμώμενη κάλυψη
                   <% if @sort_column == 'coverage' %>
                     <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
                   <% end %>
                 <% end %>
-                <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Το ποσοστό εκτέλεσης των δρομολογίων<br><br>🟠 Πορτοκαλί: &gt;100% (ύποπτο)<br>🟢 Πράσινο: 90-100%<br>🟡 Κίτρινο: 80-89%<br>🔴 Κόκκινο: &lt;80%" class="ms-1" style="cursor: pointer;">
+                <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Το εκτιμώμενο ποσοστό εκτέλεσης των δρομολογίων<br><br>🟠 Πορτοκαλί: &gt;100% (ύποπτο)<br>🟢 Πράσινο: 90-100%<br>🟡 Κίτρινο: 80-89%<br>🔴 Κόκκινο: &lt;80%" class="ms-1" style="cursor: pointer;">
                   <i class="bi bi-question-circle-fill text-white-50" style="font-size: 0.9rem;"></i>
                 </span>
               </div>
