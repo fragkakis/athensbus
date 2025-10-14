@@ -3,10 +3,9 @@ require "test_helper"
 class NormalScheduleSyncerTest < ActiveSupport::TestCase
 
   test "sync" do
-    stub_request(:get, "http://telematics.oasa.gr/api/?act=getScheduleDaysMasterline&p1=1521").
-      to_return(status: 200, body: File.read(Rails.root.join("test/fixtures/files/getScheduleDaysMasterline.json")))
+    SdcCodePicker.expects(:process).returns("foo_sdc_code")
 
-    stub_request(:get, "http://telematics.oasa.gr/api/?act=getSchedLines&p1=%CE%A793&p2=54&p3=1521").
+    stub_request(:get, "http://telematics.oasa.gr/api/?act=getSchedLines&p1=%CE%A793&p2=foo_sdc_code&p3=1521").
       to_return(status: 200, body: File.read(Rails.root.join("test/fixtures/files/daily_schedule.json")))
 
     line = lines(:x93)
