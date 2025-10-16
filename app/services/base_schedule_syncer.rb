@@ -46,5 +46,6 @@ class BaseScheduleSyncer
     schedule
       .select{ |entry| entry[departure_time_key].present?}
       .map { |entry| DateTime.parse(entry[departure_time_key]).strftime("%k:%M").strip }
+      .uniq
   end
 end
