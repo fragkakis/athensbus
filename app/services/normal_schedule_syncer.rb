@@ -21,14 +21,14 @@ class NormalScheduleSyncer < BaseScheduleSyncer
       timeout: 5)
     normal_schedule = JSON.parse(r.body).presence || []
 
-    come_departure_times = extract_departure_times(normal_schedule["come"])
-    come_routes.each do |route|
-      upsert_schedule(route, Schedule::NORMAL, come_departure_times)
-    end
-
-    go_departure_times = extract_departure_times(normal_schedule["go"])
+    go_departure_times = extract_departure_times_for_go(normal_schedule["go"])
     go_routes.each do |route|
       upsert_schedule(route, Schedule::NORMAL, go_departure_times)
+    end
+
+    come_departure_times = extract_departure_times_for_come(normal_schedule["come"])
+    come_routes.each do |route|
+      upsert_schedule(route, Schedule::NORMAL, come_departure_times)
     end
   end
 

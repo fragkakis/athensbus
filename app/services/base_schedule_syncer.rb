@@ -34,9 +34,17 @@ class BaseScheduleSyncer
     @go_routes ||= line.routes.select(&:go?)
   end
 
-  def extract_departure_times(schedule)
+  def extract_departure_times_for_go(schedule)
+    extract_departure_times(schedule, "sde_start1")
+  end
+
+  def extract_departure_times_for_come(schedule)
+    extract_departure_times(schedule, "sde_start2")
+  end
+
+  def extract_departure_times(schedule, departure_time_key)
     schedule
-      .select{ |entry| entry["sde_start1"].present?}
-      .map { |entry| DateTime.parse(entry["sde_start1"]).strftime("%k:%M").strip }
+      .select{ |entry| entry[departure_time_key].present?}
+      .map { |entry| DateTime.parse(entry[departure_time_key]).strftime("%k:%M").strip }
   end
 end

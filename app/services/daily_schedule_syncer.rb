@@ -18,15 +18,16 @@ class DailyScheduleSyncer < BaseScheduleSyncer
 
     daily_schedule = JSON.parse(r.body).presence || []
 
-    come_departure_times = extract_departure_times(daily_schedule["come"])
+    go_departure_times = extract_departure_times_for_go(daily_schedule["go"])
+    go_routes.each do |route|
+      upsert_schedule(route, Schedule::DAILY, go_departure_times)
+    end
+
+    come_departure_times = extract_departure_times_for_come(daily_schedule["come"])
     come_routes.each do |route|
       upsert_schedule(route, Schedule::DAILY, come_departure_times)
     end
 
-    go_departure_times = extract_departure_times(daily_schedule["go"])
-    go_routes.each do |route|
-      upsert_schedule(route, Schedule::DAILY, go_departure_times)
-    end
   end
 
 end

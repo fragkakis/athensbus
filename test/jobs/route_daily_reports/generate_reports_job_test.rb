@@ -1,7 +1,7 @@
 require "test_helper"
 
 module RouteDailyReports
-  class GenerateReportJobTest < ActiveJob::TestCase
+  class GenerateReportsJobTest < ActiveJob::TestCase
 
     test "perform" do
 
