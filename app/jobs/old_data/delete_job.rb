@@ -1,10 +1,11 @@
 module OldData
   class DeleteJob < ActiveJob::Base
 
-    DATA_RETENTION_DAYS = 30
+    DATA_RETENTION_DAYS = 10
     def perform
-      Schedule.where("date < ?", DATA_RETENTION_DAYS.days.ago).delete_all
-      Arrival.where("created_at < ?", DATA_RETENTION_DAYS.days.ago.beginning_of_day).delete_all
+      deletion_threshold = DATA_RETENTION_DAYS.days.ago.beginning_of_day
+      Schedule.where("date < ?", (DATA_RETENTION_DAYS + 1).days.ago).delete_all
+      Arrival.where("created_at < ?", deletion_threshold).delete_all
     end
   end
 end

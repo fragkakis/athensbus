@@ -16,14 +16,18 @@ class Route < ApplicationRecord
   end
 
   def come?
-    auto_calculated_direction == COME
+    final_direction == COME
   end
 
   def go?
-    auto_calculated_direction == GO
+    final_direction == GO
   end
 
   private
+
+  def final_direction
+    direction || auto_calculated_direction
+  end
 
   def auto_calculated_direction
     @auto_calculated_direction ||= calculate_auto_calculated_direction
