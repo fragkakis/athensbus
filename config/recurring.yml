@@ -11,13 +11,10 @@ production:
   generate_daily_reports:
     class: RouteDailyReports::GenerateReportsJob
     schedule: '0 0 * * *' # every day at 00:00
-  sync_schedules_midnight:
-    class: SyncSchedulesJob
+  delete_old_data:
+    class: OldData::DeleteJob
     schedule: '0 0 * * *' # every day at 00:00
-  sync_schedules_morning:
+  sync_schedules:
     class: SyncSchedulesJob
-    schedule: '0 8 * * *' # every day at 08:00
-  sync_schedules_evening:
-    class: SyncSchedulesJob
-    schedule: '0 23 * * *' # every day at 23:00
+    schedule: '0 0,8,23 * * *' # every day at 00:00, 08:00, 23:00
 
