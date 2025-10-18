@@ -1,12 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="el">
   <head>
-    <title><%= content_for(:title) || "Athens Bus" %></title>
+    <title><%= content_for(:title) || "Athens Bus - Πληροφορίες Δρομολογίων Λεωφορείων Αθήνας" %></title>
+    <meta name="description" content="<%= content_for(:description) || 'Πληροφορίες για τα δρομολόγια των λεωφορείων της Αθήνας. Δείτε την εκτιμώμενη κάλυψη διαδρομών και τον προγραμματισμό των γραμμών σε πραγματικό χρόνο.' %>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="<%= request.original_url %>">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="<%= content_for(:og_title) || content_for(:title) || 'Athens Bus - Πληροφορίες Δρομολογίων' %>">
+    <meta property="og:description" content="<%= content_for(:og_description) || content_for(:description) || 'Πληροφορίες για τα δρομολόγια των λεωφορείων της Αθήνας' %>">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<%= request.original_url %>">
+    <meta property="og:site_name" content="Athens Bus">
+    <meta property="og:locale" content="el_GR">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="<%= content_for(:og_title) || content_for(:title) || 'Athens Bus - Πληροφορίες Δρομολογίων' %>">
+    <meta name="twitter:description" content="<%= content_for(:og_description) || content_for(:description) || 'Πληροφορίες για τα δρομολόγια των λεωφορείων της Αθήνας' %>">
 
 
     <!-- Google tag (gtag.js) -->

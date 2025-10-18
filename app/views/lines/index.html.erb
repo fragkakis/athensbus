@@ -1,5 +1,8 @@
 <% if(@line.present?) %>
-  <% content_for :title, "Athens Bus - #{@line.line_id}" %>
+  <% content_for :title, "Λεωφορείο #{@line.line_id} - #{@route.description} - Athens Bus" %>
+  <% content_for :description, "Δείτε τα δρομολόγια της γραμμής #{@line.line_id} (#{@line.description}) με κατεύθυνση #{@route.description}. Προγραμματισμένα και εκτιμώμενα δρομολόγια λεωφορείων Αθήνας." %>
+<% else %>
+  <% content_for :description, "Αναζητήστε δρομολόγια λεωφορείων της Αθήνας. Δείτε προγραμματισμένα και εκτιμώμενα δρομολόγια για όλες τις γραμμές λεωφορείων." %>
 <% end %>
 
 <div class="py-4">
