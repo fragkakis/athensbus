@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :reports, only: [:index] do
     collection do
       get :estimated_coverage
+      get :daily_vs_normal
     end
   end
   resources :about, only: [:index]
