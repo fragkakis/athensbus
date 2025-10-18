@@ -4,14 +4,15 @@
   <h1 class="mb-4">Αναφορές</h1>
 
   <div class="row">
-    <!-- Coverage Report -->
+
+    <!-- Daily vs Normal Schedule Report -->
     <div class="col-md-4 mb-4">
-      <div class="card shadow-sm h-100" style="cursor: pointer;" onclick="window.location.href='<%= estimated_coverage_reports_url %>'">
+      <div class="card shadow-sm h-100" style="cursor: pointer;" onclick="window.location.href='<%= daily_vs_normal_reports_url %>'">
         <div class="card-body">
           <h5 class="card-title">
-            <i class="bi bi-map"></i> Εκτιμώμενη κάλυψη διαδρομών
+            <i class="bi bi-calendar-check"></i> Ημερήσιος προγραμματισμός vs Κανονικό πρόγραμμα
           </h5>
-          <p class="card-text">Δείτε την εκτιμώμενη κάλυψη του προγράμματος ανά διαδρομή</p>
+          <p class="card-text">Σύγκριση ημερήσιου προγραμματισμού με το κανονικό πρόγραμμα</p>
         </div>
         <div class="card-footer text-muted">
           Πατήστε για να δείτε την αναφορά
@@ -19,14 +20,14 @@
       </div>
     </div>
 
-    <!-- Daily vs Normal Schedule Report -->
+    <!-- Coverage Report -->
     <div class="col-md-4 mb-4">
-      <div class="card shadow-sm h-100" style="cursor: pointer;" onclick="window.location.href='<%= daily_vs_normal_reports_url %>'">
+      <div class="card shadow-sm h-100" style="cursor: pointer;" onclick="window.location.href='<%= estimated_coverage_reports_url %>'">
         <div class="card-body">
           <h5 class="card-title">
-            <i class="bi bi-calendar-check"></i> Ημερήσιος Προγραμματισμός vs Κανονικό πρόγραμμα
+            <i class="bi bi-map"></i> Εκτιμώμενη κάλυψη
           </h5>
-          <p class="card-text">Σύγκριση ημερήσιου προγραμματισμού με το κανονικό πρόγραμμα</p>
+          <p class="card-text">Δείτε την εκτιμώμενη κάλυψη του προγράμματος ανά διαδρομή</p>
         </div>
         <div class="card-footer text-muted">
           Πατήστε για να δείτε την αναφορά
