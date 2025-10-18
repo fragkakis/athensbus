@@ -4,7 +4,7 @@ class ReportsController < ApplicationController
 
   end
 
-  def coverage
+  def estimated_coverage
     date = params[:date] || Date.yesterday
 
     # Set date range for datepicker
@@ -12,7 +12,7 @@ class ReportsController < ApplicationController
     @date_max = [Date.yesterday, Arrival.maximum(:created_at)].min.to_date.to_s
 
     # Whitelist sortable columns to prevent SQL injection
-    sort_column = params[:sort].presence_in(%w[line_id normal_schedule_count daily_schedule_count executed_trips coverage]) || 'coverage'
+    sort_column = params[:sort].presence_in(%w[line_id normal_schedule_count executed_trips coverage]) || 'coverage'
     sort_direction = params[:direction].presence_in(%w[asc desc]) || 'desc'
 
     # Map sort column to actual SQL column/expression
@@ -21,8 +21,6 @@ class ReportsController < ApplicationController
       'l.line_id'
     when 'normal_schedule_count'
       'jsonb_array_length(ns.departure_times)'
-    when 'daily_schedule_count'
-      'jsonb_array_length(ds.departure_times)'
     when 'executed_trips'
       'rdr.executed_trips'
     when 'coverage'
@@ -35,7 +33,6 @@ class ReportsController < ApplicationController
             l.description as line_description,
             r.route_id as route_id,
             r.description as route_description,
-            jsonb_array_length(ds.departure_times) as daily_schedule_count,
             jsonb_array_length(ns.departure_times) as normal_schedule_count,
             rdr.executed_trips as executed_trips,
             CASE
@@ -45,7 +42,6 @@ class ReportsController < ApplicationController
             END as coverage
       from routes r
       inner join lines l on l.id = r.line_id
-      inner join schedules ds on ds.route_id = r.id AND ds.type = 'daily' and ds.date = $1
       inner join schedules ns on ns.route_id = r.id AND ns.type = 'normal' and ns.date = $1
       inner join route_daily_reports rdr on rdr.route_id = r.id and rdr.date = $1
       where rdr.executed_trips > 0

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get "/routes/:code/stats", to: "routes#stats", as: "route_stats"
   resources :reports, only: [:index] do
     collection do
-      get :coverage
+      get :estimated_coverage
     end
   end
   resources :about, only: [:index]

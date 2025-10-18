@@ -49,7 +49,7 @@
   <!-- Date Picker Card -->
   <div class="card border-0 shadow-sm mb-4" style="border-radius: 12px;">
     <div class="card-body p-4">
-      <%= form_with(url: coverage_reports_path, method: :get) do |f| %>
+      <%= form_with(url: estimated_coverage_reports_path, method: :get) do |f| %>
         <div class="row g-3">
           <div class="col-12 col-md-6">
             <label for="date" class="form-label fw-semibold">
@@ -78,7 +78,7 @@
           <tr>
             <th class="align-middle">
               <div class="d-inline-flex align-items-center">
-                <%= link_to coverage_reports_path(sort: 'line_id', direction: @sort_column == 'line_id' && @sort_direction == 'asc' ? 'desc' : 'asc', date: params[:date]), class: 'text-white text-decoration-none' do %>
+                <%= link_to estimated_coverage_reports_path(sort: 'line_id', direction: @sort_column == 'line_id' && @sort_direction == 'asc' ? 'desc' : 'asc', date: params[:date]), class: 'text-white text-decoration-none' do %>
                   Γραμμή
                   <% if @sort_column == 'line_id' %>
                     <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
@@ -99,7 +99,7 @@
             </th>
             <th class="align-middle">
               <div class="d-inline-flex align-items-center">
-                <%= link_to coverage_reports_path(sort: 'normal_schedule_count', direction: @sort_column == 'normal_schedule_count' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
+                <%= link_to estimated_coverage_reports_path(sort: 'normal_schedule_count', direction: @sort_column == 'normal_schedule_count' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
                   Προβλεπόμενα δρομολόγια
                   <% if @sort_column == 'normal_schedule_count' %>
                     <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
@@ -112,20 +112,7 @@
             </th>
             <th class="align-middle">
               <div class="d-inline-flex align-items-center">
-                <%= link_to coverage_reports_path(sort: 'daily_schedule_count', direction: @sort_column == 'daily_schedule_count' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
-                  Ημερήσιος προγραμματισμός
-                  <% if @sort_column == 'daily_schedule_count' %>
-                    <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
-                  <% end %>
-                <% end %>
-                <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Το αναθεωρημένο πρόγραμμα που καταρτίζεται τις προηγούμενες μέρες, λαμβάνοντας υπόψιν τις ελλείψεις σε οχήματα και προσωπικό. Τυπικά έχει λιγότερα δρομολόγια από τα προβλεπόμενα." class="ms-1" style="cursor: pointer;">
-                  <i class="bi bi-question-circle-fill text-white-50" style="font-size: 0.9rem;"></i>
-                </span>
-              </div>
-            </th>
-            <th class="align-middle">
-              <div class="d-inline-flex align-items-center">
-                <%= link_to coverage_reports_path(sort: 'executed_trips', direction: @sort_column == 'executed_trips' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
+                <%= link_to estimated_coverage_reports_path(sort: 'executed_trips', direction: @sort_column == 'executed_trips' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
                   Εκτιμώμενα δρομολόγια
                   <% if @sort_column == 'executed_trips' %>
                     <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
@@ -138,7 +125,7 @@
             </th>
             <th class="align-middle">
               <div class="d-inline-flex align-items-center">
-                <%= link_to coverage_reports_path(sort: 'coverage', direction: @sort_column == 'coverage' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
+                <%= link_to estimated_coverage_reports_path(sort: 'coverage', direction: @sort_column == 'coverage' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
                   Εκτιμώμενη κάλυψη
                   <% if @sort_column == 'coverage' %>
                     <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
@@ -163,7 +150,6 @@
                 <% end %>
               </td>
               <td><%= result["normal_schedule_count"] %></td>
-              <td><%= result["daily_schedule_count"] %></td>
               <td><%= result["executed_trips"] %></td>
               <td>
                 <% if result["coverage"].present? %>
