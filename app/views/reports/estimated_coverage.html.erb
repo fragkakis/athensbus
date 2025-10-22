@@ -155,8 +155,39 @@
               <td>
                 <% if result["coverage"].present? %>
                   <% coverage = result["coverage"].to_f.round %>
-                  <% badge_class = coverage > 100 ? 'bg-warning text-dark' : (coverage >= 90 ? 'bg-success' : (coverage >= 80 ? 'bg-warning' : 'bg-danger')) %>
-                  <span class="badge <%= badge_class %>"><%= coverage %>%</span>
+                  <%
+                    # Color gradient logic:
+                    # 100% = green (rgb(40, 167, 69))
+                    # 90% = yellow (rgb(255, 193, 7))
+                    # 80% = orange (rgb(253, 126, 20))
+                    # <= 80% = red (rgb(220, 53, 69))
+
+                    if coverage >= 100
+                      bg_color = 'rgb(40, 167, 69)'
+                      text_color = 'white'
+                    elsif coverage >= 90
+                      # Gradient between green and yellow
+                      ratio = (coverage - 90) / 10.0
+                      r = 40 + (255 - 40) * (1 - ratio)
+                      g = 167 + (193 - 167) * (1 - ratio)
+                      b = 69 + (7 - 69) * (1 - ratio)
+                      bg_color = "rgb(#{r.round}, #{g.round}, #{b.round})"
+                      text_color = coverage >= 95 ? 'white' : 'black'
+                    elsif coverage >= 80
+                      # Gradient between yellow and orange
+                      ratio = (coverage - 80) / 10.0
+                      r = 253 + (255 - 253) * ratio
+                      g = 126 + (193 - 126) * ratio
+                      b = 20 + (7 - 20) * ratio
+                      bg_color = "rgb(#{r.round}, #{g.round}, #{b.round})"
+                      text_color = 'black'
+                    else
+                      # Red for <= 80%
+                      bg_color = 'rgb(220, 53, 69)'
+                      text_color = 'white'
+                    end
+                  %>
+                  <span class="badge" style="background-color: <%= bg_color %>; color: <%= text_color %>;"><%= coverage %>%</span>
                 <% else %>
                   <span class="badge bg-secondary">N/A</span>
                 <% end %>

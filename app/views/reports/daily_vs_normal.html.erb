@@ -132,7 +132,7 @@
                     <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
                   <% end %>
                 <% end %>
-                <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Το ποσοστό του ημερήσιου προγραμματισμού σε σχέση με το κανονικό πρόγραμμα<br><br>🟢 Πράσινο: 90-100%<br>🟡 Κίτρινο: 80-89%<br>🔴 Κόκκινο: &lt;80%" class="ms-1" style="cursor: pointer;">
+                <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Το ποσοστό του ημερήσιου προγραμματισμού σε σχέση με το κανονικό πρόγραμμα<br><br>🟢 Πράσινο: 100%<br>🟡 Κίτρινο: 90%<br>🟠 Πορτοκαλί: 80%<br>🔴 Κόκκινο: ≤80%<br><br>Τα χρώματα μεταβάλλονται σταδιακά" class="ms-1" style="cursor: pointer;">
                   <i class="bi bi-question-circle-fill text-white-50" style="font-size: 0.9rem;"></i>
                 </span>
               </div>
@@ -155,8 +155,39 @@
               <td>
                 <% if result["percentage"].present? %>
                   <% percentage = result["percentage"].to_f.round %>
-                  <% badge_class = percentage > 100 ? 'bg-warning text-dark' : (percentage >= 90 ? 'bg-success' : (percentage >= 80 ? 'bg-warning' : 'bg-danger')) %>
-                  <span class="badge <%= badge_class %>"><%= percentage %>%</span>
+                  <%
+                    # Color gradient logic:
+                    # 100% = green (rgb(40, 167, 69))
+                    # 90% = yellow (rgb(255, 193, 7))
+                    # 80% = orange (rgb(253, 126, 20))
+                    # <= 80% = red (rgb(220, 53, 69))
+
+                    if percentage >= 100
+                      bg_color = 'rgb(40, 167, 69)'
+                      text_color = 'white'
+                    elsif percentage >= 90
+                      # Gradient between green and yellow
+                      ratio = (percentage - 90) / 10.0
+                      r = 40 + (255 - 40) * (1 - ratio)
+                      g = 167 + (193 - 167) * (1 - ratio)
+                      b = 69 + (7 - 69) * (1 - ratio)
+                      bg_color = "rgb(#{r.round}, #{g.round}, #{b.round})"
+                      text_color = percentage >= 95 ? 'white' : 'black'
+                    elsif percentage >= 80
+                      # Gradient between yellow and orange
+                      ratio = (percentage - 80) / 10.0
+                      r = 253 + (255 - 253) * ratio
+                      g = 126 + (193 - 126) * ratio
+                      b = 20 + (7 - 20) * ratio
+                      bg_color = "rgb(#{r.round}, #{g.round}, #{b.round})"
+                      text_color = 'black'
+                    else
+                      # Red for <= 80%
+                      bg_color = 'rgb(220, 53, 69)'
+                      text_color = 'white'
+                    end
+                  %>
+                  <span class="badge" style="background-color: <%= bg_color %>; color: <%= text_color %>;"><%= percentage %>%</span>
                 <% else %>
                   <span class="badge bg-secondary">N/A</span>
                 <% end %>
