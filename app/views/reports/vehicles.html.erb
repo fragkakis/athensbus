@@ -1,0 +1,136 @@
+<% content_for :title, "Οχήματα - Athens Bus" %>
+<% content_for :description, "Δείτε τα οχήματα που πραγματοποίησαν τουλάχιστον μία άφιξη σε στάση και τις γραμμές που εξυπηρέτησαν." %>
+
+<div class="container mt-4">
+  <h1 class="mb-4">
+    <i class="bi bi-bus-front"></i> Οχήματα
+  </h1>
+
+  <!-- Collapsible Info Section -->
+  <div class="card border-0 shadow-sm mb-4" style="border-radius: 12px;">
+    <div class="card-body p-0">
+      <div class="accordion accordion-flush" id="infoAccordion">
+        <div class="accordion-item border-0" style="border-radius: 8px; overflow: hidden; border: 1px solid #e9ecef !important;">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed fw-semibold" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInfo" aria-expanded="false" aria-controls="collapseInfo" style="background-color: #f8f9fa;">
+              <i class="bi bi-chevron-right me-2 accordion-icon"></i>
+              Τι φαίνεται σε αυτή τη σελίδα;
+            </button>
+          </h2>
+          <div id="collapseInfo" class="accordion-collapse collapse" data-bs-parent="#infoAccordion">
+            <div class="accordion-body bg-white p-4">
+              <p class="mb-0">
+                Σε αυτή τη σελίδα φαίνονται τα οχήματα που πραγματοποίησαν τουλάχιστον μία άφιξη σε στάση για την επιλεγμένη ημερομηνία, καθώς και οι γραμμές που εξυπηρέτησαν.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .accordion-button:not(.collapsed) .accordion-icon {
+      transform: rotate(90deg);
+      transition: transform 0.2s ease-in-out;
+    }
+    .accordion-icon {
+      transition: transform 0.2s ease-in-out;
+    }
+    .accordion-button:not(.collapsed) {
+      background-color: #e7f1ff !important;
+      color: #0d6efd;
+    }
+    .accordion-button:focus {
+      box-shadow: none;
+      border-color: rgba(0,0,0,.125);
+    }
+  </style>
+
+  <!-- Date Picker Card -->
+  <div class="card border-0 shadow-sm mb-4" style="border-radius: 12px;">
+    <div class="card-body p-4">
+      <%= form_with(url: vehicles_reports_path, method: :get) do |f| %>
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <label for="date" class="form-label fw-semibold">
+              <i class="bi bi-calendar-event me-1"></i>Ημερομηνία
+            </label>
+            <input type="date" id="date" name="date"
+                   class="form-control form-control-lg"
+                   min="<%= @date_min %>"
+                   max="<%= @date_max %>"
+                   value="<%= params[:date] || @date_max %>" />
+            <div class="form-text">
+              <i class="bi bi-info-circle me-1"></i>Διάλεξε την ημερομηνία
+            </div>
+          </div>
+        </div>
+        <input type="hidden" name="sort" value="<%= @sort_column %>" />
+        <input type="hidden" name="direction" value="<%= @sort_direction %>" />
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Total Vehicles Card -->
+  <div class="card border-0 shadow-sm mb-4" style="border-radius: 12px;">
+    <div class="card-body p-4 text-center">
+      <h2 class="display-4 fw-bold text-primary mb-2"><%= @total_vehicles %></h2>
+      <p class="text-muted mb-0">Σύνολο οχημάτων που πραγματοποίησαν αφίξεις</p>
+    </div>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <table class="table table-striped table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th class="align-middle">
+              <div class="d-inline-flex align-items-center">
+                <%= link_to vehicles_reports_path(sort: 'vehicle_code', direction: @sort_column == 'vehicle_code' && @sort_direction == 'asc' ? 'desc' : 'asc', date: params[:date]), class: 'text-white text-decoration-none' do %>
+                  Κωδικός Οχήματος
+                  <% if @sort_column == 'vehicle_code' %>
+                    <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
+                  <% end %>
+                <% end %>
+                <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Ο μοναδικός κωδικός του οχήματος" class="ms-1" style="cursor: pointer;">
+                  <i class="bi bi-question-circle-fill text-white-50" style="font-size: 0.9rem;"></i>
+                </span>
+              </div>
+            </th>
+            <th class="align-middle">
+              <div class="d-inline-flex align-items-center">
+                <%= link_to vehicles_reports_path(sort: 'routes_count', direction: @sort_column == 'routes_count' && @sort_direction == 'desc' ? 'asc' : 'desc', date: params[:date]), class: 'text-white text-decoration-none' do %>
+                  Γραμμές
+                  <% if @sort_column == 'routes_count' %>
+                    <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
+                  <% end %>
+                <% end %>
+                <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Οι γραμμές που εξυπηρέτησε το όχημα" class="ms-1" style="cursor: pointer;">
+                  <i class="bi bi-question-circle-fill text-white-50" style="font-size: 0.9rem;"></i>
+                </span>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @results.each do |result| %>
+            <tr>
+              <td><%= result["vehicle_code"] %></td>
+              <td><%= result["lines"] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  $(document).ready(function() {
+    // Submit form when date changes
+    $('#date').on('change', function() {
+      $(this).closest('form').submit();
+    });
+  });
+</script>

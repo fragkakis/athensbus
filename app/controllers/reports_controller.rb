@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
-  before_action :set_date_range, only: [:estimated_coverage, :daily_vs_normal]
-  before_action :set_date, only: [:estimated_coverage, :daily_vs_normal]
+  before_action :set_date_range, only: [:estimated_coverage, :daily_vs_normal, :vehicles]
+  before_action :set_date, only: [:estimated_coverage, :daily_vs_normal, :vehicles]
 
   def index
 
@@ -93,6 +93,38 @@ class ReportsController < ApplicationController
     SQL
 
     @results = ActiveRecord::Base.connection.raw_connection.exec_params(sql, [@date])
+    @sort_column = sort_column
+    @sort_direction = sort_direction
+  end
+
+  def vehicles
+    # Whitelist sortable columns to prevent SQL injection
+    sort_column = params[:sort].presence_in(%w[vehicle_code routes_count]) || 'vehicle_code'
+    sort_direction = params[:direction].presence_in(%w[asc desc]) || 'asc'
+
+    # Map sort column to actual SQL column/expression
+    sort_sql = case sort_column
+    when 'vehicle_code'
+      'v.code'
+    when 'routes_count'
+      'routes_count'
+    end
+
+    sql = <<~SQL
+      select v.code as vehicle_code,
+             string_agg(distinct l.line_id, ', ' order by l.line_id) as lines,
+             count(distinct r.id) as routes_count
+      from vehicles v
+      inner join arrivals a on a.vehicle_id = v.id
+      inner join routes r on r.id = a.route_id
+      inner join lines l on l.id = r.line_id
+      where DATE(a.created_at) = $1
+      group by v.code
+      order by #{sort_sql} #{sort_direction}
+    SQL
+
+    @results = ActiveRecord::Base.connection.raw_connection.exec_params(sql, [@date])
+    @total_vehicles = @results.ntuples
     @sort_column = sort_column
     @sort_direction = sort_direction
   end
