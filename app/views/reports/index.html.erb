@@ -4,10 +4,19 @@
 <style>
   .report-card {
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
   .report-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  }
+  .report-card:active {
+    transform: translateY(-2px);
+    box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.2) !important;
   }
 </style>
 
