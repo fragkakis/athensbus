@@ -1,6 +1,16 @@
 <% content_for :title, "Αναφορές Δρομολογίων - Athens Bus" %>
 <% content_for :description, "Αναλυτικές αναφορές για τα δρομολόγια λεωφορείων της Αθήνας. Εκτιμώμενη κάλυψη διαδρομών και σύγκριση προγραμματισμού." %>
 
+<style>
+  .report-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+  .report-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  }
+</style>
+
 <div class="container mt-4">
   <h1 class="mb-4">Αναφορές</h1>
 
@@ -8,45 +18,36 @@
 
     <!-- Daily vs Normal Schedule Report -->
     <div class="col-md-4 mb-4">
-      <div class="card shadow-sm h-100" style="cursor: pointer;" onclick="window.location.href='<%= daily_vs_normal_reports_url %>'">
+      <div class="card report-card shadow-sm h-100" style="cursor: pointer;" onclick="window.location.href='<%= daily_vs_normal_reports_url %>'">
         <div class="card-body">
           <h5 class="card-title">
             <i class="bi bi-calendar-check"></i> Ημερήσιος προγραμματισμός vs Κανονικό πρόγραμμα
           </h5>
           <p class="card-text">Σύγκριση ημερήσιου προγραμματισμού με το κανονικό πρόγραμμα</p>
         </div>
-        <div class="card-footer text-muted">
-          Πατήστε για να δείτε την αναφορά
-        </div>
       </div>
     </div>
 
     <!-- Coverage Report -->
     <div class="col-md-4 mb-4">
-      <div class="card shadow-sm h-100" style="cursor: pointer;" onclick="window.location.href='<%= estimated_coverage_reports_url %>'">
+      <div class="card report-card shadow-sm h-100" style="cursor: pointer;" onclick="window.location.href='<%= estimated_coverage_reports_url %>'">
         <div class="card-body">
           <h5 class="card-title">
             <i class="bi bi-map"></i> Εκτιμώμενη κάλυψη
           </h5>
           <p class="card-text">Δείτε την εκτιμώμενη κάλυψη του προγράμματος ανά διαδρομή</p>
         </div>
-        <div class="card-footer text-muted">
-          Πατήστε για να δείτε την αναφορά
-        </div>
       </div>
     </div>
 
     <!-- Vehicles Report -->
     <div class="col-md-4 mb-4">
-      <div class="card shadow-sm h-100" style="cursor: pointer;" onclick="window.location.href='<%= vehicles_reports_url %>'">
+      <div class="card report-card shadow-sm h-100" style="cursor: pointer;" onclick="window.location.href='<%= vehicles_reports_url %>'">
         <div class="card-body">
           <h5 class="card-title">
             <i class="bi bi-bus-front"></i> Οχήματα
           </h5>
           <p class="card-text">Δείτε τα οχήματα που πραγματοποίησαν αφίξεις και τις γραμμές που εξυπηρέτησαν</p>
-        </div>
-        <div class="card-footer text-muted">
-          Πατήστε για να δείτε την αναφορά
         </div>
       </div>
     </div>
