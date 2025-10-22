@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-  before_action :set_date_range, only: [:estimated_coverage, :daily_vs_normal, :vehicles]
+  before_action :set_date_range, only: [:estimated_coverage, :daily_vs_normal, :vehicles, :vehicle_count]
   before_action :set_date, only: [:estimated_coverage, :daily_vs_normal, :vehicles]
 
   def index
@@ -127,6 +127,14 @@ class ReportsController < ApplicationController
     @total_vehicles = @results.ntuples
     @sort_column = sort_column
     @sort_direction = sort_direction
+  end
+
+  def vehicle_count
+    # Group arrivals by date and count distinct vehicles per day
+    @results = Arrival
+      .group("DATE(created_at)")
+      .select("DATE(created_at) as date, COUNT(DISTINCT vehicle_id) as vehicle_count")
+      .order("DATE(created_at) DESC")
   end
 
   private
