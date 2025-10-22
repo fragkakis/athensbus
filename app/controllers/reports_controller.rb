@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
-  before_action :set_date_range, only: [:estimated_coverage, :daily_vs_normal, :vehicles, :vehicle_count]
-  before_action :set_date, only: [:estimated_coverage, :daily_vs_normal, :vehicles]
+  before_action :set_date_range, only: [:estimated_coverage, :daily_vs_normal, :vehicles, :vehicle_count, :stops]
+  before_action :set_date, only: [:estimated_coverage, :daily_vs_normal, :vehicles, :stops]
 
   def index
 
@@ -135,6 +135,39 @@ class ReportsController < ApplicationController
       .group("DATE(created_at)")
       .select("DATE(created_at) as date, COUNT(DISTINCT vehicle_id) as vehicle_count")
       .order("DATE(created_at) DESC")
+  end
+
+  def stops
+    # Whitelist sortable columns to prevent SQL injection
+    sort_column = params[:sort].presence_in(%w[stop_description lines arrival_count]) || 'arrival_count'
+    sort_direction = params[:direction].presence_in(%w[asc desc]) || 'desc'
+
+    # Map sort column to actual SQL column/expression
+    sort_sql = case sort_column
+    when 'stop_description'
+      's.description'
+    when 'lines'
+      'lines'
+    when 'arrival_count'
+      'arrival_count'
+    end
+
+    sql = <<~SQL
+      select s.description as stop_description,
+             string_agg(distinct l.line_id, ', ' order by l.line_id) as lines,
+             count(a.id) as arrival_count
+      from stops s
+      inner join arrivals a on a.stop_id = s.id
+      inner join routes r on r.id = a.route_id
+      inner join lines l on l.id = r.line_id
+      where DATE(a.created_at) = $1
+      group by s.id, s.description
+      order by #{sort_sql} #{sort_direction}
+    SQL
+
+    @results = ActiveRecord::Base.connection.raw_connection.exec_params(sql, [@date])
+    @sort_column = sort_column
+    @sort_direction = sort_direction
   end
 
   private

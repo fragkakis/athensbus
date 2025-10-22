@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       get :daily_vs_normal
       get :vehicles
       get :vehicle_count
+      get :stops
     end
   end
   resources :about, only: [:index]
