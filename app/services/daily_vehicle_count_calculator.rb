@@ -1,4 +1,7 @@
 class DailyVehicleCountCalculator
+
+  attr_reader :date
+
   def self.process(date)
     new(date).process
   end

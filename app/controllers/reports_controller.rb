@@ -130,11 +130,7 @@ class ReportsController < ApplicationController
   end
 
   def vehicle_count
-    # Group arrivals by date and count distinct vehicles per day
-    @results = Arrival
-      .group("DATE(created_at)")
-      .select("DATE(created_at) as date, COUNT(DISTINCT vehicle_id) as vehicle_count")
-      .order("DATE(created_at) DESC")
+    @results = DailyVehicleCount.order(date: :desc)
   end
 
   def stops

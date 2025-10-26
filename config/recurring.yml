@@ -17,4 +17,7 @@ production:
   sync_schedules:
     class: SyncSchedulesJob
     schedule: '0 0,8,23 * * *' # every day at 00:00, 08:00, 23:00
+  calculate_daily_vehicle_count:
+    class: CalculateDailyVehicleCountJob
+    schedule: '0 0 * * *' # every day at 00:00
 
