@@ -10,14 +10,14 @@ production:
     schedule: every 5 minutes
   generate_daily_reports:
     class: RouteDailyReports::GenerateReportsJob
-    schedule: '0 0 * * *' # every day at 00:00
+    schedule: '1 0 * * *' # every day at 00:01
   delete_old_data:
     class: OldData::DeleteJob
-    schedule: '0 0 * * *' # every day at 00:00
+    schedule: '1 0 * * *' # every day at 00:01
   sync_schedules:
     class: SyncSchedulesJob
-    schedule: '0 0,8,23 * * *' # every day at 00:00, 08:00, 23:00
+    schedule: '1 0,8,23 * * *' # every day at 00:01, 08:01, 23:01
   calculate_daily_vehicle_count:
     class: CalculateDailyVehicleCountJob
-    schedule: '0 0 * * *' # every day at 00:00
+    schedule: '1 0 * * *' # every day at 00:00
 
