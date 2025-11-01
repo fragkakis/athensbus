@@ -39,10 +39,13 @@
 
     <!-- Coverage Report -->
     <div class="col-md-4 mb-4">
-      <div class="card report-card shadow-sm h-100" style="cursor: pointer;" onclick="window.location.href='<%= estimated_coverage_reports_url %>'">
+      <div class="card report-card shadow-sm h-100" style="cursor: pointer; border-left: 4px solid #ff9800 !important;" onclick="window.location.href='<%= estimated_coverage_reports_url %>'">
         <div class="card-body">
-          <h5 class="card-title">
+          <h5 class="card-title d-flex align-items-center">
             <i class="bi bi-percent"></i> Εκτιμώμενη κάλυψη δρομολογίων
+            <span class="badge bg-warning text-dark ms-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="⚠️ <strong>Κατά προσέγγιση!</strong><br><br>Η κάλυψη και τα δρομολόγια που παρουσιάζονται είναι εκτιμώμενα, καθώς βασίζονται σε ελλιπή δεδομένα τηλεματικής. Οι αριθμοί μπορεί να διαφέρουν σημαντικά από την πραγματικότητα." style="cursor: pointer; font-size: 0.7rem;">
+              <i class="bi bi-exclamation-triangle-fill me-1"></i>Προσέγγιση
+            </span>
           </h5>
           <p class="card-text">Δείτε την εκτιμώμενη κάλυψη του προγράμματος ανά διαδρομή</p>
         </div>
