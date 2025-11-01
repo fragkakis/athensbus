@@ -2,8 +2,11 @@
 <% content_for :description, "Δείτε την εκτιμώμενη κάλυψη των δρομολογίων λεωφορείων της Αθήνας ανά διαδρομή. Ποσοστό πραγματοποίησης δρομολογίων σε σχέση με το προγραμματισμένο πρόγραμμα." %>
 
 <div class="container mt-4">
-  <h1 class="mb-4">
+  <h1 class="mb-4 d-flex align-items-center">
     <i class="bi bi-percent"></i> Εκτιμώμενη κάλυψη δρομολογίων
+    <span class="badge bg-warning text-dark ms-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="⚠️ <strong>Κατά προσέγγιση!</strong><br><br>Η κάλυψη και τα δρομολόγια που παρουσιάζονται είναι εκτιμώμενα, καθώς βασίζονται σε ελλιπή δεδομένα τηλεματικής. Οι αριθμοί μπορεί να διαφέρουν σημαντικά από την πραγματικότητα. Διάβασε στα Σχετικά." style="cursor: pointer; font-size: 1rem;">
+      <i class="bi bi-exclamation-triangle-fill me-1"></i>Προσέγγιση
+    </span>
   </h1>
 
   <!-- Collapsible Info Section -->
@@ -119,8 +122,8 @@
                     <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
                   <% end %>
                 <% end %>
-                <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Τα εκτιμώμενα δρομολόγια που έγιναν, σύμφωνα με την τηλεματική. Τυπικά είναι ακόμη λιγότερα και από τα δρομολόγια του ημερήσιου προγραμματισμού, λόγω εκτάκτων ελλείψεων σε οχήματα και προσωπικό.<br><br>⚠️ Ο αριθμός είναι κατά προσέγγιση, διάβασε στα Σχετικά." class="ms-1" style="cursor: pointer;">
-                  <i class="bi bi-question-circle-fill text-white-50" style="font-size: 0.9rem;"></i>
+                <span class="badge bg-warning text-dark ms-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="⚠️ <strong>Κατά προσέγγιση!</strong><br><br>Τα εκτιμώμενα δρομολόγια που έγιναν, σύμφωνα με την τηλεματική. Τυπικά είναι ακόμη λιγότερα και από τα δρομολόγια του ημερήσιου προγραμματισμού, λόγω εκτάκτων ελλείψεων σε οχήματα και προσωπικό.<br><br>Ο αριθμός μπορεί να διαφέρει σημαντικά από την πραγματικότητα. Διάβασε στα Σχετικά." style="cursor: pointer; font-size: 0.65rem;">
+                  <i class="bi bi-exclamation-triangle-fill"></i>
                 </span>
               </div>
             </th>
@@ -132,8 +135,8 @@
                     <i class="bi bi-caret-<%= @sort_direction == 'asc' ? 'up' : 'down' %>-fill"></i>
                   <% end %>
                 <% end %>
-                <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Το εκτιμώμενο ποσοστό εκτέλεσης των δρομολογίων<br><br>🟢 Πράσινο: 100%<br>🟡 Κίτρινο: 90%<br>🟠 Πορτοκαλί: 80%<br>🔴 Κόκκινο: ≤70%<br><br>Τα χρώματα μεταβάλλονται σταδιακά" class="ms-1" style="cursor: pointer;">
-                  <i class="bi bi-question-circle-fill text-white-50" style="font-size: 0.9rem;"></i>
+                <span class="badge bg-warning text-dark ms-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="⚠️ <strong>Κατά προσέγγιση!</strong><br><br>Το εκτιμώμενο ποσοστό εκτέλεσης των δρομολογίων βασίζεται σε ελλιπή δεδομένα.<br><br>🟢 Πράσινο: 100%<br>🟡 Κίτρινο: 90%<br>🟠 Πορτοκαλί: 80%<br>🔴 Κόκκινο: ≤70%<br><br>Τα χρώματα μεταβάλλονται σταδιακά" style="cursor: pointer; font-size: 0.65rem;">
+                  <i class="bi bi-exclamation-triangle-fill"></i>
                 </span>
               </div>
             </th>
