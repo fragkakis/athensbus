@@ -110,6 +110,21 @@
 </style>
 
 <script type="module">
+    function initializeSelect2() {
+        // Destroy existing Select2 if it exists
+        if ($('#line_code').hasClass('select2-hidden-accessible')) {
+            $('#line_code').select2('destroy');
+        }
+
+        // Initialize Select2 on line select
+        $('#line_code').select2({
+            theme: 'bootstrap-5',
+            containerCssClass: 'form-select-lg',
+            closeOnSelect: true,
+            dropdownAutoWidth: true
+        });
+    }
+
     $(document).ready(function() {
         // Handle welcome banner dismissal with localStorage
         const welcomeBanner = $('#welcome-banner');
@@ -121,13 +136,8 @@
             localStorage.setItem('welcomeBannerDismissed', 'true');
         });
 
-        // Initialize Select2 on line select
-        $('#line_code').select2({
-            theme: 'bootstrap-5',
-            containerCssClass: 'form-select-lg',
-            closeOnSelect: true,
-            dropdownAutoWidth: true
-        });
+        // Initialize Select2
+        initializeSelect2();
 
         // Clear route selection when line changes
         $('#line_code').on('change', function() {
@@ -144,5 +154,13 @@
         $('#date').on('change', function() {
             $(this).closest('form').submit();
         });
+    });
+
+    // Handle browser back/forward button - reinitialize Select2 when page is restored from cache
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            // Page was restored from bfcache
+            initializeSelect2();
+        }
     });
 </script>
