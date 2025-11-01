@@ -15,11 +15,20 @@
   </div>
 
   <!-- Statistics Chart -->
-  <div class="card border-0 shadow-sm" style="border-radius: 12px;">
+  <div class="card border-0 shadow-sm" style="border-radius: 12px; border-left: 4px solid #ff9800 !important;">
     <div class="card-body p-4">
-      <h3 class="card-title mb-4 fw-bold text-secondary">
+      <h3 class="card-title mb-3 fw-bold text-secondary">
         <i class="bi bi-bar-chart-line me-2"></i>Ιστορικό Δρομολογίων
       </h3>
+
+      <div class="alert alert-warning border-0 mb-4" style="background-color: #fff3cd;">
+        <div class="d-flex align-items-start">
+          <i class="bi bi-exclamation-triangle-fill me-2 mt-1"></i>
+          <div>
+            <strong>Σημείωση:</strong> Τα "Εκτελεσμένα" δρομολόγια είναι <strong>κατά προσέγγιση</strong>, καθώς βασίζονται σε ελλιπή δεδομένα τηλεματικής. Οι αριθμοί μπορεί να διαφέρουν σημαντικά από την πραγματικότητα.
+          </div>
+        </div>
+      </div>
 
       <div class="chart-container">
         <%= line_chart [
