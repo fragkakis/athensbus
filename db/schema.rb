@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_22_114039) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_26_181604) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,11 +20,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_22_114039) do
     t.bigint "route_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index "date(created_at)", name: "index_arrivals_on_date_created_at"
     t.index ["created_at"], name: "index_arrivals_on_created_at"
     t.index ["route_id"], name: "index_arrivals_on_route_id"
     t.index ["stop_id"], name: "index_arrivals_on_stop_id"
     t.index ["vehicle_id"], name: "index_arrivals_on_vehicle_id"
+  end
+
+  create_table "daily_vehicle_counts", force: :cascade do |t|
+    t.date "date", null: false
+    t.integer "vehicle_count", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["date"], name: "index_daily_vehicle_counts_on_date", unique: true
   end
 
   create_table "lines", force: :cascade do |t|

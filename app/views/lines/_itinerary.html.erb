@@ -100,13 +100,13 @@
 
     <!-- Executed Schedule -->
     <div class="col-12 col-lg-4">
-      <div class="card h-100 border-0 shadow-sm" style="border-radius: 12px; border-left: 4px solid #dc3545 !important;">
+      <div class="card h-100 border-0 shadow-sm" style="border-radius: 12px; border-left: 4px solid #ff9800 !important;">
         <div class="card-body p-4">
           <h5 class="card-title fw-bold mb-3 d-flex align-items-center">
             <i class="bi bi-check2-all me-2 <%= @date.today? ? 'text-info' : (@normal_schedule.size > @executed_trips_count ? 'text-danger' : 'text-success') %>"></i>
-            Εκτιμώμενα
-            <span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="Τα εκτιμώμενα δρομολόγια που έγιναν, σύμφωνα με την τηλεματική. Τυπικά είναι ακόμη λιγότερα και από τα δρομολόγια του ημερήσιου προγραμματισμού, λόγω εκτάκτων ελλείψεων σε οχήματα και προσωπικό.<br><br>⚠️ Ο αριθμός είναι κατά προσέγγιση, διάβασε στα Σχετικά." class="ms-2" style="cursor: pointer;">
-              <i class="bi bi-info-circle-fill text-muted" style="font-size: 0.9rem;"></i>
+            Εκτελεσμένα
+            <span class="badge bg-warning text-dark ms-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-title="⚠️ <strong>Κατά προσέγγιση!</strong><br><br>Τα εκτιμώμενα δρομολόγια που έγιναν, σύμφωνα με την τηλεματική. Τυπικά είναι ακόμη λιγότερα και από τα δρομολόγια του ημερήσιου προγραμματισμού, λόγω εκτάκτων ελλείψεων σε οχήματα και προσωπικό.<br><br>Ο αριθμός μπορεί να διαφέρει σημαντικά από την πραγματικότητα. Διάβασε στα Σχετικά." style="cursor: pointer; font-size: 0.75rem;">
+              <i class="bi bi-exclamation-triangle-fill me-1"></i>Κατά προσέγγιση
             </span>
           </h5>
 

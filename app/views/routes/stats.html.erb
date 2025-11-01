@@ -25,9 +25,9 @@
         <%= line_chart [
           {name: "Προβλεπόμενα", data: @route.schedules.normal.where.not(date: Date.current).order(:date).map{|s| [s.date, s.departure_times.size]}},
           {name: "Ημερήσιος προγραμματισμός", data: @route.schedules.daily.where.not(date: Date.current).order(:date).map{|s| [s.date, s.departure_times.size]}},
-          {name: "Εκτιμώμενα", data: @route.route_daily_reports.where.not(date: Date.current).order(:date).map{|rdr| [rdr.date, rdr.executed_trips]}}
+          {name: "Πραγματοποιημένα (κατά προσέγγιση)", data: @route.route_daily_reports.where.not(date: Date.current).order(:date).map{|rdr| [rdr.date, rdr.executed_trips]}}
         ],
-        colors: ["#6c757d", "#ffc107", "#dc3545"],
+        colors: ["#008000", "#dc3545", "#ffc107"],
         library: {
           backgroundColor: '#ffffff',
           borderRadius: 8
