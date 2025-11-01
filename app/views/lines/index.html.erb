@@ -111,17 +111,25 @@
 
 <script type="module">
     function initializeSelect2() {
+        const $lineCode = $('#line_code');
+
         // Destroy existing Select2 if it exists
-        if ($('#line_code').hasClass('select2-hidden-accessible')) {
-            $('#line_code').select2('destroy');
+        if ($lineCode.data('select2')) {
+            $lineCode.select2('destroy');
         }
 
         // Initialize Select2 on line select
-        $('#line_code').select2({
+        $lineCode.select2({
             theme: 'bootstrap-5',
             containerCssClass: 'form-select-lg',
             closeOnSelect: true,
             dropdownAutoWidth: true
+        });
+
+        // Clear route selection when line changes
+        $lineCode.off('change').on('change', function() {
+            $('#route_id').val('');
+            $(this).closest('form').submit();
         });
     }
 
@@ -139,12 +147,6 @@
         // Initialize Select2
         initializeSelect2();
 
-        // Clear route selection when line changes
-        $('#line_code').on('change', function() {
-            $('#route_id').val('');
-            $(this).closest('form').submit();
-        });
-
         // Submit form when route changes
         $('#route_id').on('change', function() {
             $(this).closest('form').submit();
@@ -156,11 +158,14 @@
         });
     });
 
-    // Handle browser back/forward button - reinitialize Select2 when page is restored from cache
-    window.addEventListener('pageshow', function(event) {
-        if (event.persisted) {
-            // Page was restored from bfcache
-            initializeSelect2();
+    // Handle browser back/forward button using jQuery
+    $(window).on('pageshow', function(event) {
+        // Check if page was loaded from cache
+        if (event.originalEvent.persisted) {
+            // Small delay to ensure DOM is ready
+            setTimeout(function() {
+                initializeSelect2();
+            }, 100);
         }
     });
 </script>
