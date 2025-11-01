@@ -88,6 +88,7 @@ class ReportsController < ApplicationController
       inner join schedules ns on ns.route_id = r.id AND ns.type = 'normal' and ns.date = $1
       inner join schedules ds on ds.route_id = r.id AND ds.type = 'daily' and ds.date = $1
       where jsonb_array_length(ns.departure_times) > 0
+        and jsonb_array_length(ds.departure_times) > 0
         and (jsonb_array_length(ds.departure_times)::float / jsonb_array_length(ns.departure_times)::float * 100) <= 100
       order by #{sort_sql} #{sort_direction} nulls last
     SQL
