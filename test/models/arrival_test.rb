@@ -2,18 +2,16 @@ require "test_helper"
 
 class ArrivalTest < ActiveSupport::TestCase
 
-  def setup
-    @route = routes(:x97_route)
-    @stop = stops(:stop1)
-    @vehicle = vehicles(:v1)
-    Arrival.delete_all
-  end
-
   test "at_date returns arrivals created on specified date" do
-    arrival_today = Arrival.create!(route: @route, stop: @stop, vehicle: @vehicle,
+    route = routes(:x97_route)
+    stop = stops(:stop1)
+    vehicle = vehicles(:v1)
+    Arrival.delete_all
+
+    arrival_today = Arrival.create!(route: route, stop: stop, vehicle: vehicle,
       created_at: Date.current.beginning_of_day + 10.hours)
 
-    arrival_yesterday = Arrival.create!(route: @route, stop: @stop, vehicle: @vehicle,
+    arrival_yesterday = Arrival.create!(route: route, stop: stop, vehicle: vehicle,
       created_at: Date.yesterday.beginning_of_day + 10.hours)
 
     assert_equal [arrival_today], Arrival.at_date(Date.current)
@@ -21,10 +19,15 @@ class ArrivalTest < ActiveSupport::TestCase
   end
 
   test "at_date returns all arrivals throughout the day" do
-    arrival_morning = Arrival.create!(route: @route, stop: @stop, vehicle: @vehicle,
+    route = routes(:x97_route)
+    stop = stops(:stop1)
+    vehicle = vehicles(:v1)
+    Arrival.delete_all
+
+    arrival_morning = Arrival.create!(route: route, stop: stop, vehicle: vehicle,
       created_at: Date.current.beginning_of_day + 1.minute)
 
-    arrival_evening = Arrival.create!(route: @route, stop: @stop, vehicle: @vehicle,
+    arrival_evening = Arrival.create!(route: route, stop: stop, vehicle: vehicle,
       created_at: Date.current.end_of_day - 1.minute)
 
     assert_equal [arrival_morning, arrival_evening].sort_by(&:created_at),
@@ -44,7 +47,12 @@ class ArrivalTest < ActiveSupport::TestCase
   end
 
   test "stop_order handles terminal stops correctly" do
-    arrival = Arrival.create!(route: @route, stop: @stop, vehicle: @vehicle,
+    route = routes(:x97_route)
+    stop = stops(:stop1)
+    vehicle = vehicles(:v1)
+    Arrival.delete_all
+    
+    arrival = Arrival.create!(route: route, stop: stop, vehicle: vehicle,
       created_at: Time.current)
 
     assert_equal 1, arrival.stop_order
