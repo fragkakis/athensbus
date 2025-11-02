@@ -51,7 +51,7 @@ class ArrivalTest < ActiveSupport::TestCase
     stop = stops(:stop1)
     vehicle = vehicles(:v1)
     Arrival.delete_all
-    
+
     arrival = Arrival.create!(route: route, stop: stop, vehicle: vehicle,
       created_at: Time.current)
 
