@@ -1,8 +1,8 @@
 <% if(@line.present?) %>
-  <% content_for :title, "Λεωφορείο #{@line.line_id} - #{@route.description} - Athens Bus" %>
-  <% content_for :description, "Δείτε τα δρομολόγια της γραμμής #{@line.line_id} (#{@line.description}) με κατεύθυνση #{@route.description}. Προγραμματισμένα και εκτιμώμενα δρομολόγια λεωφορείων Αθήνας." %>
+  <% content_for :title, "Λεωφορείο #{@line.line_id} - #{@route.description} - #{APP_NAME_NO_DOMAIN}" %>
+  <% content_for :description, "Δείτε τα δρομολόγια της γραμμής #{@line.line_id} (#{@line.description}) με κατεύθυνση #{@route.description}. Προγραμματισμένα και εκτιμώμενα δρομολόγια λεωφορείων #{CITY_NAME}ς." %>
 <% else %>
-  <% content_for :description, "Αναζητήστε δρομολόγια λεωφορείων της Αθήνας. Δείτε προγραμματισμένα και εκτιμώμενα δρομολόγια για όλες τις γραμμές λεωφορείων." %>
+  <% content_for :description, "Αναζητήστε δρομολόγια λεωφορείων της #{CITY_NAME}ς. Δείτε προγραμματισμένα και εκτιμώμενα δρομολόγια για όλες τις γραμμές λεωφορείων." %>
 <% end %>
 
 <div class="py-4">
@@ -15,7 +15,7 @@
           </div>
           <div class="flex-grow-1">
             <h5 class="alert-heading mb-2">
-              <i class="bi bi-info-circle me-2"></i>Καλώς ήρθες στο AthensBus.info!
+              <i class="bi bi-info-circle me-2"></i>Καλώς ήρθες στο <%= APP_NAME %>!
             </h5>
             <p class="mb-0">
               Αυτή η ιστοσελίδα σου επιτρέπει να δεις μια εκτίμηση του κατά πόσον η γραμμή λεωφορείου που χρησιμοποιείς πραγματοποιεί σωστά τα δρομολόγια της.

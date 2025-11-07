@@ -59,7 +59,7 @@ env:
     POSTGRES_DB: oasa_production
     POSTGRES_USER: oasa
     DD_TRACE_ENABLED: false
-    CITY: athens
+    CITY_NAME: athens
     TELEMATICS_BASE_URL: http://telematics.oasa.gr
     # Log everything from Rails
     # RAILS_LOG_LEVEL: debug

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="el">
   <head>
-    <title><%= content_for(:title) || "Athens Bus - Πληροφορίες Δρομολογίων Λεωφορείων Αθήνας" %></title>
-    <meta name="description" content="<%= content_for(:description) || 'Πληροφορίες για τα δρομολόγια των λεωφορείων της Αθήνας. Δείτε την εκτιμώμενη κάλυψη διαδρομών και τον προγραμματισμό των γραμμών σε πραγματικό χρόνο.' %>">
+    <title><%= content_for(:title) || "#{APP_NAME} - Πληροφορίες Δρομολογίων Λεωφορείων #{CITY_NAME}ς" %></title>
+    <meta name="description" content="<%= content_for(:description) || 'Πληροφορίες για τα δρομολόγια των λεωφορείων της #{CITY_NAME}ς. Δείτε την εκτιμώμενη κάλυψη διαδρομών και τον προγραμματισμό των γραμμών σε πραγματικό χρόνο.' %>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -13,17 +13,17 @@
     <link rel="canonical" href="<%= request.original_url %>">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="<%= content_for(:og_title) || content_for(:title) || 'Athens Bus - Πληροφορίες Δρομολογίων' %>">
-    <meta property="og:description" content="<%= content_for(:og_description) || content_for(:description) || 'Πληροφορίες για τα δρομολόγια των λεωφορείων της Αθήνας' %>">
+    <meta property="og:title" content="<%= content_for(:og_title) || content_for(:title) || APP_NAME_NO_DOMAIN + ' - Πληροφορίες Δρομολογίων' %>">
+    <meta property="og:description" content="<%= content_for(:og_description) || content_for(:description) || 'Πληροφορίες για τα δρομολόγια των λεωφορείων της #{CITY_NAME}ς' %>">
     <meta property="og:type" content="website">
     <meta property="og:url" content="<%= request.original_url %>">
-    <meta property="og:site_name" content="Athens Bus">
+    <meta property="og:site_name" content="<%= APP_NAME_NO_DOMAIN %>">
     <meta property="og:locale" content="el_GR">
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="<%= content_for(:og_title) || content_for(:title) || 'Athens Bus - Πληροφορίες Δρομολογίων' %>">
-    <meta name="twitter:description" content="<%= content_for(:og_description) || content_for(:description) || 'Πληροφορίες για τα δρομολόγια των λεωφορείων της Αθήνας' %>">
+    <meta name="twitter:title" content="<%= content_for(:og_title) || content_for(:title) || APP_NAME_NO_DOMAIN + ' - Πληροφορίες Δρομολογίων' %>">
+    <meta name="twitter:description" content="<%= content_for(:og_description) || content_for(:description) || 'Πληροφορίες για τα δρομολόγια των λεωφορείων της #{CITY_NAME}ς' %>">
 
 
     <!-- Google tag (gtag.js) -->
@@ -67,8 +67,8 @@
     <nav class="navbar navbar-expand navbar-light bg-white shadow-sm sticky-top">
       <div class="container">
         <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="<%= lines_url %>">
-          <%= image_tag 'icon.png', alt: 'Athens Bus', style: 'height: 32px;', class: 'me-2' %>
-          <span class="d-none d-sm-inline">Athens Bus</span>
+          <%= image_tag 'icon.png', alt: APP_NAME_NO_DOMAIN, style: 'height: 32px;', class: 'me-2' %>
+          <span class="d-none d-sm-inline"><%= APP_NAME_NO_DOMAIN %></span>
         </a>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
@@ -106,10 +106,10 @@
         <div class="row">
           <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
             <p class="mb-1 text-muted">
-              <strong class="text-dark">Athens Bus</strong> - Πληροφορίες δρομολογίων
+              <strong class="text-dark"><%= APP_NAME_NO_DOMAIN %></strong> - Πληροφορίες δρομολογίων
             </p>
             <p class="mb-0 small text-muted">
-              © <%= Time.current.year %> Athens Bus
+              © <%= Time.current.year %> <%= APP_NAME_NO_DOMAIN %>
             </p>
           </div>
           <div class="col-md-6 text-center text-md-end">
