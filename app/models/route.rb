@@ -11,7 +11,7 @@ class Route < ApplicationRecord
   GO = "go"
 
   def bus_locations
-    r = RestClient.get("http://telematics.oasa.gr/api/?act=getBusLocation&p1=#{code}")
+    r = RestClient.get("http://telematics.oasa.gr/api/?act=getBusLocation&p1=#{code}", origin: TELEMATICS_BASE_URL)
     JSON.parse(r.body).presence || []
   end
 

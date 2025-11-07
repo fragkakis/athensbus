@@ -19,7 +19,7 @@ class Stop < ApplicationRecord
   end
 
   def get_routes
-    r = RestClient.get("#{TELEMATICS_BASE_URL}/api/?act=webGetRoutes&p1=#{code}")
+    r = RestClient.get("#{TELEMATICS_BASE_URL}/api/?act=webGetRoutes&p1=#{code}", origin: TELEMATICS_BASE_URL)
     JSON.parse(r.body)
   end
 end
