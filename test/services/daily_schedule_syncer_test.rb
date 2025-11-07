@@ -3,7 +3,7 @@ require "test_helper"
 class DailyScheduleSyncerTest < ActiveSupport::TestCase
 
   test "sync" do
-    stub_request(:get, "http://telematics.oasa.gr/api/?act=getDailySchedule&line_code=1521").
+    stub_request(:get, "#{TELEMATICS_BASE_URL}/api/?act=getDailySchedule&line_code=1521").
       to_return(status: 200, body: File.read(Rails.root.join("test/fixtures/files/daily_schedule.json")))
 
     line = lines(:x93)

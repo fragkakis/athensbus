@@ -18,7 +18,7 @@ module Populators
         }
       ].to_json
 
-      stub_request(:get, "http://telematics.oasa.gr/api/?act=webGetLines").
+      stub_request(:get, "#{TELEMATICS_BASE_URL}/api/?act=webGetLines").
         to_return(status: 200, body: response, headers: {})
 
       ::Populators::Route.expects(:populate).twice

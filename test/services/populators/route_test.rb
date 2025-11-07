@@ -18,7 +18,7 @@ module Populators
           "route_descr_eng": "AER\/NAS ATHINON - ST. ELLINIKO [EXPRESS]"
         }
       ].to_json
-      stub_request(:get, "http://telematics.oasa.gr/api/?act=getRoutesForLine&p1=1547").
+      stub_request(:get, "#{TELEMATICS_BASE_URL}/api/?act=getRoutesForLine&p1=1547").
         to_return(status: 200, body: expected_routes_response, headers: {})
 
       expected_stops_response = [
@@ -51,7 +51,7 @@ module Populators
           "StopAmea": "1"
         }
       ].to_json
-      stub_request(:get, "http://telematics.oasa.gr/api/?act=webGetStops&p1=5373").
+      stub_request(:get, "#{TELEMATICS_BASE_URL}/api/?act=webGetStops&p1=5373").
         to_return(status: 200, body: expected_stops_response, headers: {})
 
       assert_difference("::Route.count") do
@@ -106,7 +106,7 @@ module Populators
           "route_descr_eng": "AER\/NAS ATHINON - ST. ELLINIKO [EXPRESS]"
         }
       ].to_json
-      stub_request(:get, "http://telematics.oasa.gr/api/?act=getRoutesForLine&p1=1547").
+      stub_request(:get, "#{TELEMATICS_BASE_URL}/api/?act=getRoutesForLine&p1=1547").
         to_return(status: 200, body: expected_routes_response, headers: {})
 
       expected_stops_response = [
@@ -139,7 +139,7 @@ module Populators
           "StopAmea": "1"
         }
       ].to_json
-      stub_request(:get, "http://telematics.oasa.gr/api/?act=webGetStops&p1=5373").
+      stub_request(:get, "#{TELEMATICS_BASE_URL}/api/?act=webGetStops&p1=5373").
         to_return(status: 200, body: expected_stops_response, headers: {})
 
       assert_no_difference("::Route.count") do

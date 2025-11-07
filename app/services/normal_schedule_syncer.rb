@@ -14,7 +14,7 @@ class NormalScheduleSyncer < BaseScheduleSyncer
 
     today_code = SdcCodePicker.process(line)
 
-    url = "http://telematics.oasa.gr/api/?act=getSchedLines&p1=#{CGI.escape(line.line_id)}&p2=#{today_code}&p3=#{line.code}"
+    url = "#{TELEMATICS_BASE_URL}/api/?act=getSchedLines&p1=#{CGI.escape(line.line_id)}&p2=#{today_code}&p3=#{line.code}"
     r = RestClient::Request.execute(
       method: :get,
       url: url,

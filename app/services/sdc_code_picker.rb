@@ -3,7 +3,7 @@ class SdcCodePicker
   def self.process(line)
     r = RestClient::Request.execute(
       method: :get,
-      url: "http://telematics.oasa.gr/api/?act=getScheduleDaysMasterline&p1=#{line.code}",
+      url: "#{TELEMATICS_BASE_URL}/api/?act=getScheduleDaysMasterline&p1=#{line.code}",
       timeout: 5)
 
     types_of_schedule = JSON.parse(r.body).presence || []

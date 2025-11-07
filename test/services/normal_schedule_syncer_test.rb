@@ -5,7 +5,7 @@ class NormalScheduleSyncerTest < ActiveSupport::TestCase
   test "sync" do
     SdcCodePicker.expects(:process).returns("foo_sdc_code")
 
-    stub_request(:get, "http://telematics.oasa.gr/api/?act=getSchedLines&p1=%CE%A793&p2=foo_sdc_code&p3=1521").
+    stub_request(:get, "#{TELEMATICS_BASE_URL}/api/?act=getSchedLines&p1=%CE%A793&p2=foo_sdc_code&p3=1521").
       to_return(status: 200, body: File.read(Rails.root.join("test/fixtures/files/daily_schedule.json")))
 
     line = lines(:x93)

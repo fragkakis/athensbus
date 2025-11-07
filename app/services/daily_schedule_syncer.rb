@@ -13,7 +13,7 @@ class DailyScheduleSyncer < BaseScheduleSyncer
   def sync_daily_schedule
     r = RestClient::Request.execute(
       method: :get,
-      url: "http://telematics.oasa.gr/api/?act=getDailySchedule&line_code=#{line.code}",
+      url: "#{TELEMATICS_BASE_URL}/api/?act=getDailySchedule&line_code=#{line.code}",
       timeout: 5)
 
     daily_schedule = JSON.parse(r.body).presence || []

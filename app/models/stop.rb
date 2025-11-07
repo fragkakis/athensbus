@@ -5,7 +5,7 @@ class Stop < ApplicationRecord
 
   def pending_arrivals
     r = RestClient::Request.execute(method: :get,
-                                    url: "http://telematics.oasa.gr/api/?act=getStopArrivals&p1=#{code}",
+                                    url: "#{TELEMATICS_BASE_URL}/api/?act=getStopArrivals&p1=#{code}",
                                     timeout: 5)
     arrivals = JSON.parse(r.body)
     return [] if arrivals.blank?
@@ -19,7 +19,7 @@ class Stop < ApplicationRecord
   end
 
   def get_routes
-    r = RestClient.get("http://telematics.oasa.gr/api/?act=webGetRoutes&p1=#{code}")
+    r = RestClient.get("#{TELEMATICS_BASE_URL}/api/?act=webGetRoutes&p1=#{code}")
     JSON.parse(r.body)
   end
 end

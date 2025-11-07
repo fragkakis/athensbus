@@ -1,7 +1,7 @@
 module Populators
   class Line
     def self.populate_all
-      r = RestClient.get("http://telematics.oasa.gr/api/?act=webGetLines")
+      r = RestClient.get("#{TELEMATICS_BASE_URL}/api/?act=webGetLines")
       lines = JSON.parse(r.body)
 
       lines.each do |line|

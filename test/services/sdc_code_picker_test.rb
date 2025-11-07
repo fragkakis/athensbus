@@ -37,7 +37,7 @@ class SdcCodePickerTest < ActiveSupport::TestCase
       }
     ]
 
-    stub_request(:get, "http://telematics.oasa.gr/api/?act=getScheduleDaysMasterline&p1=1547").
+    stub_request(:get, "#{TELEMATICS_BASE_URL}/api/?act=getScheduleDaysMasterline&p1=1547").
       to_return(status: 200, body: response.to_json, headers: {})
 
     line = lines(:x97)
