@@ -54,7 +54,7 @@ env:
 
     # Match this to any external database server to configure Active Record correctly
     # Use thessbus-db for a db accessory server on same machine via local kamal docker network.
-    DB_HOST: thessbus-db
+    DB_HOST: thessbus-thessdb
     DB_PORT: 5433
     POSTGRES_DB: oasa_production
     POSTGRES_USER: oasa
@@ -103,7 +103,7 @@ builder:
 
 # Use accessory services (secrets come from .kamal/secrets).
 accessories:
-  db:
+  thessdb:
    image: postgres:17
    host: 167.235.226.89
    # Change to 3306 to expose port to the world instead of just local network.
