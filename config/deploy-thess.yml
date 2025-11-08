@@ -54,8 +54,9 @@ env:
 
     # Match this to any external database server to configure Active Record correctly
     # Use thessbus-db for a db accessory server on same machine via local kamal docker network.
+    # Note: Use internal port 5432 for container-to-container communication (host port 5433 is for external access only)
     DB_HOST: thessbusinfo-thessdb
-    DB_PORT: 5433
+    DB_PORT: 5432
     POSTGRES_DB: oasa_production
     POSTGRES_USER: oasa
     DD_TRACE_ENABLED: false
