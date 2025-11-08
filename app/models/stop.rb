@@ -6,7 +6,8 @@ class Stop < ApplicationRecord
   def pending_arrivals
     r = RestClient::Request.execute(method: :get,
                                     url: "#{TELEMATICS_BASE_URL}/api/?act=getStopArrivals&p1=#{code}",
-                                    timeout: 5)
+                                    timeout: 5,
+                                    origin: TELEMATICS_BASE_URL)
     arrivals = JSON.parse(r.body)
     return [] if arrivals.blank?
 
