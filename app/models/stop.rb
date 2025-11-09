@@ -3,9 +3,13 @@ class Stop < ApplicationRecord
   has_many :routes, through: :routes_stops
   has_many :arrivals
 
+  PENDING_ARRIVALS_URL = athens? ?
+                           "#{TELEMATICS_BASE_URL}/api/?act=getStopArrivals&p1=%{code}" :
+                           "#{TELEMATICS_BASE_URL}/api/getStopArrivals/%{code}/?a=1"
+
   def pending_arrivals
     r = RestClient::Request.execute(method: :get,
-                                    url: "#{TELEMATICS_BASE_URL}/api/?act=getStopArrivals&p1=#{code}",
+                                    url: PENDING_ARRIVALS_URL % { code: code },
                                     timeout: 5)
     arrivals = JSON.parse(r.body)
     return [] if arrivals.blank?
