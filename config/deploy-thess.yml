@@ -62,6 +62,7 @@ env:
     DD_TRACE_ENABLED: false
     CITY_NAME: thessaloniki
     TELEMATICS_BASE_URL: https://telematics.oasth.gr
+    HONEYBADGER_ENV: production_thess
     # Log everything from Rails
     # RAILS_LOG_LEVEL: debug
 
