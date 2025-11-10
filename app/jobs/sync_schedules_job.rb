@@ -5,7 +5,9 @@ class SyncSchedulesJob < ApplicationJob
     Rails.benchmark("Syncing all schedules") do
       jobs = []
       Line.ids.sort.each_with_index do |line_id, i|
-        jobs << SyncDailyScheduleJob.new(line_id).set(priority: 2, wait_until: i.seconds.from_now)
+        if athens?
+          jobs << SyncDailyScheduleJob.new(line_id).set(priority: 2, wait_until: i.seconds.from_now)
+        end
         jobs << SyncNormalScheduleJob.new(line_id).set(priority: 2, wait_until: i.seconds.from_now)
       end
       ActiveJob.perform_all_later(jobs)
