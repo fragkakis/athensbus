@@ -6,9 +6,9 @@ class SyncSchedulesJob < ApplicationJob
       jobs = []
       Line.ids.sort.each_with_index do |line_id, i|
         if athens?
-          jobs << SyncDailyScheduleJob.new(line_id).set(priority: 2, wait_until: i.seconds.from_now)
+          jobs << Schedules::Athens::SyncDailyScheduleJob.new(line_id).set(priority: 2, wait_until: i.seconds.from_now)
+          jobs << Schedules::Athens::SyncNormalScheduleJob.new(line_id).set(priority: 2, wait_until: i.seconds.from_now)
         end
-        jobs << SyncNormalScheduleJob.new(line_id).set(priority: 2, wait_until: i.seconds.from_now)
       end
       ActiveJob.perform_all_later(jobs)
     end
