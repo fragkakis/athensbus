@@ -37,3 +37,6 @@
 
 .idea
 .DS_Store
+
+# Ignore deployment logs
+output.txt
