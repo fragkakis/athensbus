@@ -7,9 +7,4 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-# r = RestClient.get("#{TELEMATICS_BASE_URL}/api/?act=webGetLines")
-# lines = JSON.parse(r.body)
-#
-# lines.each do |line|
-#   Populators::Line.populate(line)
-# end
+
